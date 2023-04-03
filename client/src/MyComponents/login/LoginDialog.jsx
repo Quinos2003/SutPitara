@@ -119,7 +119,8 @@ export default function LoginDialog({open,setOpen}) {
     const loginUser = async () => {
             
         const data = {
-            "test": "test"
+            "email": document.getElementById("email").value,
+            "password": document.getElementById("password").value
         }
         console.log("test")
         let response = fetch("store/login", {
@@ -151,8 +152,8 @@ export default function LoginDialog({open,setOpen}) {
             {
                 account.view==='login'?
             <Wrapper>
-                <TextField variant="standard"   name="username" label="Enter Email/Mobile number"/>
-                <TextField variant="standard"  name="password" label="Enter Password"/>
+                <TextField variant="standard" id='email'  name="username" label="Enter Email/Mobile number" />
+                <TextField variant="standard" id='password' name="password" label="Enter Password"/>
                 <Text>By continuing,you are agree to Flipkart's Terms of Use and Privacy Policy.</Text>
                 <LoginButton onClick={()=> loginUser()}>Login</LoginButton>
                 <Typography style={{
