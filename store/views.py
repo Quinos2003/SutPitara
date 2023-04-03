@@ -4,8 +4,11 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 import json
 from .models import User
+from django.views.decorators.csrf import csrf_exempt
+
 #npm install react-scripts --save
 # Create your views here.
+@csrf_exempt
 def login_view(request):
     if request.method == "POST":
         data = json.loads(request.body)
@@ -14,7 +17,7 @@ def login_view(request):
         user = authenticate(request, email=email, password=password)
         if user:
             login(request, user)
-    
+@csrf_exempt
 def signup(request):
     if request.method == "POST":
         data = json.loads(request.body)
