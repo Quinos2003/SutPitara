@@ -108,7 +108,26 @@ export default function LoginDialog({open,setOpen}) {
         
     }
 
+    const signUp = async () => {
+        const data = {
+            "first_name": document.getElementById("first").value,
+            "last_name": document.getElementById("last").value,
+            "email": document.getElementById("emailsignup").value,
+            "password": document.getElementById("passwordsignup").value
+        }
+        console.log("test")
+        let response = fetch("store/signup", {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": cookies.csrftoken
+            },
+          });
+         handleClose();
+    }
         const toggleSignup=()=>{
+            
                 toggleAccount(accountInitialValues.signup);
         }
 
@@ -166,15 +185,15 @@ export default function LoginDialog({open,setOpen}) {
             
             :
             <Wrapper>
-                <TextField variant="standard"   name="firstname" label="Enter  Firstname"/>
-                <TextField variant="standard"  name="lastname" label="Enter  Lastname"/>
+                <TextField variant="standard" id='first' name="firstname" label="Enter  Firstname"/>
+                <TextField variant="standard" id='last' name="lastname" label="Enter  Lastname"/>
                 {/* <TextField variant="standard" onChange={(e)=>onInputChange(e)} name="username" label="Enter  Username"/> */}
-                <TextField variant="standard"  name="email" label="Enter  Email"/>
-                <TextField variant="standard"  name="password" label="Enter  Password"/>
+                <TextField variant="standard" id='emailsignup' name="email" label="Enter  Email"/>
+                <TextField variant="standard" id='passwordsignup' name="password" label="Enter  Password"/>
                 {/* <TextField variant="standard" onChange={(e)=>onInputChange(e)} name="phone"label="Enter  Phone"/>   */}
                 {/* here in the name field we have to take the same values that we have taken in the uperside of the object  that is signupInitialValues */}
                 
-                <LoginButton >Continue</LoginButton>
+                <LoginButton onClick={() => signUp()}>Continue</LoginButton>
             </Wrapper>
             }
             </Box>
