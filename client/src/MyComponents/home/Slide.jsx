@@ -118,6 +118,7 @@ const Slide = ({ data, timer, title }) => {
               autoPlaySpeed={4000}
               keyBoardControl={true}
               showDots={false}
+              // slidesToSlide={1}
               containerClass="carousel-container"
               removeArrowOnDeviceType={["tablet", "mobile"]}
               dotListClass="custom-dot-list-style"

@@ -19,9 +19,9 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import "tippy.js/themes/light.css";
 import { useState } from "react";
 import LoginDialog from "../login/LoginDialog";
-
+import Shopnow from "../tippy/Shopnow";
 import { Link } from "react-router-dom";
-import Shopnow from "../Shopnow/Shopnow";
+
 export default function Header() {
   const [open, setOpen] = useState(false);
   const openDialog = () => {

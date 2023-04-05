@@ -23,11 +23,15 @@ export default function Shopnow() {
 
         </div>
         </Link>
+        <Link to="women" style={{
+            textDecoration: "none",
+          }}>
         <div className="moret__in">
             <WomanIcon/>
             <p>For Women</p>
         </div>
        
+        </Link>
         
       
     </div>
