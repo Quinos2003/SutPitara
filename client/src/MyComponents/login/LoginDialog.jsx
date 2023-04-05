@@ -116,14 +116,16 @@ export default function LoginDialog({open,setOpen}) {
             "password": document.getElementById("passwordsignup").value
         }
         console.log("test")
-        let response = fetch("store/signup", {
+        fetch("store/signup", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
                 "Content-Type": "application/json",
                 "X-CSRFToken": cookies.csrftoken
-            },
-          });
+            }}).then(response => response.json())
+            .then(response => {
+              console.log(response);
+            })
          handleClose();
     }
         const toggleSignup=()=>{
@@ -141,15 +143,16 @@ export default function LoginDialog({open,setOpen}) {
             "email": document.getElementById("email").value,
             "password": document.getElementById("password").value
         }
-        console.log("test")
-        let response = fetch("store/login", {
+        fetch("store/login", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
                 "Content-Type": "application/json",
                 "X-CSRFToken": cookies.csrftoken
-            },
-          });
+            }}).then(response => response.json())
+            .then(response => {
+              console.log(response);
+            })
          handleClose();
     }
 

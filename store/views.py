@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import JsonResponse
 import json
 from .models import User
 from django.views.decorators.csrf import csrf_exempt
 
 #npm install react-scripts --save
+#npm i react-multi-carousel
 # Create your views here.
 @csrf_exempt
 def login_view(request):
@@ -17,6 +18,17 @@ def login_view(request):
         user = authenticate(request, email=email, password=password)
         if user:
             login(request, user)
+            response = {
+                'success': True,
+                'name': user.firstName + ' ' + user.lastName
+            }
+            return JsonResponse(response)
+        else:
+            response = {
+                'success': False
+            }
+            return JsonResponse(response)
+
 @csrf_exempt
 def signup(request):
     if request.method == "POST":
@@ -25,7 +37,18 @@ def signup(request):
         last_name = data["last_name"]
         email = data["email"]
         password = data["password"]
-        new_user = User.objects.create_user(first_name, last_name, email, password)
-        new_user.save()
+        try:
+            new_user = User.objects.create_user(first_name, last_name, email, password)
+            new_user.save()
+        except IntegrityError as e:
+            response = {
+                'success': False
+            }
+            return JsonResponse(response)
         user = authenticate(request, email=email, password=password)
         login(request, user)
+        response = {
+                'success': True,
+                'name': first_name + ' ' + last_name
+            }
+        return JsonResponse(response)
