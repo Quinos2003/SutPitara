@@ -52,3 +52,14 @@ class User(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+    
+class Product(models.Model):
+    smallImageURL = models.URLField()
+    largeImageURL = models.URLField()
+    shortTitle = models.CharField(max_length=64)
+    longTitle = models.CharField(max_length=64)
+    mrp = models.IntegerField()
+    discount = models.IntegerField()
+    quantity = models.IntegerField()
+    description = models.CharField(max_length=64)
+    tagline = models.CharField(max_length=64)
