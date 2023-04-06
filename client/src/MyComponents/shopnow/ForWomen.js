@@ -24,23 +24,31 @@ import ProductList from './ProductList';
 // `;
 
 const Wrapper = styled(Box)`
-.grid-filter-column{
-  grid-template-columns: 0.2fr 1fr;
-  display: grid;
-  padding: 0 55px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
   background: #f7ede1;
-
 }`
 
+const PanelList=styled(Box)`
+display: flex;
+flex: 1;
+overflow-y: auto;
+`
+const Panel=styled(Box)`
+flex-basis: 280px;
+padding: 1rem;
+overflow-y: auto;
+
+`
+const List=styled(Box)`
+flex: 1;
+padding: 1rem;
+// overflow-y: auto;
+
+`
 
 
-const Container = styled(Grid)(({ theme }) => ({
-  // background: '#FFFFFF',
-  display: 'flex',
-  [theme.breakpoints.down('md')]: {
-      display: 'none',
-  }
-}))
 
 
 // @media(max-width: ${({theme}) => theme.media.mobile}){
@@ -50,7 +58,6 @@ const Container = styled(Grid)(({ theme }) => ({
   // }
 
   
-
   
 
 export default function ForMen() {
@@ -60,27 +67,32 @@ export default function ForMen() {
 
     <>
      
-     <Wrapper>
+     <Wrapper className='home'>
 
 
-       <Box className='container grid grid-filter-column'>
+       <PanelList className='home_panelList-wrap'>
 
 
-        <Container>
-        <FilterSection/>
-        </Container>
-        <Box className='product-view--sort'>
+        <Panel className="home_panel-wrap">
+          <FilterSection/>
+        </Panel>
+        
+        
+        <List className="home_list-wrap">
           
-          <Box className="main-product">
+             <ProductList/>
             <ProductList/>
             <ProductList/>
             <ProductList/>
             <ProductList/>
-            <ProductList/>
-          </Box>
-        </Box>
 
-       </Box>
+        </List>
+          
+          
+          
+        
+
+       </PanelList>
 
      </Wrapper>
     </>
