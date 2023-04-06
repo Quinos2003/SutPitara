@@ -54,6 +54,13 @@ class User(AbstractBaseUser):
         return True
     
 class Product(models.Model):
+
+    M = "M"
+    F = "F"
+    GENDER_CHOICES = (
+        (M, 'Male'),
+        (F, 'Female'),
+    )
     smallImageURL = models.URLField()
     largeImageURL = models.URLField()
     shortTitle = models.CharField(max_length=64)
@@ -63,3 +70,6 @@ class Product(models.Model):
     quantity = models.IntegerField()
     description = models.CharField(max_length=64)
     tagline = models.CharField(max_length=64)
+    category = models.CharField(max_length=1,
+                  choices=GENDER_CHOICES,
+                  default=M)
