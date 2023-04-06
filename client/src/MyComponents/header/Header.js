@@ -88,11 +88,15 @@ export default function Header() {
           </Tippy>
           <ExpandMoreIcon />
         </div>
-        <div className="header__fifth">
+        <Link to='/cart' style={{
+            textDecoration: "none",
+          }}>
+        <div className="header__fifth" >
           <ShoppingCartIcon />
 
           <span>Cart</span>
         </div>
+        </Link>
         <div className="header__sixth">
           <FavoriteBorderIcon />
 
