@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 
 const LeftContainer = styled(Box)(({ theme }) => ({
     minWidth: '40%',
-    padding: '40px 0 0 80px',
+    padding: '40px 10px 0 80px',
     [theme.breakpoints.down('md')]: {
         padding: '20px 40px'
     }

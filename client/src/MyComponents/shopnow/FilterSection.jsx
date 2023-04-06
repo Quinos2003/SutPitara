@@ -74,8 +74,13 @@ const FilterSection = ({ applyFilter }) => {
 
   return (
     <Box classname="container">
+        <h3 style={{
+          fontFamily: 'PT Serif',
+          fontSize: '25px',
+          color: '#830304',
+          fontWeight: 'bolder',
+        }}>Filter</h3>
       <Box>
-        <h3>Filter</h3>
         <SearchBar className="search-bar">
         <SearchIcon style={{
             color: '#830304',
@@ -87,12 +92,16 @@ const FilterSection = ({ applyFilter }) => {
         </SearchBar>
       </Box>
       <Box>
-        <h3>Category</h3>
+        <h3 style={{
+          fontFamily: 'PT Serif',
+        }}>Categories</h3>
       <Box sx={{ minWidth: 120 }} style={{
         background: 'white',
       }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Banarasi Silk Saree</InputLabel>
+        <InputLabel id="demo-simple-select-label" style={{
+          fontFamily: 'PT Serif',
+        }}>Banarasi Silk Saree</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -108,12 +117,16 @@ const FilterSection = ({ applyFilter }) => {
     </Box>
     </Box>
     <Box>
-        <h3>Types</h3>
+        <h3 style={{
+          fontFamily: 'PT Serif',
+        }}>Types</h3>
       <Box sx={{ minWidth: 120 }}style={{
         background: 'white',
       }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Saree</InputLabel>
+        <InputLabel id="demo-simple-select-label" style={{
+          fontFamily: 'PT Serif',
+        }}>Saree</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -129,12 +142,16 @@ const FilterSection = ({ applyFilter }) => {
     </Box>
     </Box>
     <Box>
-        <h3>Prices</h3>
+        <h3 style={{
+          fontFamily: 'PT Serif',
+        }}>Prices</h3>
       <Box sx={{ minWidth: 120 }}style={{
         background: 'white',
       }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">20k-40k</InputLabel>
+        <InputLabel id="demo-simple-select-label" style={{
+          fontFamily: 'PT Serif',
+        }}>20k-40k</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -150,12 +167,16 @@ const FilterSection = ({ applyFilter }) => {
     </Box>
     </Box>
     <Box>
-        <h3>Color</h3>
+        <h3 style={{
+          fontFamily: 'PT Serif',
+        }}>Color</h3>
       <Box sx={{ minWidth: 120 }} style={{
         background: 'white',
       }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Blue</InputLabel>
+        <InputLabel id="demo-simple-select-label" style={{
+          fontFamily: 'PT Serif',
+        }}>Blue</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"

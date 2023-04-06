@@ -71,7 +71,7 @@ const Image=styled('img')(({theme})=>({
   width: '100%',
   height: '250px',
   [theme.breakpoints.down('sm')]:{
-    objectFit: 'contain',
+    // objectFit: 'contain',
     // height: 180
 
 }
@@ -101,7 +101,7 @@ const ProductList = ({ data, timer, title }) => {
       <Component>
               {
                   products.slice(0,4).map((product) => (
-                      <Link to={`product/${product.id}`} style={{textDecoration: 'none'}}>
+                      <Link to={`/product/${product.id}`} style={{textDecoration: 'none'}}>
                           <Box textAlign="center" style={{ padding: '25px 40px' }}>
                               <Image src={product.url} />
                               <Text style={{ fontWeight: 600, color: '#212121' }}>{product.title.shortTitle}</Text>

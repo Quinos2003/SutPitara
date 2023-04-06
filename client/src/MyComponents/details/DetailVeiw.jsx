@@ -55,7 +55,9 @@ const DetailView = () => {
             <Box></Box>
             {/* {   product && Object.keys(product).length && */}
                 <Container container> 
-                    <Grid item lg={4} md={4} sm={8} xs={12}>
+                    <Grid item lg={4} md={4} sm={8} xs={12} style={{
+                        paddingRight: '10px'
+                    }}>
                         {/* <ActionItem product={product} /> */}
                         <ActionItem  />
                     </Grid>
