@@ -105,10 +105,11 @@
 // export default Cart;
 
 import React from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import CartItem from './CartItem';
-import { useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import CartItem from "./CartItem";
+import { useState } from "react";
 import { Box, Typography, Button, Grid, styled } from "@mui/material";
+import TotalView from "./TotalView";
 const Component = styled(Grid)(({ theme }) => ({
   padding: "30px 135px",
   display: "flex",
@@ -146,8 +147,8 @@ const StyledButton = styled(Button)`
 `;
 
 const Cart = () => {
-    // const cartDetails = useSelector(state => state.cart);
-        // const { cartItems } = cartDetails;
+  // const cartDetails = useSelector(state => state.cart);
+  // const { cartItems } = cartDetails;
   // const buyNow = async () => {
   //   // let response = await payUsingPaytm({ amount: 500, email: 'kunaltyagi@gmail.com'});
   //   // var information = {
@@ -158,42 +159,40 @@ const Cart = () => {
   // };
   const removeItemFromCart = (id) => {
     //         // dispatch(removeFromCart(id));
-        };
-        
+  };
 
-        const [amount, setamount] = useState('');
-        const buyNow = (e)=>{
-            e.preventDefault();
-            // if(amount === ""){
-            // alert("please enter amount");
-            // }else{
-              var options = {
-                key: "rzp_test_L0OE3OK4mfOEtJ",
-                key_secret:"w4qnWCdwJRcRaC1Dp8QSMMVw",
-                amount: 500,
-                currency:"INR",
-                name:"STARTUP_PROJECTS",
-                description:"for testing purpose",
-                handler: function(response){
-                  alert(response.razorpay_payment_id);
-                },
-                prefill: {
-                  name:"Velmurugan",
-                  email:"mvel1620r@gmail.com",
-                  contact:"7904425033"
-                },
-                notes:{
-                  address:"Razorpay Corporate office"
-                },
-                theme: {
-                  color:"#3399cc"
-                }
-              };
-              var pay = new window.Razorpay(options);
-              pay.open();
-            }
-        //   }
-    
+  const [amount, setamount] = useState("");
+  const buyNow = (e) => {
+    e.preventDefault();
+    // if(amount === ""){
+    // alert("please enter amount");
+    // }else{
+    var options = {
+      key: "rzp_test_L0OE3OK4mfOEtJ",
+      key_secret: "w4qnWCdwJRcRaC1Dp8QSMMVw",
+      amount: 500,
+      currency: "INR",
+      name: "STARTUP_PROJECTS",
+      description: "for testing purpose",
+      handler: function (response) {
+        alert(response.razorpay_payment_id);
+      },
+      prefill: {
+        name: "Velmurugan",
+        email: "mvel1620r@gmail.com",
+        contact: "7904425033",
+      },
+      notes: {
+        address: "Razorpay Corporate office",
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+    var pay = new window.Razorpay(options);
+    pay.open();
+  };
+  //   }
 
   return (
     <div>
@@ -209,15 +208,19 @@ const Cart = () => {
                                  <CartItem item={item} removeItemFromCart={removeItemFromCart}/>
                            ))
                          } */}
-                         <CartItem  removeItemFromCart={removeItemFromCart}/>
+          <CartItem removeItemFromCart={removeItemFromCart} />
           <BottomWrapper>
-            <StyledButton onClick={ buyNow} variant="contained">
+            <StyledButton onClick={buyNow} variant="contained">
               Place Order
             </StyledButton>
           </BottomWrapper>
         </LeftComponent>
-        <Grid item lg={3} md={3} sm={12} xs={12}>
+
+        {/* right components */}
+        <Grid item lg={3} md={3} sm={12} xs={12}> 
+        
           {/* <TotalView cartItems={cartItems} /> */}
+          <TotalView />
         </Grid>
       </Component>
     </div>
