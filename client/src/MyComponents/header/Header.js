@@ -10,7 +10,7 @@ import MoreT from "../tippy/MoreT";
 // import Login from "./Login";
 import Login from "../tippy/Login";
 import Logo from '../../image/Logo.png'
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 // import { useEffect} from "react";
 
 
@@ -97,11 +97,15 @@ export default function Header() {
           <span>Cart</span>
         </div>
         </Link>
+        <Link to='/wishlist' style={{
+            textDecoration: "none",
+          }}>
         <div className="header__sixth">
-          <FavoriteBorderIcon />
+          <FavoriteIcon />
 
           <span>Wishlist</span>
         </div>
+        </Link>
         </div>
       </div>
       
