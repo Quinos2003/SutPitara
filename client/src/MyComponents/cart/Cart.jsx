@@ -110,6 +110,8 @@ import CartItem from "./CartItem";
 import { useState } from "react";
 import { Box, Typography, Button, Grid, styled } from "@mui/material";
 import TotalView from "./TotalView";
+import { useNavigate } from 'react-router-dom';
+
 const Component = styled(Grid)(({ theme }) => ({
   padding: "30px 135px",
   display: "flex",
@@ -162,37 +164,44 @@ const Cart = () => {
   };
 
   const [amount, setamount] = useState("");
-  const buyNow = (e) => {
-    e.preventDefault();
-    // if(amount === ""){
-    // alert("please enter amount");
-    // }else{
-    var options = {
-      key: "rzp_test_L0OE3OK4mfOEtJ",
-      key_secret: "w4qnWCdwJRcRaC1Dp8QSMMVw",
-      amount: 500,
-      currency: "INR",
-      name: "STARTUP_PROJECTS",
-      description: "for testing purpose",
-      handler: function (response) {
-        alert(response.razorpay_payment_id);
-      },
-      prefill: {
-        name: "Velmurugan",
-        email: "mvel1620r@gmail.com",
-        contact: "7904425033",
-      },
-      notes: {
-        address: "Razorpay Corporate office",
-      },
-      theme: {
-        color: "#3399cc",
-      },
-    };
-    var pay = new window.Razorpay(options);
-    pay.open();
-  };
-  //   }
+
+  // const buyNow = (e) => {
+  //   e.preventDefault();
+  //   // if(amount === ""){
+  //   // alert("please enter amount");
+  //   // }else{
+  //   var options = {
+  //     key: "rzp_test_L0OE3OK4mfOEtJ",
+  //     key_secret: "w4qnWCdwJRcRaC1Dp8QSMMVw",
+  //     amount: 500,
+  //     currency: "INR",
+  //     name: "STARTUP_PROJECTS",
+  //     description: "for testing purpose",
+  //     handler: function (response) {
+  //       alert(response.razorpay_payment_id);
+  //     },
+  //     prefill: {
+  //       name: "Velmurugan",
+  //       email: "mvel1620r@gmail.com",
+  //       contact: "7904425033",
+  //     },
+  //     notes: {
+  //       address: "Razorpay Corporate office",
+  //     },
+  //     theme: {
+  //       color: "#3399cc",
+  //     },
+  //   };
+  //   var pay = new window.Razorpay(options);
+  //   pay.open();
+  // };
+  //   // }
+  const navigate = useNavigate();
+
+  const buyNow = () => {
+    // dispatch(addToCart(id, quantity));
+    navigate('/detail');
+}
 
   return (
     <div>
@@ -210,7 +219,7 @@ const Cart = () => {
                          } */}
           <CartItem removeItemFromCart={removeItemFromCart} />
           <BottomWrapper>
-            <StyledButton onClick={buyNow} variant="contained">
+            <StyledButton onClick={() => buyNow()}  variant="contained">
               Place Order
             </StyledButton>
           </BottomWrapper>

@@ -14,17 +14,37 @@ import { products } from '../constants/data';
 // })
 
 const responsive = {
+  // desktop: {
+  //   breakpoint: { max: 3000, min: 1024 },
+  //   items: 5,
+  // },
+  // tablet: {
+  //   breakpoint: { max: 1024, min: 464 },
+  //   items: 2,
+  // },
+  // mobile: {
+  //   breakpoint: { max: 464, min: 0 },
+  //   items: 1,
+  // },
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 1024 },
+    items: 7,
+    // slidesToSlide: 2,
+  },
   desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 5,
+    breakpoint: { max: 1024, min: 800 },
+    items: 4,
   },
   tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
+    breakpoint: { max: 800, min: 464 },
+    items: 3,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1,
+    items: 2,
+    // slidesToSlide: al,
+    
   },
 };
 
@@ -108,11 +128,12 @@ const Slide = ({ data, timer, title }) => {
               <ViewAllButton variant="contained" color="primary">View All</ViewAllButton>
           </Deal>
           <Divider />
-          <Carousel
-              swipeable={false}
+          <Carousel 
+              // swipeable={false}
+              swipeable={true}
               draggable={false}
               responsive={responsive}
-              centerMode={true}
+              // centerMode={true}
               infinite={true}
               autoPlay={true}
               autoPlaySpeed={4000}
