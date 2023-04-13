@@ -5,7 +5,8 @@ import GroupButton from './GroupButton';
 
 
 const Component = styled(Card)`
-    border-top: 1px solid #f0f0f0;
+    // border-top: 1px solid #f0f0f0;
+    border: 2px solid #e0e0e0;
     border-radius: 0px;
     display: flex;
 `;

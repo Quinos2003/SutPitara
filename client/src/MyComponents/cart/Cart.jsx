@@ -129,6 +129,8 @@ const LeftComponent = styled(Grid)(({ theme }) => ({
 const Header = styled(Box)`
   padding: 15px 24px;
   background: #fff;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+  border: 2px solid #e0e0e0;
 `;
 
 const BottomWrapper = styled(Box)`
