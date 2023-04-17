@@ -55,7 +55,7 @@ const Main = styled('div')(({ theme }) => ({
   cursor: 'pointer',
     position: 'absolute',
     left: '105px',
-    top: '172px',
+    top: '195px',
     borderRadius: '50%',
     
     border: '1px solid #f0f0f0',
@@ -66,7 +66,7 @@ const Main = styled('div')(({ theme }) => ({
   // padding: '40px 10px 0 80px',
   [theme.breakpoints.down('md')]: {
       left: '65px',
-      top: '151px',
+      top: '175px',
   }
 }))
 const Heart=styled('div')`

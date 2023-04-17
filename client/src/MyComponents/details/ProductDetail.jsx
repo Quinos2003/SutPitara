@@ -32,6 +32,7 @@ const ProductDetail = ({ product }) => {
     return (
         <>
             <Typography>Available offers</Typography>
+            
             <SmallText>
                 <Typography><StyledBadge />Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit Card</Typography>
                 <Typography><StyledBadge />Bank Offer 10% Off on Bank of Baroda Mastercard debit card first time transaction, Terms and Condition apply</Typography>
@@ -56,11 +57,11 @@ const ProductDetail = ({ product }) => {
                             <Typography>View more sellers starting from ₹329</Typography>
                         </TableCell>
                     </ColumnText>
-                    <TableRow>
+                    {/* <TableRow>
                         <TableCell colSpan={2}>
                             <img src={adURL} style={{ width: 390 }} />
                         </TableCell>
-                    </TableRow>
+                    </TableRow> */}
                     <ColumnText>
                         <TableCell style={{ color: '#878787' }}>Description</TableCell>
                         {/* <TableCell>{product.description}</TableCell> */}

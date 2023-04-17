@@ -88,7 +88,7 @@ export const products = [
     { 
         id: 'product4',
         // url: 'https://rukminim1.flixcart.com/image/300/300/kll7bm80/smartwatch/c/1/n/43-mo-sw-sense-500-android-ios-molife-original-imagyzyycnpujyjh.jpeg?q=70', 
-        url: 'https://cdn.shopify.com/s/files/1/0606/5864/7273/products/7-min_900x.jpg?v=1665128213',
+        url: 'https://cdn.shopify.com/s/files/1/0606/5864/7273/products/MicrosoftTeams-image_1080x.jpg?v=1681293460',
         detailUrl:'https://cdn.shopify.com/s/files/1/0606/5864/7273/products/TMKJSLMA0609_2227e775-4b6c-4f9e-862b-ef825a64e320_900x.jpg?v=1638334658',
         title: {
             shortTitle: 'Smart Watches',

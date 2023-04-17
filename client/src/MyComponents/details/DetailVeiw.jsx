@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-import { styled, Box, Typography, Grid } from '@mui/material';
+import { styled, Box, Typography, Grid} from '@mui/material';
 
 import ProductDetail from './ProductDetail';
 // import ActionItem from './ActionItem';
@@ -10,6 +10,7 @@ import ActionItem from './ActionItem';
 import { useParams } from 'react-router-dom';
 // import { getProductById } from '../../service/api';
 import { useDispatch, useSelector } from 'react-redux';
+import Breadcrumbs from './Breadcrumbs'
 
 // import { getProductDetails } from '../../redux/actions/productActions';
 
@@ -32,6 +33,9 @@ const RightContainer = styled(Grid)`
         margin-top: 10px;
     }
 `;
+// const DetailText=styled(Typography)`
+
+// `
 
 const DetailView = () => {
     const fassured = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/fa_62673a.png'
@@ -52,7 +56,11 @@ const DetailView = () => {
 
     return (    
         <Component>
-            <Box></Box>
+            <Box style={{
+                paddingLeft: '100px',
+            }}>
+                <Breadcrumbs/>
+            </Box>
             {/* {   product && Object.keys(product).length && */}
                 <Container container> 
                     <Grid item lg={4} md={4} sm={8} xs={12} style={{
@@ -63,7 +71,7 @@ const DetailView = () => {
                     </Grid>
                     <RightContainer item lg={8} md={8} sm={8} xs={12}>
                         {/* <Typography>{product.title.longTitle}</Typography> */}
-                        <Typography>Pigeon FAVOURITE Electric Kettle  (1.5 L, Silver, Black)</Typography>
+                        <Typography >Pigeon FAVOURITE Electric Kettle  (1.5 L, Silver, Black)</Typography>
 
                         <Typography style={{marginTop: 5, color: '#878787', fontSize: 14 }}>
                             8 Ratings & 1 Reviews

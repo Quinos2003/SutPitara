@@ -10,9 +10,9 @@ width: 90vh;
 
 `
 const Image=styled(Box)`
-height: 82%;
+// height: 82%;
 width: 28%;
-background: #2874f0
+background: #830304
 url(https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/login_img_c4a81e.png) center 85%  no-repeat;
 padding: 45px 35px;
 &>p ,&>h5{
@@ -39,7 +39,8 @@ const  LoginButton=styled(Button)`
 text-tranform: none; 
 // it is used for the writren text is only in capital alphabet
 
-background: #FB641B;
+// background: #FB641B;
+background: #830304;
 color: #fff;
 height: 48px;
 border-radius: 2px
@@ -50,7 +51,8 @@ text-tranform: none;
 // it is used for the writren text is only in capital alphabet
 
 background: #fff;
-color: #2874f0;
+// color: #2874f0;
+color: #830304;
 height: 48px;
 border-radius: 2px;
 box-shadow: 0 2px 4px 0 rgb(0 0 0/20%)
@@ -62,7 +64,8 @@ color: #878787
 const CreateAccount=styled(Typography)`
 font-size: 14px;
 text-align: center;
-color: #2874f0;
+// color: #2874f0;
+color: #830304;
 font-weight: 600;
 cursor: pointer;
 
@@ -182,7 +185,7 @@ export default function LoginDialog({open,setOpen}) {
                     textAlign: 'center' 
                 }}>Or</Typography>
                 <OtpButton>Request OTP?</OtpButton>
-                <CreateAccount onClick={()=> toggleSignup()}>New to Flipkart? Create an account</CreateAccount>
+                <CreateAccount onClick={()=> toggleSignup()}>New to Sutpitaara? Create an account</CreateAccount>
                 {/* <CreateAccount >New to Flipkart? Create an account</CreateAccount> */}
             </Wrapper>
             

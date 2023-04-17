@@ -44,6 +44,7 @@ const responsive = {
     breakpoint: { max: 464, min: 0 },
     items: 2,
     // slidesToSlide: al,
+   
     
   },
 };
@@ -78,6 +79,8 @@ background: #2874f0;
 border-radius: 2px
 font-size: 13px;
 font-weight: 600;
+white-space: nowrap;
+height: 36px;
 
 `;
 // const Image = styled("img")({
@@ -132,6 +135,7 @@ const Slide = ({ data, timer, title }) => {
               // swipeable={false}
               swipeable={true}
               draggable={false}
+              // draggable={true}
               responsive={responsive}
               // centerMode={true}
               infinite={true}

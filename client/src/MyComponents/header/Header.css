@@ -7,8 +7,8 @@
     height: 56px;
 }
 .header__first{
-    padding-right: -100px ;
-    padding-left: 120px;
+    /* padding-right: -100px ; */
+    padding-left: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,7 +47,9 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    overflow: hidden;
+    /* overflow: hidden; */
+    width: 40%;
+   
 }
 .header__third>button{
     border: none;
@@ -111,7 +113,8 @@ color: white;
 
 }
 
-
+/* 
 .header__fifth,.header__second,.header__third,.header__third1,.header__fourth,.header__fifth,.header__sixth{
     margin: 0 20px;
 }
+ */

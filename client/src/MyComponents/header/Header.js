@@ -21,6 +21,37 @@ import { useState } from "react";
 import LoginDialog from "../login/LoginDialog";
 import Shopnow from "../tippy/Shopnow";
 import { Link } from "react-router-dom";
+import MuiDrawer from "./MuiDrawer";
+import { Box,styled } from "@mui/material";
+
+
+
+
+const Drawer = styled(Box)(({ theme }) => ({
+  
+//  display: 'none',
+  [theme.breakpoints.up('md')]: {
+    
+    display: 'none',
+  },
+}));
+
+const Space = styled('div')(({ theme }) => ({
+  //  display: 'none',
+    [theme.breakpoints.down('md')]: {
+      
+      display: 'none',
+    },
+  }));
+
+  const Navbar = styled('div')(({ theme }) => ({
+    //  display: 'none',
+      [theme.breakpoints.down('md')]: {
+        
+        justifyContent: 'space-between',
+       
+      },
+    }));
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -33,7 +64,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="header">
+      <Navbar className="header">
         <Link
           to="/"
           style={{
@@ -54,7 +85,7 @@ export default function Header() {
           <input type="text" name="" id="" placeholder="Search for products" />
           <SearchIcon />
         </div>
-        <div className="space">
+        <Space className="space">
         <div className="header__third">
           <Tippy
             content={<Login></Login>}
@@ -106,8 +137,12 @@ export default function Header() {
           <span>Wishlist</span>
         </div>
         </Link>
-        </div>
-      </div>
+        </Space>
+        <Drawer>
+        <MuiDrawer />
+        </Drawer>
+      </Navbar>
+      
       
       
       <LoginDialog open={open} setOpen={setOpen} />
