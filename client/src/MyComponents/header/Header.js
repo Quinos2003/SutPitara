@@ -12,7 +12,7 @@ import Login from "../tippy/Login";
 import Logo from '../../image/Logo.png'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 // import { useEffect} from "react";
-
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
 
 //  for the light mode use this import and in the tippy write the theme="light"
@@ -23,6 +23,7 @@ import Shopnow from "../tippy/Shopnow";
 import { Link } from "react-router-dom";
 import MuiDrawer from "./MuiDrawer";
 import { Box,styled } from "@mui/material";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 
@@ -30,6 +31,8 @@ import { Box,styled } from "@mui/material";
 const Drawer = styled(Box)(({ theme }) => ({
   
 //  display: 'none',
+display:'flex',
+alignItems: 'center',
   [theme.breakpoints.up('md')]: {
     
     display: 'none',
@@ -123,7 +126,7 @@ export default function Header() {
             textDecoration: "none",
           }}>
         <div className="header__fifth" >
-          <ShoppingCartIcon />
+          {/* <ShoppingCartIcon /> */}
 
           <span>Cart</span>
         </div>
@@ -132,13 +135,17 @@ export default function Header() {
             textDecoration: "none",
           }}>
         <div className="header__sixth">
-          <FavoriteIcon />
+          {/* <FavoriteIcon /> */}
 
           <span>Wishlist</span>
         </div>
         </Link>
         </Space>
         <Drawer>
+
+        <ShoppingCartOutlinedIcon style={{color: 'white'}}/>
+   
+
         <MuiDrawer />
         </Drawer>
       </Navbar>

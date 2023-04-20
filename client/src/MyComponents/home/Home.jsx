@@ -7,6 +7,7 @@ import { Box, styled } from "@mui/material";
 // import {useDispatch, useSelector} from'react-redux'
 // import MidSlide from "./MidSlide";
 import { useEffect } from "react";
+
 // import {getProducts } from '../../redux/actions/productActions'
 // import Video from "./Video";
 

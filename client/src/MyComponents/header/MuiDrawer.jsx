@@ -12,22 +12,23 @@ const MuiDrawer = () => {
   return (
     <>
     <IconButton size='large' edge='start'  color='inherit' aria-aria-label='logo' onClick={()=> setIsDrawerOpen(true)} style={{
-      color:"white"
+      color:"white",
+     
     }}>
         <MenuIcon />
     </IconButton>
     <Drawer 
-    anchor='left'
+    anchor='right'
+   
     open={isDrawerOpen} 
     onClose={()=> setIsDrawerOpen(false)}  >
-        <Box sx={{ overflow: 'auto' }}  textAlign='center' role='presentation'>
-            <Typography variant='h6' component='div'>New Arrivals</Typography>
-            <Typography variant='h6' component='div'>Kurtas & bundis</Typography>
-            <Typography variant='h6' component='div'>Bandhgalas</Typography>
-            <Typography variant='h6' component='div'>Sherwanis & achkans</Typography>
-            <Typography variant='h6' component='div'>Occasion wear</Typography>
-            <Typography variant='h6' component='div'>Wedding</Typography>
-            <Typography variant='h6' component='div'>Bran</Typography>
+        <Box sx={{ overflow: 'auto',
+      width: '50vw' }}  textAlign='center' role='presentation'>
+            <Typography variant='h6' component='div'>Previous Orders</Typography>
+            <Typography variant='h6' component='div'>My Profile</Typography>
+            <Typography variant='h6' component='div'>Login</Typography>
+            <Typography variant='h6' component='div'>Wishlist</Typography>
+            
         </Box>
     </Drawer>
       

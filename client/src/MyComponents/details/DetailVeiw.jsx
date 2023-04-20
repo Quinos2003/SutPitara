@@ -23,16 +23,21 @@ const Container = styled(Grid)(({ theme }) => ({
     background: '#FFFFFF',
     display: 'flex',
     [theme.breakpoints.down('md')]: {
-        margin: 0
+        margin: 0,
+        
+
     }
 }))
 
 const RightContainer = styled(Grid)`
     margin-top: 50px;
+    padding: 0px 20px ;
     & > p {
         margin-top: 10px;
     }
+
 `;
+
 // const DetailText=styled(Typography)`
 
 // `
@@ -63,19 +68,19 @@ const DetailView = () => {
             </Box>
             {/* {   product && Object.keys(product).length && */}
                 <Container container> 
-                    <Grid item lg={4} md={4} sm={8} xs={12} style={{
+                    <Grid item lg={4} md={4} sm={12} xs={12} style={{
                         paddingRight: '10px'
                     }}>
                         {/* <ActionItem product={product} /> */}
                         <ActionItem  />
                     </Grid>
-                    <RightContainer item lg={8} md={8} sm={8} xs={12}>
+                    <RightContainer item lg={8} md={8} sm={12} xs={12}>
                         {/* <Typography>{product.title.longTitle}</Typography> */}
                         <Typography >Pigeon FAVOURITE Electric Kettle  (1.5 L, Silver, Black)</Typography>
 
                         <Typography style={{marginTop: 5, color: '#878787', fontSize: 14 }}>
                             8 Ratings & 1 Reviews
-                            <span><img src={fassured} style={{width: 77, marginLeft: 20}} /></span>
+                            {/* <span><img src={fassured} style={{width: 77, marginLeft: 20}} /></span> */}
                         </Typography>
                         <Typography>
                             {/* <span style={{ fontSize: 28 }}>₹{product.price.cost}</span>&nbsp;&nbsp;&nbsp;  */}
