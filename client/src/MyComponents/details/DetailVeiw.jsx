@@ -24,6 +24,7 @@ const Container = styled(Grid)(({ theme }) => ({
     display: 'flex',
     [theme.breakpoints.down('md')]: {
         margin: 0,
+       
         
 
     }
@@ -68,15 +69,16 @@ const DetailView = () => {
             </Box>
             {/* {   product && Object.keys(product).length && */}
                 <Container container> 
-                    <Grid item lg={4} md={4} sm={12} xs={12} style={{
-                        paddingRight: '10px'
-                    }}>
+                    <Grid item lg={4} md={4} sm={12} xs={12} >
                         {/* <ActionItem product={product} /> */}
                         <ActionItem  />
                     </Grid>
                     <RightContainer item lg={8} md={8} sm={12} xs={12}>
                         {/* <Typography>{product.title.longTitle}</Typography> */}
-                        <Typography >Pigeon FAVOURITE Electric Kettle  (1.5 L, Silver, Black)</Typography>
+                        <Typography style={{ fontSize: '24px',
+                    fontWeight: '500',
+                    fontFamily:'serif'
+                    }} >Pigeon Favourite Electric Kettle  (1.5 L, Silver, Black)</Typography>
 
                         <Typography style={{marginTop: 5, color: '#878787', fontSize: 14 }}>
                             8 Ratings & 1 Reviews

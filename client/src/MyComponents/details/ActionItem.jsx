@@ -9,35 +9,47 @@ import { useNavigate } from 'react-router-dom';
 
 // import { addToCart } from '../../redux/actions/cartActions';
 import { useDispatch } from 'react-redux';
-import img1 from '../../image/1.png'
+// import img1 from '../../image/1.png'
+import img1 from '../../image/1.webp'
+import { width } from '@mui/system';
 
 const LeftContainer = styled(Box)(({ theme }) => ({
     minWidth: '40%',
     padding: '40px 10px 0 80px',
     [theme.breakpoints.down('md')]: {
-        padding: '20px 40px'
+        // padding: '20px 40px'
+        padding: '0px'
     }
 }))
-const BottomContainerr = styled(Box)(({ theme }) => ({
+const BottomContainer = styled(Box)(({ theme }) => ({
     // minWidth: '40%',
     display: 'flex',
     padding: '20px 10px 0 80px',
     [theme.breakpoints.down('md')]: {
-        padding: '20px 40px'
+        // padding: '20px 40px'
+        padding: '0px'
+    }
+}))
+
+const Image = styled('img')(({ theme }) => ({
+    // minWidth: '40%',
+    // padding: '15px 20px',
+    border: '1px solid #f0f0f0',
+    width: '95%',
+    [theme.breakpoints.down('md')]: {
+        // padding: '20px 40px'
+        padding: '0px',
+        width: '100%',
     }
 }))
 
 
 
-const Image = styled('img')({
-    padding: '15px 20px',
-    border: '1px solid #f0f0f0',
-    width: '95%'
-});
+
 const BImage = styled('img')({
    
     border: '1px solid #f0f0f0',
-    width: '95%'
+    // width: '95%'
 });
 const StyledButton = styled(Button)`
     width: 46%;
@@ -69,8 +81,8 @@ const StyledButton = styled(Button)`
 const Main = styled('div')(({ theme }) => ({
   cursor: 'pointer',
     position: 'absolute',
-    left: '105px',
-    top: '195px',
+    left: '92px',
+    top: '185px',
     borderRadius: '50%',
     
     border: '1px solid #f0f0f0',
@@ -80,8 +92,8 @@ const Main = styled('div')(({ theme }) => ({
   // minWidth: '40%',
   // padding: '40px 10px 0 80px',
   [theme.breakpoints.down('md')]: {
-      left: '65px',
-      top: '175px',
+      left: '13px',
+      top: '147px',
   }
 }))
 const Heart=styled('div')`
@@ -132,12 +144,15 @@ const ActionItem = ({ product }) => {
 
             
         </LeftContainer>
-        <BottomContainerr>
+        <BottomContainer>
             {/* <Image src={product.detailUrl} /><br /> */}
-            <Box style={{width: '50%'}}>
+            <Box >
             <BImage src={img1} />
             </Box>
-            <Box style={{width: '50%'}}>
+            <Box >
+            <BImage src={img1} />
+            </Box>
+            <Box >
             <BImage src={img1} />
             </Box>
 
@@ -146,7 +161,7 @@ const ActionItem = ({ product }) => {
             
 
             
-        </BottomContainerr>
+        </BottomContainer>
         </>
         
     )
