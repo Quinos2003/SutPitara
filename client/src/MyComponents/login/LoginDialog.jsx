@@ -150,8 +150,7 @@ export default function LoginDialog({open,setOpen}) {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": cookies.csrftoken
+                "Content-Type": "application/json",                "X-CSRFToken": cookies.csrftoken
             }}).then(response => response.json())
             .then(response => {
               console.log(response);

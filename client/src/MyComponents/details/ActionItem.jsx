@@ -93,7 +93,7 @@ const Main = styled('div')(({ theme }) => ({
   // padding: '40px 10px 0 80px',
   [theme.breakpoints.down('md')]: {
       left: '13px',
-      top: '147px',
+      top: '177px',
   }
 }))
 const Heart=styled('div')`

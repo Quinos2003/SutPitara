@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 export default function Shopnow() {
   return (
     <div className='moret'>
-      <Link to="men" style={{
+      <Link to="/men" style={{
             textDecoration: "none",
           }}>
         <div className="moret__in">
@@ -23,7 +23,7 @@ export default function Shopnow() {
 
         </div>
         </Link>
-        <Link to="women" style={{
+        <Link to="/women" style={{
             textDecoration: "none",
           }}>
         <div className="moret__in">

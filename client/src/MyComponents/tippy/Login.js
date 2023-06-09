@@ -3,7 +3,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
-
+import { Link } from 'react-router-dom';
 import './Login.css'
 export default function Login() {
    
@@ -14,10 +14,14 @@ export default function Login() {
             <p className='su'>Sign Up</p>
             
         </div>
+        <Link to="/account" style={{
+            textDecoration: "none",
+          }}>
         <div className="log_in">
             <AccountCircleIcon/>
-            <p>My Profile</p>
+            <p style={{color:'#830304'}}>My Profile</p>
         </div>
+        </Link>
         
         
 

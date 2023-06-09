@@ -37,7 +37,7 @@ const Discount = styled(Typography)`
 `;
 
 const Remove = styled(Button)`
-    margin-top: 20px;
+    margin-top: 47px;
     font-size: 16px;
 `;
 
@@ -55,9 +55,9 @@ const CartItem = ({ item, removeItemFromCart }) => {
             <Box style={{ margin: 20 }}>
                 {/* <Typography>{(item.title.longTitle)}</Typography> */}
                 <Typography>Flipkart SmartBuy Sandwich 01 Grill  (Black)</Typography>
-                <SmallText>Seller:RetailNet
+                {/* <SmallText>Seller:RetailNet
                     <span><img src={fassured} style={{ width: 50, marginLeft: 10 }} /></span>
-                </SmallText>
+                </SmallText> */}
                 <Typography style={{margin: '20px 0'}}>
                     {/* <Cost component="span">₹{item.price.cost}</Cost>&nbsp;&nbsp;&nbsp;
                     <MRP component="span"><strike>₹{item.price.mrp}</strike></MRP>&nbsp;&nbsp;&nbsp;

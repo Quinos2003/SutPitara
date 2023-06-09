@@ -11,7 +11,8 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import Header from './MyComponents/header/Header';
 import Wishlist from './MyComponents/wishlist/Wishlist';
 import Checkout from './MyComponents/placedetail/Checkout'
-
+import Profile from './MyComponents/myprofile/Profile'
+import Order from './MyComponents/orders/Order';
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
             <Route path='/cart' element={<Cart/>}/>
             <Route path='/wishlist' element={<Wishlist/>}/>
             <Route path='/detail' element={<Checkout/>}/>
+            <Route path='/account' element={<Profile/>}/>
+            <Route path='/orders' element={<Order/>}/>
 
             
             </Routes>

@@ -93,9 +93,7 @@ const WishlistItem = ( ) => {
             <Box style={{ margin: 20, width: '50%', }}>
                 {/* <Typography>{(item.title.longTitle)}</Typography> */}
                 <Typography>Flipkart SmartBuy Sandwich 01 Grill  (Black)</Typography>
-                <SmallText>Seller:RetailNet
-                    <span><img src={fassured} style={{ width: 50, marginLeft: 10 }} /></span>
-                </SmallText>
+                
                 <Typography style={{margin: '20px 0'}}>
                     {/* <Cost component="span">₹{item.price.cost}</Cost>&nbsp;&nbsp;&nbsp;
                     <MRP component="span"><strike>₹{item.price.mrp}</strike></MRP>&nbsp;&nbsp;&nbsp;
