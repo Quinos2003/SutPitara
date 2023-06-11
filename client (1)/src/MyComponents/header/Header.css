@@ -1,0 +1,129 @@
+.header{
+    background-color: #830304;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 56px;
+}
+.header__first{
+    /* padding-right: -100px ; */
+    padding-left: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.header__first>img{
+    width: 75px;
+    height: 50px;
+    object-fit: contain;
+   
+    
+}
+
+
+
+
+.header__second{
+    display: flex;
+    text-align: center;
+    background-color: white;
+    border-radius: 3px;
+
+}
+.header__second>input{
+    border: none;
+    outline: none;
+    width: 36vw;
+    padding: 10px 15px;
+    border-radius: 3px;
+}
+.header__second>.MuiSvgIcon-root{
+    color: #830304;
+    padding: 5px;
+    font-size: 25px;
+}
+.space{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    /* overflow: hidden; */
+    width: 40%;
+   
+}
+.header__third>button{
+    border: none;
+    outline: none;
+    width: 9vw;
+    color: #830304;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 7px;
+}
+.header__third1{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.header__third1>span{
+    color: white;
+    font-weight: 600;
+}
+.header__fourth{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header__fourth>span{
+    color: white;
+    font-weight: 600;
+}
+.header__fourth>.MuiSvgIcon-root{
+color: white;
+
+}
+.header__fifth{
+    display: flex;
+    align-items: center;
+    /* padding-right: 120px; */
+}
+.header__fifth>.MuiSvgIcon-root{
+    color: white;
+  
+}
+.header__fifth>span{
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+.header__sixth{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.header__sixth>span{
+    color: white;
+    font-weight: 600;
+}
+.header__sixth>.MuiSvgIcon-root{
+color: white;
+
+}
+
+/* 
+.header__fifth,.header__second,.header__third,.header__third1,.header__fourth,.header__fifth,.header__sixth{
+    margin: 0 20px;
+}
+ */
+ @media (max-width: 900px) {
+    .header__first {
+        padding-left: 25px;
+    }
+    .header__first img{
+        width: auto;
+    }
+
+}
