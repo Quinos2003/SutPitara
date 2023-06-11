@@ -105,50 +105,41 @@
 // export default Cart;
 
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
 import CartItem from "./CartItem";
 import { useState } from "react";
-import { Box, Typography, Button, Grid, styled } from "@mui/material";
-import TotalView from "./TotalView";
 import { useNavigate } from 'react-router-dom';
 
-const Component = styled(Grid)(({ theme }) => ({
-  padding: "30px 135px",
-  display: "flex",
-  [theme.breakpoints.down("sm")]: {
-    padding: "15px 0",
-  },
-}));
-const LeftComponent = styled(Grid)(({ theme }) => ({
-  paddingRight: 15,
-  [theme.breakpoints.down("sm")]: {
-    marginBottom: 15,
-  },
-}));
+// const LeftComponent = styled(Grid)(({ theme }) => ({
+//   paddingRight: 15,
+//   [theme.breakpoints.down("sm")]: {
+//     marginBottom: 15,
+//   },
+// }));
 
-const Header = styled(Box)`
-  padding: 15px 24px;
-  background: #fff;
-  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
-  border: 2px solid #e0e0e0;
-`;
+// const Header = styled(Box)`
+//   padding: 15px 24px;
+//   background: #fff;
+//   box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+//   border: 2px solid #e0e0e0;
+// `;
 
-const BottomWrapper = styled(Box)`
-  padding: 16px 22px;
-  background: #fff;
-  box-shadow: 0 -2px 10px 0 rgb(0 0 0 / 10%);
-  border-top: 1px solid #f0f0f0;
-`;
+// const BottomWrapper = styled(Box)`
+//   padding: 16px 22px;
+//   background: #fff;
+//   box-shadow: 0 -2px 10px 0 rgb(0 0 0 / 10%);
+//   border-top: 1px solid #f0f0f0;
+// `;
 
-const StyledButton = styled(Button)`
-  display: flex;
-  margin-left: auto;
-  background: #fb641b;
-  color: #fff;
-  border-radius: 2px;
-  width: 250px;
-  height: 51px;
-`;
+// const StyledButton = styled(Button)`
+//   display: flex;
+//   margin-left: auto;
+//   background: #fb641b;
+//   color: #fff;
+//   border-radius: 2px;
+//   width: 250px;
+//   height: 51px;
+// `;
 
 const Cart = () => {
   // const cartDetails = useSelector(state => state.cart);
@@ -206,36 +197,112 @@ const Cart = () => {
 }
 
   return (
-    <div>
-      <Component container>
-        <LeftComponent item lg={9} md={9} sm={12} xs={12}>
+    <Container>
+      <Box>
+        <LeftSection>
           <Header>
-            {/* <Typography style={{fontWeight: 600, fontSize: 18}}>My Cart ({cartItems?.length})</Typography> */}
-            <Typography style={{ fontWeight: 600, fontSize: 18 }}>
-              My Cart{" "}
-            </Typography>
+            <h3>Shopping Cart</h3>
+            <h3 style={{color:"grey"}}> {7} Items</h3>
           </Header>
-          {/* {   cartItems.map(item => (
-                                 <CartItem item={item} removeItemFromCart={removeItemFromCart}/>
-                           ))
-                         } */}
-          <CartItem removeItemFromCart={removeItemFromCart} />
-          <BottomWrapper>
-            <StyledButton onClick={() => buyNow()}  variant="contained">
-              Place Order
-            </StyledButton>
-          </BottomWrapper>
-        </LeftComponent>
-
-        {/* right components */}
-        <Grid item lg={3} md={3} sm={12} xs={12}> 
-        
-          {/* <TotalView cartItems={cartItems} /> */}
-          <TotalView />
-        </Grid>
-      </Component>
-    </div>
+          <CartContainer>
+            <CartItem/>
+          </CartContainer>
+        </LeftSection>
+        <RightSection>
+          <Header>
+            <h3>Order Summary</h3>
+          </Header>
+          <Summary>
+            <Details>
+              <p>Subtotal</p>
+              <p>₹ 1,000</p>
+            </Details>
+            <Details>
+              <p>Shipping</p>
+              <p>₹ 40</p>
+            </Details>
+            <Details>
+              <p>Discount</p>
+              <p>₹ 0</p>
+            </Details>
+            <Details style={{borderTop:"1px solid #e0e0e0", fontWeight:"500"}}>
+              <p>Total</p>
+              <p>₹ 1,040</p>
+            </Details>
+          </Summary>
+          <CheckOutButton onClick={() => buyNow()}>
+            Place Order
+          </CheckOutButton>
+        </RightSection>
+      </Box>
+    </Container>
   );
 };
 
+const Container = styled.div`
+  height: 90vh;
+`
+  const Box = styled.div`
+  display: flex;
+  justify-content: center;
+  gap:1.5rem;
+  margin-top:2rem;
+`
+const Header = styled.div`
+  display: flex;
+  border-bottom: 3px solid #e0e0e0;
+  justify-content: space-between;
+  padding:0.5rem 1rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+`
+const LeftSection = styled.div`
+  border: 2px solid #e0e0e0;
+  padding:1rem;
+  width:50%;
+`
+const CartContainer = styled.div`
+  height:70vh;
+  overflow: auto;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #F4F4F4;
+    border-radius: 100px;
+    &:hover{
+      background: #E7E7E7;
+    }
+  }
+
+`
+
+const RightSection = styled.div`
+  height:60%;
+  padding:1rem 1rem;
+  padding-bottom: 2rem;
+  background-color: #F7F7F7;
+
+`
+const Summary = styled.div`
+  padding:1rem
+`
+const Details = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap:6rem;
+`
+const CheckOutButton = styled.div`
+  border: 1px solid #e0e0e0;
+  text-align: center;
+  padding:1rem;
+  background-color: #FF6C0F;
+  color: white;
+  cursor: pointer;
+    &:hover{
+      background-color: #B64701;
+      transition: 0.25s;
+    }
+`
 export default Cart;

@@ -1,78 +1,109 @@
-import { Card, Box, Typography, Button, styled } from '@mui/material';
-
-// import { addEllipsis } from '../../utils/util';
-import GroupButton from './GroupButton';
-
-
-const Component = styled(Card)`
-    // border-top: 1px solid #f0f0f0;
-    border: 2px solid #e0e0e0;
-    border-radius: 0px;
-    display: flex;
-`;
-
-const LeftComponent = styled(Box)`
-    margin: 20px; 
-    display: flex;
-    flex-direction: column;
-`;
-
-const SmallText = styled(Typography)`
-    color: #878787;
-    font-size: 14px;
-    margin-top: 10px;
-`;
-
-const Cost = styled(Typography)`
-    font-size: 18px;
-    font-weight: 600;
-`;
-
-const MRP = styled(Typography)`
-    color: #878787;
-`;
-
-const Discount = styled(Typography)`
-    color: #388E3C;
-`;
-
-const Remove = styled(Button)`
-    margin-top: 47px;
-    font-size: 16px;
-`;
+import styled from "styled-components";
+import { GrAdd,GrSubtract } from "react-icons/gr";
+import React,{useState} from "react";
+import {products} from "../constants/data"
 
 const CartItem = ({ item, removeItemFromCart }) => {
-    const fassured = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/fa_62673a.png';
+
+    const [counter, setCounter]= useState(1);
+    const increase=()=>{
+        setCounter(()=>counter+1);
+      }
+      const decrease=()=>{
+        if(counter === 1){
+          return;  
+        }
+        setCounter(()=>counter - 1);
+      }
+
+
+    const fassured = 'https://cdn.shopify.com/s/files/1/0606/5864/7273/products/TasvaDay123290_900x.jpg?v=1655982825';
 
     return (
-        <>
-        <Component>
-            <LeftComponent>
-                {/* <img src={item.url} style={{ height: 110, width: 110 }} /> */}
-                <img src='https://cdn.shopify.com/s/files/1/0606/5864/7273/products/TASVADY227141_900x.jpg?v=1656152840' style={{ height: 110, width: 110 }} />
-                <GroupButton />
-            </LeftComponent>
-            <Box style={{ margin: 20 }}>
-                {/* <Typography>{(item.title.longTitle)}</Typography> */}
-                <Typography>Flipkart SmartBuy Sandwich 01 Grill  (Black)</Typography>
-                {/* <SmallText>Seller:RetailNet
-                    <span><img src={fassured} style={{ width: 50, marginLeft: 10 }} /></span>
-                </SmallText> */}
-                <Typography style={{margin: '20px 0'}}>
-                    {/* <Cost component="span">₹{item.price.cost}</Cost>&nbsp;&nbsp;&nbsp;
-                    <MRP component="span"><strike>₹{item.price.mrp}</strike></MRP>&nbsp;&nbsp;&nbsp;
-                    <Discount component="span">{item.price.discount} off</Discount> */}
-                    <Cost component="span">₹625</Cost>&nbsp;&nbsp;&nbsp;
-                    <MRP component="span"><strike>₹1125</strike></MRP>&nbsp;&nbsp;&nbsp;
-                    <Discount component="span">47% off</Discount>
-                </Typography>
-                {/* <Remove onClick={() => removeItemFromCart(item.id)}>Remove</Remove> */}
-                <Remove onClick={() => removeItemFromCart()}>Remove</Remove>
-               
-            </Box>
-        </Component>
-        </>
+        <div>
+                        {
+        products.map((product,key) => {
+            return(
+                <Container key={product.id}>
+                    <ImageContainer><img src={product.url}/></ImageContainer>
+                    <ItemInfoContainer>
+                        <h3 style={{fontWeight:"500"}}>{product.title.shortTitle}</h3>
+                        <p>Color: Pink</p>
+                        <p>Size : M</p>
+                        <p>MRP : Rs.{product.price.mrp}</p>
+                        <RemoveItem>Remove</RemoveItem>
+                    </ItemInfoContainer>
+                    <QuantityCounter>
+                        <p style={{fontWeight:"500", textAlign:"center"}}>Quantity</p>
+                        <Quantity>
+                            <GrSubtract onClick={decrease}style={{ borderRadius:"8rem", background:"white", padding:"0.1rem", cursor:"pointer"}}/>
+                                <span style={{maxWidth:"0.7rem"}}>{counter}</span>
+                            <GrAdd onClick={increase} style={{ borderRadius:"8rem", background:"white", padding:"0.1rem", cursor:"pointer"}}/>
+                        </Quantity>
+                    </QuantityCounter>
+                    <TotalAmountContainer>
+                        <p>Total</p>
+                        <p>Rs.{product.price.mrp*counter}</p>
+                    </TotalAmountContainer>
+                    
+                </Container>
+            )
+        })
+    }
+        </div>
     )
 }
 
+const Container = styled.div`
+    width:inherit;
+    height:inherit;
+    display:flex;
+    justify-content:space-between;
+    gap:3rem;
+    padding:1rem ;
+    border-bottom: 1px solid #e0e0e0;
+`
+const ImageContainer = styled.div`
+    img{
+        width:8rem;
+        height:10rem;
+    }
+`
+const ItemInfoContainer = styled.div`
+    max-width: 20%;
+    font-size: 0.9rem;
+    p{
+        color:#6B6B6B;
+    }
+`
+const TotalAmountContainer = styled.div`
+    font-weight:500;
+    text-align:start;
+    min-width: 15%;
+    max-width: 15%;
+`
+const Quantity = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid #e0e0e0;
+    border-radius: 0.5rem;
+    width:8rem;
+    height: 2rem;
+    margin-top:1rem;
+    padding:0 0.5rem;
+`
+const QuantityCounter = styled.div`
+
+`
+const RemoveItem = styled.span`
+    font-size: 0.8rem;
+    font-style: italic;
+    color: #FF5B5B;
+    &:hover{
+        cursor:pointer;
+        color:#FF1C1C;
+        transition: all 0.2s ease-in-out;
+    }
+`
 export default CartItem;

@@ -69,14 +69,12 @@ const DealText = styled(Typography)`
   line-height: 32px;
 `;
 const ViewAllButton = styled(Button)`
-margin-left: auto;  // it align the item at  the end 
-
 border-radius: 2px
 font-size: 13px;
 font-weight: 600;
 white-space: nowrap;
 height: 36px;
-
+text-decoration: none;
 `;
 // const Image = styled("img")({
 //   width: "auto",
@@ -85,7 +83,8 @@ height: 36px;
 // });
 const Image = styled("img")(({ theme }) => ({
   width: "100%",
-  height: "250px",
+  height: "19rem",
+  objectFit:"contain",
   [theme.breakpoints.down("sm")]: {
     objectFit: "contain",
     // height: 180
@@ -104,7 +103,7 @@ const RenderTimer = styled(Box)(({ theme }) => ({
   },
 }));
 
-const Slide = ({ data, timer, title }) => {
+const Slide = ({ data, timer, title , gender }) => {
   const timerURL =
     "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/timer_a73398.svg";
 
@@ -132,9 +131,11 @@ const Slide = ({ data, timer, title }) => {
             <Countdown date={Date.now() + 5.04e7} renderer={renderer} />
           </Timer>
         )}
-        <ViewAllButton variant="contained" style={{ background: "#830304" }}>
-          View All
-        </ViewAllButton>
+        <Link to={`/${gender}`} style={{marginLeft:"auto"}}>
+          <ViewAllButton variant="contained" style={{ background: "rgb(131, 3, 4)"}}>
+            View All
+          </ViewAllButton>
+        </Link>
       </Deal>
       <Divider />
       <Carousel

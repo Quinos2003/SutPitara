@@ -28,7 +28,6 @@ const  Home =() => {
   // useEffect(() =>{
   //   dispatch(getProducts())
   // },[dispatch])
-  
 
   return (
 
@@ -37,10 +36,10 @@ const  Home =() => {
       <Component>
         <Banner />
         {/* <Video/> */}
-        <Slide  title="Most Popular Mens Wear" timer={false}/>
-        <Slide  title="Most Popular Womens Wear" timer={true}/>
-        <Slide  title="Summer Wear For Men" timer={false}/>
-        <Slide  title="Summer Wear For Women" timer={true}/>
+        <Slide  title="Most Popular Mens Wear" gender='men' timer={false}/>
+        <Slide  title="Most Popular Womens Wear" gender='women' timer={true}/>
+        <Slide  title="Summer Wear For Men" gender='men' timer={false}/>
+        <Slide  title="Summer Wear For Women" gender='women' timer={true}/>
         <Slide  title="Festive Wear" timer={false}/>
         <Slide  title="Giftings" timer={false}/>
       

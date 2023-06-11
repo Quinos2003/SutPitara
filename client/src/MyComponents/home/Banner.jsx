@@ -7,11 +7,11 @@ import { height } from '@mui/system';
 
 const Image=styled('img')(({theme})=>({
     width: '100%',
-    height: '500px',
+    height: '650px',
+    objectFit: 'cover',
+    marginTop: '',
     [theme.breakpoints.down('sm')]:{
       objectFit: 'cover',
-      height: 180
-  
   }
 
   }));
@@ -38,14 +38,14 @@ export default function Banner() {
     <Carousel responsive={responsive}
 
     swipeable={false}
-  draggable={false}
+    draggable={false}
 
-  infinite={true}
-  autoPlay={true}
+    infinite={true}
+    autoPlay={true}
 
-  autoPlaySpeed={4000}
-  keyBoardControl={true}
-slidesToSlide={1}
+    autoPlaySpeed={4000}
+    keyBoardControl={true}
+    slidesToSlide={1}
     containerClass="carousel-container"
 
     dotListClass="custom-dot-list-style"

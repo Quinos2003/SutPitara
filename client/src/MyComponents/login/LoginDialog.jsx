@@ -70,6 +70,15 @@ font-weight: 600;
 cursor: pointer;
 
 `
+const LoginAccount=styled(Typography)`
+font-size: 14px;
+text-align: center;
+// color: #2874f0;
+color: #830304;
+font-weight: 600;
+cursor: pointer;
+
+`
 
 const accountInitialValues={
     login:{
@@ -135,6 +144,10 @@ export default function LoginDialog({open,setOpen}) {
             
                 toggleAccount(accountInitialValues.signup);
         }
+        const toggleLogin=()=>{
+            
+            toggleAccount(accountInitialValues.login);
+        }   
 
    
 
@@ -199,6 +212,7 @@ export default function LoginDialog({open,setOpen}) {
                 {/* here in the name field we have to take the same values that we have taken in the uperside of the object  that is signupInitialValues */}
                 
                 <LoginButton onClick={() => signUp()}>Continue</LoginButton>
+                <LoginAccount onClick={()=> toggleLogin()}>Already have an account? Click to login</LoginAccount>
             </Wrapper>
             }
             </Box>

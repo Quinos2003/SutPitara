@@ -18,7 +18,6 @@ import Videoget from '../../image/video1.mp4'
     [theme.breakpoints.down('sm')]:{
       objectFit: 'cover',
       height: 180
-  
   }
 
   }));
