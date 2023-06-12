@@ -1,58 +1,108 @@
 import styled from "styled-components";
-import { GrAdd,GrSubtract } from "react-icons/gr";
-import React,{useState} from "react";
-import {products} from "../constants/data"
+import { GrAdd, GrSubtract } from "react-icons/gr";
+import React, { useState, useEffect } from "react";
+import { products } from "../constants/data";
 
-const CartItem = ({ item, removeItemFromCart }) => {
+const CartItem = ({ item, removeItemFromCart, updateTotalAmount }) => {
+  const [counters, setCounters] = useState(
+    Array(products.length).fill(1) // Initialize counters array with length equal to products array length
+  );
 
-    const [counter, setCounter]= useState(1);
-    const increase=()=>{
-        setCounter(()=>counter+1);
+  const [totalAmount, setTotalAmount] = useState(0); // State to store the total amount
+
+  useEffect(() => {
+    // Calculate total amount whenever counters or products change
+    const calculateTotalAmount = () => {
+      let total = 0;
+      for (let i = 0; i < products.length; i++) {
+        total += products[i].price.mrp * counters[i];
       }
-      const decrease=()=>{
-        if(counter === 1){
-          return;  
-        }
-        setCounter(()=>counter - 1);
-      }
+      setTotalAmount(total);
+      updateTotalAmount(total);
+      console.log(total)
+    };
 
+    calculateTotalAmount();
+  }, [counters, products]);
 
-    const fassured = 'https://cdn.shopify.com/s/files/1/0606/5864/7273/products/TasvaDay123290_900x.jpg?v=1655982825';
+  const increase = (index) => {
+    setCounters((prevCounters) => {
+      const newCounters = [...prevCounters];
+      newCounters[index] = newCounters[index] + 1;
+      return newCounters;
+    });
+  };
 
-    return (
-        <div>
-                        {
-        products.map((product,key) => {
-            return(
-                <Container key={product.id}>
-                    <ImageContainer><img src={product.url}/></ImageContainer>
-                    <ItemInfoContainer>
-                        <h3 style={{fontWeight:"500"}}>{product.title.shortTitle}</h3>
-                        <p>Color: Pink</p>
-                        <p>Size : M</p>
-                        <p>MRP : Rs.{product.price.mrp}</p>
-                        <RemoveItem>Remove</RemoveItem>
-                    </ItemInfoContainer>
-                    <QuantityCounter>
-                        <p style={{fontWeight:"500", textAlign:"center"}}>Quantity</p>
-                        <Quantity>
-                            <GrSubtract onClick={decrease}style={{ borderRadius:"8rem", background:"white", padding:"0.1rem", cursor:"pointer"}}/>
-                                <span style={{maxWidth:"0.7rem"}}>{counter}</span>
-                            <GrAdd onClick={increase} style={{ borderRadius:"8rem", background:"white", padding:"0.1rem", cursor:"pointer"}}/>
-                        </Quantity>
-                    </QuantityCounter>
-                    <TotalAmountContainer>
-                        <p>Total</p>
-                        <p>Rs.{product.price.mrp*counter}</p>
-                    </TotalAmountContainer>
-                    
-                </Container>
-            )
-        })
+  const decrease = (index) => {
+    if (counters[index] === 1) {
+      return;
     }
-        </div>
-    )
-}
+    setCounters((prevCounters) => {
+      const newCounters = [...prevCounters];
+      newCounters[index] = newCounters[index] - 1;
+      return newCounters;
+    });
+  };
+
+  const fassured =
+    "https://cdn.shopify.com/s/files/1/0606/5864/7273/products/TasvaDay123290_900x.jpg?v=1655982825";
+
+  return (
+    <div>
+      {products.map((product, index) => {
+        const counter = counters[index]; // Get the counter value for the current product
+
+        return (
+          <Container key={product.id}>
+            <ImageContainer>
+              <img src={product.url} alt={product.title.shortTitle} />
+            </ImageContainer>
+            <ItemInfoContainer>
+              <h3 style={{ fontWeight: "500" }}>{product.title.shortTitle}</h3>
+              <p>Color: Pink</p>
+              <p>Size : M</p>
+              <p>MRP : Rs.{product.price.mrp}</p>
+              <RemoveItem>Remove</RemoveItem>
+            </ItemInfoContainer>
+            <QuantityCounter>
+              <p style={{ fontWeight: "500", textAlign: "center" }}>Quantity</p>
+              <Quantity>
+                <GrSubtract
+                  onClick={() => decrease(index)}
+                  style={{
+                    borderRadius: "8rem",
+                    background: "white",
+                    padding: "0.1rem",
+                    cursor: "pointer",
+                  }}
+                />
+                <span style={{ maxWidth: "0.7rem" }}>{counter}</span>
+                <GrAdd
+                  onClick={() => increase(index)}
+                  style={{
+                    borderRadius: "8rem",
+                    background: "white",
+                    padding: "0.1rem",
+                    cursor: "pointer",
+                  }}
+                />
+              </Quantity>
+            </QuantityCounter>
+            <TotalAmountContainer>
+              <p>Total</p>
+              <p>Rs.{product.price.mrp * counter}</p>
+            </TotalAmountContainer>
+          </Container>
+        );
+      })}
+    </div>
+  );
+};
+
+// Rest of the code...
+
+export default CartItem;
+
 
 const Container = styled.div`
     width:inherit;
@@ -106,4 +156,3 @@ const RemoveItem = styled.span`
         transition: all 0.2s ease-in-out;
     }
 `
-export default CartItem;

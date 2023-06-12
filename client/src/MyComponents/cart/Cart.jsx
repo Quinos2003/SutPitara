@@ -156,7 +156,13 @@ const Cart = () => {
     //         // dispatch(removeFromCart(id));
   };
 
-  const [amount, setamount] = useState("");
+
+  const [totalAmount, setTotalAmount] = useState(0);
+
+  // Callback function to update total amount
+  const updateTotalAmount = (amount) => {
+    setTotalAmount(amount);
+  };
 
   // const buyNow = (e) => {
   //   e.preventDefault();
@@ -189,12 +195,14 @@ const Cart = () => {
   //   pay.open();
   // };
   //   // }
+
+  /*Added new cart configuration*/
   const navigate = useNavigate();
 
   const buyNow = () => {
     // dispatch(addToCart(id, quantity));
     navigate('/detail');
-}
+  }
 
   return (
     <Container>
@@ -205,7 +213,7 @@ const Cart = () => {
             <h3 style={{color:"grey"}}> {7} Items</h3>
           </Header>
           <CartContainer>
-            <CartItem/>
+            <CartItem updateTotalAmount={updateTotalAmount}/>
           </CartContainer>
         </LeftSection>
         <RightSection>
@@ -227,7 +235,7 @@ const Cart = () => {
             </Details>
             <Details style={{borderTop:"1px solid #e0e0e0", fontWeight:"500"}}>
               <p>Total</p>
-              <p>₹ 1,040</p>
+              <p>{totalAmount}</p>
             </Details>
           </Summary>
           <CheckOutButton onClick={() => buyNow()}>
