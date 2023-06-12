@@ -41,6 +41,7 @@ def signup(request):
             new_user = User.objects.create_user(first_name, last_name, email, password)
             new_user.save()
         except IntegrityError as e:
+            print(e)
             response = {
                 'success': False
             }
