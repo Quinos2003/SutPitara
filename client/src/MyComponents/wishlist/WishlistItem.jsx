@@ -1,17 +1,29 @@
-import React from "react";
+import React, { useState} from "react";
 import styled from "styled-components";
 import { MdDelete } from "react-icons/md";
 
 
 
 function WishlistItem(){
+
+    const [isInWishlist, setIsInWishlist] = useState(true);
+
+    const handleDelete = () => {
+      setIsInWishlist(!isInWishlist);
+    };
+  
+    if (!isInWishlist) {
+      return null; // Don't render anything if the item is deleted
+    }
+  
+
   return (
     <Container>
         <Image><img src="https://cdn.shopify.com/s/files/1/0606/5864/7273/products/TMKJSLMA0609_2227e775-4b6c-4f9e-862b-ef825a64e320_900x.jpg?v=1638334658"/></Image>
         <InfoContainer>
             <RemoveButton>
                 <p style={{color:"#65BA00"}}>Instock</p>
-                <MdDelete className="remove"/>
+                <MdDelete className="remove" onClick={handleDelete}/>
             </RemoveButton>
             <h3>Lorem ipsum dolor sit amet.</h3>
             <p id="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, facilis?</p>

@@ -158,10 +158,16 @@ const Cart = () => {
 
 
   const [totalAmount, setTotalAmount] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
 
   // Callback function to update total amount
   const updateTotalAmount = (amount) => {
     setTotalAmount(amount);
+  };
+
+  //to keep total count of elements shown in header
+  const updateTotalItems = (items) => {
+    setTotalItems(items);
   };
 
   // const buyNow = (e) => {
@@ -210,10 +216,10 @@ const Cart = () => {
         <LeftSection>
           <Header>
             <h3>Shopping Cart</h3>
-            <h3 style={{color:"grey"}}> {7} Items</h3>
+            <h3 style={{color:"grey"}}> {totalItems} Items</h3>
           </Header>
           <CartContainer>
-            <CartItem updateTotalAmount={updateTotalAmount}/>
+            <CartItem updateTotalAmount={updateTotalAmount} updateTotalItems={updateTotalItems}/>
           </CartContainer>
         </LeftSection>
         <RightSection>

@@ -3,13 +3,14 @@ import { GrAdd, GrSubtract } from "react-icons/gr";
 import React, { useState, useEffect } from "react";
 import { products } from "../constants/data";
 
-const CartItem = ({ item, removeItemFromCart, updateTotalAmount }) => {
+const CartItem = ({ removeItemFromCart, updateTotalAmount ,totalIte}) => {
   const [counters, setCounters] = useState(
     Array(products.length).fill(1) // Initialize counters array with length equal to products array length
   );
 
   const [totalAmount, setTotalAmount] = useState(0); // State to store the total amount
-
+  const [totalItems, setTotalItems] = useState(0);
+  //calculate total amount
   useEffect(() => {
     // Calculate total amount whenever counters or products change
     const calculateTotalAmount = () => {
@@ -24,6 +25,25 @@ const CartItem = ({ item, removeItemFromCart, updateTotalAmount }) => {
 
     calculateTotalAmount();
   }, [counters, products]);
+
+//calculate total items in cart
+const updateTotalItems = (items) => {
+    setTotalItems(items);
+  };
+
+  useEffect(() => {
+    const calculateTotalItems = () => {
+      let total = 0;
+      for (let i = 0; i < products.length; i++) {
+        total += counters[i];
+      }
+    setTotalItems(total);
+      updateTotalItems(total);
+      console.log(total)
+    };
+  
+    calculateTotalItems();
+  }, [counters, updateTotalItems]);
 
   const increase = (index) => {
     setCounters((prevCounters) => {
