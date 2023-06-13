@@ -1,7 +1,7 @@
 import { Dialog ,Box, TextField, Typography, Button, styled} from '@mui/material'
-import { height } from '@mui/system';
 import {useState, React} from 'react'
 import { useCookies } from 'react-cookie';
+import { AiFillEyeInvisible,AiFillEye } from 'react-icons/ai'
 //  import { authenticateSignup } from '../../service/api';
 //  import { authenticateLogin } from '../../service/api';
 const Component=styled(Box)`
@@ -111,8 +111,8 @@ const accountInitialValues={
 export default function LoginDialog({open,setOpen}) {
     const [cookies, setCookie] = useCookies(['csrftoken']);
         const [account, toggleAccount]=useState(accountInitialValues.login);
-        // const[ signup,setSignup]=useState(signupInitialValues);
-        // const[ login,setLogin]=useState(loginInitialValues);
+        const [emailError, setEmailError] = useState('');
+        const [passwordError, setPasswordError] = useState('');
 
     const handleClose=()=>{
         setOpen(false);
@@ -121,13 +121,32 @@ export default function LoginDialog({open,setOpen}) {
     }
 
     const signUp = async () => {
+            // Validate email
+            const email = document.getElementById('emailsignup').value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+            setEmailError('Invalid email');
+            console.log(emailError);
+            return;
+            }
+            setEmailError('');
+
+            // Validate password (at least 6 characters)
+            const password = document.getElementById('passwordsignup').value;
+            const passwordRegex = /^.{6,}$/;
+            if (!passwordRegex.test(password)) {
+            setPasswordError('Password must be at least 6 characters');
+            console.log(passwordError)
+            return;
+            }
+            setPasswordError('');
+
         const data = {
             "first_name": document.getElementById("first").value,
             "last_name": document.getElementById("last").value,
-            "email": document.getElementById("emailsignup").value,
-            "password": document.getElementById("passwordsignup").value
-        }
-        console.log("test")
+            "email": email,
+            "password": password
+        };
         fetch("store/signup", {
             method: "POST",
             body: JSON.stringify(data),
@@ -154,6 +173,26 @@ export default function LoginDialog({open,setOpen}) {
   
 
     const loginUser = async () => {
+
+            // Validate email
+        const email = document.getElementById('email').value;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email) || email === '') {
+        setEmailError('Invalid email');
+        console.log(emailError);
+        return;
+        }
+        setEmailError('');
+
+        // Validate password (at least 6 characters)
+        const password = document.getElementById('password').value;
+        const passwordRegex = /^.{6,}$/;
+        if (!passwordRegex.test(password) || password === '') {
+        setPasswordError('Password must be at least 6 characters');
+        console.log(passwordError);
+        return;
+        }
+        setPasswordError('');
             
         const data = {
             "email": document.getElementById("email").value,
@@ -163,7 +202,8 @@ export default function LoginDialog({open,setOpen}) {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
-                "Content-Type": "application/json",                "X-CSRFToken": cookies.csrftoken
+                "Content-Type": "application/json",                
+                "X-CSRFToken": cookies.csrftoken
             }}).then(response => response.json())
             .then(response => {
               console.log(response);
