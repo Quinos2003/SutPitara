@@ -1,8 +1,5 @@
 import React from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import { Link } from 'react-router-dom';
 import './Login.css'
 export default function Login() {

@@ -113,24 +113,22 @@ const accountInitialValues={
 
 
 export default function LoginDialog({open,setOpen}) {
-    const [cookies, setCookie] = useCookies(['csrftoken']);
+        const [cookies, setCookie] = useCookies(['csrftoken']);
         const [account, toggleAccount]=useState(accountInitialValues.login);
         const [emailError, setEmailError] = useState('');
         const [passwordError, setPasswordError] = useState('');
+        const [firstNameError, setFirstNameError] = useState('');
+        const [lastNameError, setLastNameError] = useState('');
+        const [firstName, setFirstName] = useState('');
+        const [lastName, setLastName] = useState('');
+        const [emailSignUp, setEmailSignUp] = useState('');
+        const [passwordSignUp, setPasswordSignUp] = useState('');
         //To toggle password visibility
         const [show, setShow] = useState(false);
-        const [show2, setShow2] = useState(false);
-        const [show3, setShow3] = useState(false);
 
         // ----to show and hide password----
         const showIcon=()=>{
             setShow(!show)
-        }
-        const showIcon2=()=>{
-            setShow2(!show2)
-        }
-        const showIcon3=()=>{
-            setShow3(!show3)
         }
     
 
@@ -141,29 +139,40 @@ export default function LoginDialog({open,setOpen}) {
     }
 
     const signUp = async () => {
+
+            const first_name = firstName
+            if(first_name === '') {
+                setFirstNameError('First name cannot be blank');
+                console.log(firstNameError);
+            }
+            const last_name = lastName
+            if(last_name === '') {
+                setLastNameError('Last name cannot be blank');
+                console.log(lastNameError);
+            }
             // Validate email
-            const email = document.getElementById('emailsignup').value;
+            const email = emailSignUp
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-            setEmailError('Invalid email');
+            if (!emailRegex.test(email) || email === '') {
+                setEmailError('Invalid email');
             console.log(emailError);
             return;
             }
             setEmailError('');
 
             // Validate password (at least 6 characters)
-            const password = document.getElementById('passwordsignup').value;
+            const password = passwordSignUp
             const passwordRegex = /^.{6,}$/;
-            if (!passwordRegex.test(password)) {
-            setPasswordError('Password must be at least 6 characters');
-            console.log(passwordError)
+            if (!passwordRegex.test(password) || password === '') {
+                setPasswordError('Password must be at least 6 characters');
+            console.log(passwordError);
             return;
             }
             setPasswordError('');
 
         const data = {
-            "first_name": document.getElementById("first").value,
-            "last_name": document.getElementById("last").value,
+            "first_name": first_name,
+            "last_name": last_name,
             "email": email,
             "password": password
         };
@@ -269,12 +278,12 @@ export default function LoginDialog({open,setOpen}) {
             
             :
             <Wrapper>
-                <TextField variant="standard" id='first' name="firstname" label="Enter  Firstname"/>
-                <TextField variant="standard" id='last' name="lastname" label="Enter  Lastname"/>
+                <TextField variant="standard" id='first' name="firstname" label="Enter  Firstname" defaultValue={firstName} onChange={(e)=>setFirstName(e.target.value)}/>
+                <TextField variant="standard" id='last' name="lastname" label="Enter  Lastname" defaultValue={lastName} onChange={(e)=>setLastName(e.target.value)}/>
                 {/* <TextField variant="standard" onChange={(e)=>onInputChange(e)} name="username" label="Enter  Username"/> */}
-                <TextField variant="standard" id='emailsignup' name="email" label="Enter  Email"/>
+                <TextField variant="standard" id='emailsignup' name="email" label="Enter  Email" defaultValue={emailSignUp} onChange={(e)=>setEmailSignUp(e.target.value)}/>
                 <div style={{display:"flex"}}>
-                    <TextField style={{width:"100%"}} variant="standard" type={show?"text":"password"} id='password' name="password" label="Enter Password"/>
+                    <TextField style={{width:"100%"}} variant="standard" type={show?"text":"password"} id='password' name="password" label="Enter Password" defaultValue={passwordSignUp} onChange={(e)=>setPasswordSignUp(e.target.value)}/>
                     <span style={{margin:'8px 6px 0px 0px'}} onClick={()=>showIcon()}>
                         {show ? <BsFillEyeSlashFill style={{color:"black", fontSize:"1.2rem", margin:"0.8rem",cursor:"pointer"}}/> : <BsFillEyeFill style={{color:"black", fontSize:"1.2rem", margin:"0.8rem",cursor:"pointer"}}/>}
                     </span>

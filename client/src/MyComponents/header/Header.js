@@ -7,7 +7,6 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css"; // optional
 
 import MoreT from "../tippy/MoreT";
-// import Login from "./Login";
 import Login from "../tippy/Login";
 import Logo from '../../image/Logo.png'
 import FavoriteIcon from '@mui/icons-material/Favorite';

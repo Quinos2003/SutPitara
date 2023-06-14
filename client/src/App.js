@@ -1,9 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 
 import { Box, styled } from "@mui/material";
 import Home from './MyComponents/home/Home';
-import DetailVeiw from './MyComponents/details/DetailVeiw'
 import ForMen from './MyComponents/shopnow/ForMen';
 import ForWomen from './MyComponents/shopnow/ForWomen'
 import Cart from './MyComponents/cart/Cart';
@@ -13,6 +11,7 @@ import Wishlist from './MyComponents/wishlist/Wishlist';
 import Checkout from './MyComponents/placedetail/Checkout'
 import Profile from './MyComponents/myprofile/Profile'
 import Order from './MyComponents/orders/Order';
+import ProductDetail from './MyComponents/details/ProductDetail';
 
 function App() {
   return (
@@ -26,7 +25,7 @@ function App() {
           <Routes>
     
             <Route path='/' element={<Home/>}/>
-            <Route path='/product/:id' element={<DetailVeiw/>}/>
+            <Route path='/product/:id' element={<ProductDetail/>}/>
             <Route path='/men' element={<ForMen/>}/>
             <Route path='/women' element={<ForWomen/>}/>
             <Route path='/cart' element={<Cart/>}/>
