@@ -158,7 +158,7 @@ const Slide = ({ data, timer, title , gender }) => {
         itemClass="carousel-item-padding-40-px"
       >
         {products.map((product) => (
-          <Link to={`product/${product.id}`} style={{ textDecoration: "none" }}>
+          <Link to={{pathname:`/product/${product.id}`, state :product}} style={{ textDecoration: "none" }}>
             <Box textAlign="center" style={{ padding: "25px 15px" }}>
               <Image src={product.url}   />
              

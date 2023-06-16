@@ -1,10 +1,20 @@
 import styled from 'styled-components';
-import Caraousal from './Caraousal';
+import Carousel from './Carousel';
 import StarRating from './StarRating';
-import { FaShoppingCart, FaHeart, FaTag } from "react-icons/fa"
+import { FaShoppingCart, FaTag } from "react-icons/fa"
 import {BsTruck, BsHeart} from "react-icons/bs"
-const ProductDetail = ({ product }) => {
-  
+import Review from './Review';
+import { useParams } from 'react-router-dom';
+import { products } from '../constants/data';
+
+
+
+const ProductDetail = () => {
+
+  const { id } = useParams();
+
+  const product = products.find((product) => product.id.toString() === id);
+  const discountedPrice = Math.round(product.price.mrp * product.price.discount);
 
   return (
     <>
@@ -13,22 +23,26 @@ const ProductDetail = ({ product }) => {
           <Image>
             <img src="https://cdn.shopify.com/s/files/1/0606/5864/7273/products/TMKJSLMA0609_2227e775-4b6c-4f9e-862b-ef825a64e320_900x.jpg?v=1638334658"/>
           </Image>
-          <Caraousal/>
+          <Carousel/>
         </LeftSection>
         <RightSection>
           <Header>
-            <h2>Pigeon Favourite Electric Kettle (1.5 L, Silver, Black)</h2>
+            <h2>{product.title.longTitle}</h2>
+            <p style={{padding:"0rem"}}>{product.tagline}</p>
             <Rating>
               <StarRating/> | 45 reviews
             </Rating>
           </Header>
             <Price>
-              <p id="price">₹ 1,999</p>
-              <p id="mrp">₹ 3000</p>
-              <p id="discount">(66% off)</p>
+              <p id="price">₹ {product.price.mrp-discountedPrice}</p>
+              <p id="mrp">₹ {product.price.mrp}</p>
+              <p id="discount">{product.price.discount*100}%</p>
             </Price>
             <Size>
-
+              <span>S</span>
+              <span>M</span>
+              <span>L</span>
+              <span>XL</span>
             </Size>
             <ActionButton>
               <AddToCartButton id="common-button">
@@ -67,11 +81,15 @@ const ProductDetail = ({ product }) => {
             </SmallText>
             <ProductDetails>
               <h3>Product Details</h3>
+              <p><span>Description :</span> Lorem ipsum dolor sit, amet</p>
+              <div>
+                <p><span>Brand :</span> Roadster</p>
+                <p><span>Colors :</span> White, Black, Red</p>
+                <p><span>Sizes :</span> S, M, L, XL</p>
+                <p><span>Material :</span> Cotton</p>
+              </div>
             </ProductDetails>
-
-            <ReviewSection>
-              <h3>Reviews</h3>
-            </ReviewSection>
+            <Review/>
 
         </RightSection>
       </Main>
@@ -83,6 +101,7 @@ const ProductDetail = ({ product }) => {
 const Main = styled.div`
   display:flex;
   margin:2rem;
+  height:100vh;
   p{
     padding:0rem;
     margin:0rem;
@@ -90,6 +109,10 @@ const Main = styled.div`
   h2{
     font-size:1.4rem;
     font-weight:600;
+  }
+  h3{
+    font-size:1.2rem;
+    text-transform:uppercase;
   }
   #price{
     font-size:1.5rem;
@@ -131,7 +154,8 @@ const Image = styled.div`
   }
   img:hover{
     transform:scale(1.05);
-    transition:all 0.6s;
+    // transition:all 0.6s;
+}
   }
 `
 
@@ -145,7 +169,6 @@ const LeftSection = styled.div`
 
 const RightSection = styled.div`
   width:fit-content;
-  border:1px solid #DCDCDC;
   padding:0rem 1.5rem;
   padding-top:1rem
 
@@ -158,7 +181,7 @@ const Rating = styled.span`
   display:flex;
   align-items:center;
   border: 1px solid #ADADAD ;
-  border-radius: 0.5rem;
+  border-radius: 0.3rem;
   width:fit-content;
   padding:0.3rem 0.5rem;
   margin:1.2rem 0rem;
@@ -176,6 +199,24 @@ const Price = styled.div`
 
 const Size = styled.div`
   display:flex;
+  gap:1rem;
+  span{
+    font-size:1.2rem;
+    width:3rem;
+    height:3rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:80rem;
+    background-color:#F2F2F2;
+    border:1px solid white ;
+    &:hover{
+      background-color: #EBEBEB  ;
+      border:1px solid #C1C1C1 ;
+      transition: 0.3s ease-in-out;
+      cursor:pointer;
+    }
+  }
 `
 
 
@@ -238,17 +279,34 @@ const SmallText = styled.div`
   }
 `
 
-const ProductDetails = styled.div``
+const ProductDetails = styled.div`
+padding-bottom: 1rem;
 
-const ReviewSection = styled.div``
+  span{
+    font-weight:300;
+    font-size:0.9rem;
+    color:#7C7C7C;
+  }
+  div{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    p{
+      border-bottom:1px solid #DCDCDC;
+      width:60%;
+    }
+  }
+  p{
+    font-size:1rem;
+    margin:0.8rem 0rem;
+    display:flex;
+    flex-direction:column;
+  }
+  `
 
 
 
 
-// This electric kettle from Pigeon will soon become a travelers best
-// friend, a hostelite saviour and an answer to all the midnight
-// cravings. With this handy appliance, you can boil water and use it
-// to make instant noodles, packet soup, coffee and green tea.',
-// discount: 'Extra 10% Off
+
+
 
 export default ProductDetail;

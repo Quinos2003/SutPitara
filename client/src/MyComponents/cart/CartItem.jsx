@@ -4,6 +4,10 @@ import React, { useState, useEffect } from "react";
 import { products } from "../constants/data";
 
 const CartItem = ({ removeItemFromCart, updateTotalAmount ,totalIte}) => {
+
+
+
+
   const [counters, setCounters] = useState(
     Array(products.length).fill(1) // Initialize counters array with length equal to products array length
   );
@@ -71,7 +75,6 @@ const updateTotalItems = (items) => {
     <div>
       {products.map((product, index) => {
         const counter = counters[index]; // Get the counter value for the current product
-
         return (
           <Container key={product.id}>
             <ImageContainer>
