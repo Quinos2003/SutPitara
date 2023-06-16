@@ -152,9 +152,7 @@ const Cart = () => {
   //   // }
   //   // post(information);
   // };
-  const removeItemFromCart = (id) => {
-    //         // dispatch(removeFromCart(id));
-  };
+
 
 
   const [totalAmount, setTotalAmount] = useState(0);
@@ -218,6 +216,7 @@ const Cart = () => {
             <h3>Shopping Cart</h3>
             <h3 style={{color:"grey"}}> {totalItems} Items</h3>
           </Header>
+
           <CartContainer>
             <CartItem updateTotalAmount={updateTotalAmount} updateTotalItems={updateTotalItems}/>
           </CartContainer>

@@ -11,13 +11,13 @@ import Checkout from './MyComponents/placedetail/Checkout'
 import Profile from './MyComponents/myprofile/Profile'
 import Order from './MyComponents/orders/Order';
 import ProductDetail from './MyComponents/details/ProductDetail';
-import { CartProvider } from './MyComponents/cart/cartContext';
+import { Provider } from 'react-redux';
+import store from './MyComponents/cart/Store';
 
 function App() {
   return (
-    <>
-        <CartProvider>
-          <BrowserRouter>
+    <><Provider store={store}>
+            <BrowserRouter>
               <Header/>
                 <Routes>
 
@@ -32,7 +32,8 @@ function App() {
                     <Route path='/orders' element={<Order/>}/>
                   </Routes>
           </BrowserRouter>
-        </CartProvider>
+    </Provider>
+
         
        
       

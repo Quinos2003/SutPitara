@@ -2,11 +2,18 @@ import styled from "styled-components";
 import { GrAdd, GrSubtract } from "react-icons/gr";
 import React, { useState, useEffect } from "react";
 import { products } from "../constants/data";
+import { useSelector, useDispatch } from 'react-redux';
+import EmptyCart from "./EmptyCart";
 
 const CartItem = ({ removeItemFromCart, updateTotalAmount ,totalIte}) => {
 
+  const cartItems = useSelector((state) => state.cart);
+  console.log(cartItems);
+  const dispatch = useDispatch();
 
-
+  const removeFromCart = itemId => {
+    dispatch({ type: 'REMOVE_FROM_CART', payload: itemId });
+  };
 
   const [counters, setCounters] = useState(
     Array(products.length).fill(1) // Initialize counters array with length equal to products array length
@@ -73,51 +80,55 @@ const updateTotalItems = (items) => {
 
   return (
     <div>
-      {products.map((product, index) => {
-        const counter = counters[index]; // Get the counter value for the current product
-        return (
-          <Container key={product.id}>
-            <ImageContainer>
-              <img src={product.url} alt={product.title.shortTitle} />
-            </ImageContainer>
-            <ItemInfoContainer>
-              <h3 style={{ fontWeight: "500" }}>{product.title.shortTitle}</h3>
-              <p>Color: Pink</p>
-              <p>Size : M</p>
-              <p>MRP : Rs.{product.price.mrp}</p>
-              <RemoveItem>Remove</RemoveItem>
-            </ItemInfoContainer>
-            <QuantityCounter>
-              <p style={{ fontWeight: "500", textAlign: "center" }}>Quantity</p>
-              <Quantity>
-                <GrSubtract
-                  onClick={() => decrease(index)}
-                  style={{
-                    borderRadius: "8rem",
-                    background: "white",
-                    padding: "0.1rem",
-                    cursor: "pointer",
-                  }}
-                />
-                <span style={{ maxWidth: "0.7rem" }}>{counter}</span>
-                <GrAdd
-                  onClick={() => increase(index)}
-                  style={{
-                    borderRadius: "8rem",
-                    background: "white",
-                    padding: "0.1rem",
-                    cursor: "pointer",
-                  }}
-                />
-              </Quantity>
-            </QuantityCounter>
-            <TotalAmountContainer>
-              <p>Total</p>
-              <p>Rs.{product.price.mrp * counter}</p>
-            </TotalAmountContainer>
-          </Container>
-        );
-      })}
+      {cartItems.length === 0 ? (<EmptyCart/>):(
+        <div>
+          {cartItems.map((product,index) => {
+            const counter = counters[index]; // Get the counter value for the current product
+            return (
+              <Container key={product.id}>
+                <ImageContainer>
+                  <img src={product.url} alt={product.title.shortTitle} />
+                </ImageContainer>
+                <ItemInfoContainer>
+                  <h3 style={{ fontWeight: "500" }}>{product.title.shortTitle}</h3>
+                  <p>Color: Pink</p>
+                  <p>Size : {product.size}</p>
+                  <p>MRP : Rs.{product.price.mrp}</p>
+                  <RemoveItem onClick={()=> removeFromCart(product.id)}>Remove</RemoveItem>
+                </ItemInfoContainer>
+                <QuantityCounter>
+                  <p style={{ fontWeight: "500", textAlign: "center" }}>Quantity</p>
+                  <Quantity>
+                    <GrSubtract
+                      onClick={() => decrease(index)}
+                      style={{
+                        borderRadius: "8rem",
+                        background: "white",
+                        padding: "0.1rem",
+                        cursor: "pointer",
+                      }}
+                    />
+                    <span style={{ maxWidth: "0.7rem" }}>{counter}</span>
+                    <GrAdd
+                      onClick={() => increase(index)}
+                      style={{
+                        borderRadius: "8rem",
+                        background: "white",
+                        padding: "0.1rem",
+                        cursor: "pointer",
+                      }}
+                    />
+                  </Quantity>
+                </QuantityCounter>
+                <TotalAmountContainer>
+                  <p>Total</p>
+                  <p>Rs.{product.price.mrp * counter}</p>
+                </TotalAmountContainer>
+              </Container>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

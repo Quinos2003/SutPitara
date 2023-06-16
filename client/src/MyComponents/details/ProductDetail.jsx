@@ -1,17 +1,33 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import Carousel from './Carousel';
 import StarRating from './StarRating';
 import { FaShoppingCart, FaTag } from "react-icons/fa"
 import {BsTruck, BsHeart} from "react-icons/bs"
 import Review from './Review';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { products } from '../constants/data';
+import { useState } from 'react';
 
 
 
 const ProductDetail = () => {
 
   const { id } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [selectedSize, setSelectedSize] = useState(null);
+
+//to send items into cart
+  const addToCart = () => {
+    dispatch({ type: 'ADD_TO_CART', payload: product, size: selectedSize });
+    navigate('/cart');
+  };
+
+  //To select size of clothing
+  const handleSizeSelection = (size) => {
+    setSelectedSize(size);
+  };
 
   const product = products.find((product) => product.id.toString() === id);
   const discountedPrice = Math.round(product.price.mrp * product.price.discount);
@@ -39,13 +55,17 @@ const ProductDetail = () => {
               <p id="discount">{product.price.discount*100}%</p>
             </Price>
             <Size>
-              <span>S</span>
-              <span>M</span>
-              <span>L</span>
-              <span>XL</span>
+              <span className={selectedSize === 'S' ? 'selected' : ''} onClick={() => handleSizeSelection('S')}
+                    isActive={selectedSize === 'S'}>S</span>
+              <span className={selectedSize === 'M' ? 'selected' : ''} onClick={() => handleSizeSelection('M')}
+                    isActive={selectedSize === 'M'}>M</span>
+              <span className={selectedSize === 'L' ? 'selected' : ''} onClick={() => handleSizeSelection('L')}
+                    isActive={selectedSize === 'L'}>L</span>
+              <span className={selectedSize === 'XL' ? 'selected' : ''} onClick={() => handleSizeSelection('XL')}
+                    isActive={selectedSize === 'XL'}>XL</span>
             </Size>
             <ActionButton>
-              <AddToCartButton id="common-button">
+              <AddToCartButton id="common-button" onClick={addToCart}>
                 <FaShoppingCart style={{color:"white", fontSize:"1.1rem"}}/><p>ADD TO CART</p>
               </AddToCartButton>
               <WishListButton id="common-button">
@@ -215,6 +235,10 @@ const Size = styled.div`
       border:1px solid #C1C1C1 ;
       transition: 0.3s ease-in-out;
       cursor:pointer;
+    }
+    &.selected {
+      background-color: #ebebeb;
+      border: 1px solid #c1c1c1;
     }
   }
 `
