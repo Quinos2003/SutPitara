@@ -1,4 +1,5 @@
 // cartReducer.js
+
 const initialState = [];
 
 const cartReducer = (state = initialState, action) => {
@@ -6,7 +7,16 @@ const cartReducer = (state = initialState, action) => {
     case 'ADD_TO_CART':
       return [...state, action.payload];
     case 'REMOVE_FROM_CART':
-      return state.filter(item => item.id !== action.payload);
+      const itemId = action.payload;
+      const updatedCart = state.filter(item => item.id !== itemId);
+
+      // Update the localStorage
+      localStorage.setItem('reduxState', JSON.stringify({
+        ...state,
+        cart: updatedCart,
+      }));
+
+      return updatedCart;
     default:
       return state;
   }

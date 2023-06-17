@@ -1,79 +1,106 @@
-import React, { useState} from "react";
+import React from "react";
 import styled from "styled-components";
 import { MdDelete } from "react-icons/md";
+import { useDispatch , useSelector } from 'react-redux';
+import { removeFromWishlist } from "./wishlistReducer";
+import { useNavigate, useParams } from "react-router-dom";
+import { products } from "../constants/data";
+
+function WishlistItem() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { id } = useParams();
+
+  const wishlistItems = useSelector((state) => state.wishlist);
+
+  const handleDelete = (id) => {
+    dispatch(removeFromWishlist(id));
+  };
 
 
+  // Add to cart
+  const product = products.find((product) => product.id.toString() === id);
 
-function WishlistItem(){
+  const addToCart = (id) => {
+    const product = products.find((product) => product.id.toString() === id);
+    dispatch({ type: 'ADD_TO_CART', payload: product });
+    navigate('/cart');
+  };
 
-    const [isInWishlist, setIsInWishlist] = useState(true);
-
-    const handleDelete = () => {
-      setIsInWishlist(!isInWishlist);
-    };
-  
-    if (!isInWishlist) {
-      return null; // Don't render anything if the item is deleted
-    }
-  
 
   return (
-    <Container>
-        <Image><img src="https://cdn.shopify.com/s/files/1/0606/5864/7273/products/TMKJSLMA0609_2227e775-4b6c-4f9e-862b-ef825a64e320_900x.jpg?v=1638334658"/></Image>
-        <InfoContainer>
-            <RemoveButton>
-                <p style={{color:"#65BA00"}}>Instock</p>
-                <MdDelete className="remove" onClick={handleDelete}/>
-            </RemoveButton>
-            <h3>Lorem ipsum dolor sit amet.</h3>
-            <p id="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, facilis?</p>
-            <Base>
-                <Price>  
-                    <p id="price">Rs. 700</p>
-                    <p id="off">Rs. 1000</p>
-                    <p id="discount">30% off</p>
+    <div>
+    {wishlistItems.length === 0 ? (
+      <h1>Wishlist is empty</h1>
+    ) : (
+      <div>
+        {wishlistItems.map((item) => (
+          <Container key={item.id}>
+            <Image>
+              <img src={item.url} alt={item.title.shortTitle} />
+            </Image>
+            <InfoContainer>
+              <RemoveButton>
+                <p style={{ color: "#65BA00" }}>{item.title.shortTitle}</p>
+                <MdDelete
+                  className="remove"
+                  onClick={() => handleDelete(item.id)}
+                />
+              </RemoveButton>
+              <h3>{item.title.shortTitle}</h3>
+              <p id="description">
+                {item.title.longTitle}
+              </p>
+              <Base>
+                <Price>
+                  <p id="price">Rs. {Math.round(item.price.mrp - item.price.mrp * item.price.discount)}</p>
+                  <p id="off">Rs. {item.price.mrp}</p>
+                  <p id="discount">{item.price.discount*100}% off</p>
                 </Price>
-                <AddToCartButton>Add to cart</AddToCartButton>
-            </Base>
-        </InfoContainer>
-      
-    </Container>
-  )
+                <AddToCartButton onClick={() => addToCart(item.id)}>Add to cart</AddToCartButton>
+              </Base>
+            </InfoContainer>
+          </Container>
+        ))}
+      </div>
+    )}
+  </div>
+);
 };
 
 const Container = styled.div`
-    margin:2px auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #e0e0e0;
-    padding:0.5rem ;
-    &:hover{
-        transform: scale(1.002);
-        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
-        transition: 0.25s;
-    }
+  margin: 2px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #e0e0e0;
+  padding: 0.5rem;
+  &:hover {
+    transform: scale(1.002);
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+    transition: 0.25s;
+  }
 
-    p{
-        margin:0;
-    }
+  p {
+    margin: 0;
+  }
 
-    h3{
-        font-size: 1.3rem;
-        font-weight: 500;
-        margin:0.5rem 0rem;
+  h3 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 0.5rem 0rem;
+  }
+  .remove {
+    font-size: 1.5rem;
+    color: grey;
+    cursor: pointer;
+    padding: 0.4rem;
+    border-radius: 50%;
+    &:hover {
+      background-color: #e2e2e2;
+      transition: 0.25s;
     }
-    .remove{
-        font-size: 1.5rem;
-        color:grey;
-        cursor: pointer;
-        padding:0.4rem;
-        border-radius: 50%;
-        &:hover{
-            background-color: #E2E2E2;
-            transition: 0.25s;
-        }
-    }
+  }
     #price{
         font-size: 1.1rem;
         font-weight: 600;

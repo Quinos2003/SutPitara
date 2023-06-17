@@ -24,6 +24,14 @@ const ProductDetail = () => {
     navigate('/cart');
   };
 
+//to send item into wishlist
+const addToWishlist = () => {
+    dispatch({ type: 'ADD_TO_WISHLIST', payload: product });
+    navigate('/wishlist');
+
+};
+  
+
   //To select size of clothing
   const handleSizeSelection = (size) => {
     setSelectedSize(size);
@@ -68,7 +76,7 @@ const ProductDetail = () => {
               <AddToCartButton id="common-button" onClick={addToCart}>
                 <FaShoppingCart style={{color:"white", fontSize:"1.1rem"}}/><p>ADD TO CART</p>
               </AddToCartButton>
-              <WishListButton id="common-button">
+              <WishListButton id="common-button" onClick={addToWishlist}>
                 <BsHeart style={{color:"black", fontSize:"1.1rem"}}/><p>ADD TO WISHLIST</p>
               </WishListButton>
             </ActionButton>

@@ -160,6 +160,7 @@
 import styled from "styled-components";
 import WishlistItem from "./WishlistItem";
 import ScrollToTop from "./ScrollToTop";
+import { useSelector } from 'react-redux';
 
 const Wishlist = () => {
   // const cartDetails = useSelector(state => state.cart);
@@ -207,16 +208,13 @@ const Wishlist = () => {
   // };
   // //   }
 
+
   return (
     <Container>
       <Header>
         <h2>My Wishlist</h2>
         <p>({1} item)</p>
       </Header>
-      <WishlistItem/>
-      <WishlistItem/>
-      <WishlistItem/>
-      <WishlistItem/>
       <WishlistItem/>
       <ScrollToTop/>
 

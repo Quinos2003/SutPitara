@@ -109,6 +109,7 @@ import styled from "styled-components";
 import CartItem from "./CartItem";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 // const LeftComponent = styled(Grid)(({ theme }) => ({
 //   paddingRight: 15,
@@ -156,17 +157,12 @@ const Cart = () => {
 
 
   const [totalAmount, setTotalAmount] = useState(0);
-  const [totalItems, setTotalItems] = useState(0);
 
   // Callback function to update total amount
   const updateTotalAmount = (amount) => {
     setTotalAmount(amount);
   };
 
-  //to keep total count of elements shown in header
-  const updateTotalItems = (items) => {
-    setTotalItems(items);
-  };
 
   // const buyNow = (e) => {
   //   e.preventDefault();
@@ -208,17 +204,21 @@ const Cart = () => {
     navigate('/detail');
   }
 
+    // Get the total count of items
+    const cartItems = useSelector((state) => state.cart); // Get cart items from the Redux store
+    const totalCount = cartItems.length;
+
   return (
     <Container>
       <Box>
         <LeftSection>
           <Header>
             <h3>Shopping Cart</h3>
-            <h3 style={{color:"grey"}}> {totalItems} Items</h3>
+            <h3 style={{color:"grey"}}> {totalCount} Items</h3>
           </Header>
 
           <CartContainer>
-            <CartItem updateTotalAmount={updateTotalAmount} updateTotalItems={updateTotalItems}/>
+            <CartItem updateTotalAmount={updateTotalAmount}/>
           </CartContainer>
         </LeftSection>
         <RightSection>
