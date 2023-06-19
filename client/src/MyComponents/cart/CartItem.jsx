@@ -5,56 +5,27 @@ import { products } from "../constants/data";
 import { useSelector, useDispatch } from 'react-redux';
 import EmptyCart from "./EmptyCart";
 
-const CartItem = ({ removeItemFromCart, updateTotalAmount ,totalIte}) => {
+const CartItem = ({counter}) => {
 
   const cartItems = useSelector((state) => state.cart);
-  console.log(cartItems);
+
+  // console.log(cartItems);
   const dispatch = useDispatch();
 
-  const removeFromCart = itemId => {
-    dispatch({ type: 'REMOVE_FROM_CART', payload: itemId });
-  };
+  // Load counters value from local storage or use default value
+  const savedCounters = localStorage.getItem('counters');
 
-  const [counters, setCounters] = useState(
-    Array(products.length).fill(1) // Initialize counters array with length equal to products array length
-  );
 
-  const [totalAmount, setTotalAmount] = useState(0); // State to store the total amount
-  const [totalItems, setTotalItems] = useState(0);
-  //calculate total amount
-  useEffect(() => {
-    // Calculate total amount whenever counters or products change
-    const calculateTotalAmount = () => {
-      let total = 0;
-      for (let i = 0; i < products.length; i++) {
-        total += products[i].price.mrp * counters[i];
-      }
-      setTotalAmount(total);
-      updateTotalAmount(total);
-      console.log(total)
-    };
-
-    calculateTotalAmount();
-  }, [counters, products]);
-
-//calculate total items in cart
-const updateTotalItems = (items) => {
-    setTotalItems(items);
-  };
+  //Counter logic starts here
+  const [counters, setCounters] = useState(() => {
+    return savedCounters ? JSON.parse(savedCounters) : Array(products.length).fill(1);
+  });
 
   useEffect(() => {
-    const calculateTotalItems = () => {
-      let total = 0;
-      for (let i = 0; i < products.length; i++) {
-        total += counters[i];
-      }
-    setTotalItems(total);
-      updateTotalItems(total);
-      console.log(total)
-    };
-  
-    calculateTotalItems();
-  }, [counters, updateTotalItems]);
+    // Save counters value to local storage whenever it changes
+    if (cartItems.length > 0) {
+      localStorage.setItem('counters', JSON.stringify(counters));
+    }  }, [counters]);
 
   const increase = (index) => {
     setCounters((prevCounters) => {
@@ -75,6 +46,28 @@ const updateTotalItems = (items) => {
     });
   };
 
+
+  // Remove from cart
+  const removeFromCart = (itemId) => {
+    dispatch({ type: 'REMOVE_FROM_CART', payload: itemId });
+
+    setCounters((prevCounters) => {
+      const newCounters = [...prevCounters];
+      newCounters.splice(itemId, 1); // Remove the corresponding counter from the counters array
+      return newCounters;
+    });
+  };
+
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      localStorage.setItem('counters', JSON.stringify(counters));
+    } else {
+      localStorage.removeItem('counters');
+    }
+  }, [counters, cartItems]);
+
+
+
   const fassured =
     "https://cdn.shopify.com/s/files/1/0606/5864/7273/products/TasvaDay123290_900x.jpg?v=1655982825";
 
@@ -85,15 +78,20 @@ const updateTotalItems = (items) => {
           {cartItems.map((product,index) => {
             const counter = counters[index]; // Get the counter value for the current product
             return (
-              <Container key={product.id}>
+              <Container key={index}>
                 <ImageContainer>
                   <img src={product.url} alt={product.title.shortTitle} />
                 </ImageContainer>
                 <ItemInfoContainer>
                   <h3 style={{ fontWeight: "500" }}>{product.title.shortTitle}</h3>
                   <p>Color: Pink</p>
-                  <p>Size : {product.size}</p>
-                  <p>MRP : Rs.{product.price.mrp}</p>
+                  <p>Size : {product.selectedSize}</p>
+                  {console.log(product.selectedSize)}
+                  <span>
+                    <p>Price : Rs. {Math.round(product.price.mrp - product.price.mrp*product.price.discount)}</p>
+                    <p id="mrp">MRP : Rs. {product.price.mrp}</p>
+                  </span>
+                  <p style={{color:"green"}}>Discount: {product.price.discount *100}% off</p>
                   <RemoveItem onClick={()=> removeFromCart(product.id)}>Remove</RemoveItem>
                 </ItemInfoContainer>
                 <QuantityCounter>
@@ -122,7 +120,7 @@ const updateTotalItems = (items) => {
                 </QuantityCounter>
                 <TotalAmountContainer>
                   <p>Total</p>
-                  <p>Rs.{product.price.mrp * counter}</p>
+                  <p>Rs.{Math.round(product.price.mrp - product.price.mrp*product.price.discount) * counter}</p>
                 </TotalAmountContainer>
               </Container>
             );
@@ -146,6 +144,10 @@ const Container = styled.div`
     gap:3rem;
     padding:1rem ;
     border-bottom: 1px solid #e0e0e0;
+    #mrp{
+        text-decoration:line-through;
+        font-size:0.8rem;
+    }
 `
 const ImageContainer = styled.div`
     img{
@@ -154,7 +156,7 @@ const ImageContainer = styled.div`
     }
 `
 const ItemInfoContainer = styled.div`
-    max-width: 20%;
+    max-width: 15%;
     font-size: 0.9rem;
     p{
         color:#6B6B6B;

@@ -1,4 +1,5 @@
 import { Typography, Box, styled } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Component = styled(Box)`
     width: 80%%;
@@ -26,7 +27,11 @@ const EmptyCart = () => {
             <Container>
                 <Image src={imgurl} />
                 <Typography>Your cart is empty!</Typography>
-                <Typography component="span">Add items to it now.</Typography>
+                <Link to="/" style={{textDecoration:"none", color:"#D20000"}}> 
+                    <Typography component="span">
+                        <h3>Add items to it now.</h3>
+                    </Typography>
+                </Link>
             </Container>
         </Component>
         </>

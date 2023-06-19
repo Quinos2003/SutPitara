@@ -1,4 +1,5 @@
 import { Typography, Box, styled } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Component = styled(Box)`
     width: 80%%;
@@ -11,6 +12,8 @@ const Container = styled(Box)`
     text-align: center;
     padding-top: 70px;
 `;
+
+
 
 const Image = styled('img')({
     width: '15%'
@@ -25,12 +28,16 @@ const EmptyWishlist = () => {
         <Component>
             <Container>
                 <Image src={imgurl} />
-                <Typography>Your cart is empty!</Typography>
-                <Typography component="span">Add items to it now.</Typography>
+                <Typography>Your wishlist is empty!</Typography>
+                <Link to="/" style={{textDecoration:"none", color:"#D20000"}}> 
+                    <Typography component="span">
+                        <h3>Add items to it now.</h3>
+                    </Typography>
+                </Link>
             </Container>
         </Component>
         </>
     )
 }
 
-export default EmptyCart;
+export default EmptyWishlist;

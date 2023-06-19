@@ -39,7 +39,6 @@ export const products = [
         }, 
         price: {
             mrp: 1195,
-            cost: 625,
             discount: 47/100 //47% off
         },
         quantity: 1,

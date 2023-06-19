@@ -13,6 +13,8 @@ import Order from './MyComponents/orders/Order';
 import ProductDetail from './MyComponents/details/ProductDetail';
 import { Provider } from 'react-redux';
 import store from './MyComponents/cart/Store';
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
                     <Route path='/account' element={<Profile/>}/>
                     <Route path='/orders' element={<Order/>}/>
                   </Routes>
+                  <ToastContainer/>
           </BrowserRouter>
     </Provider>
 

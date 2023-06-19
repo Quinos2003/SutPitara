@@ -176,7 +176,7 @@ export default function LoginDialog({open,setOpen}) {
             "email": email,
             "password": password
         };
-        fetch("store/signup", {
+        fetch("http://127.0.0.1:8000/store/signup", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {

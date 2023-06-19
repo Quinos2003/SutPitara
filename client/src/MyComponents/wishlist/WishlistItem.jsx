@@ -5,7 +5,7 @@ import { useDispatch , useSelector } from 'react-redux';
 import { removeFromWishlist } from "./wishlistReducer";
 import { useNavigate, useParams } from "react-router-dom";
 import { products } from "../constants/data";
-
+import EmptyWishlist from "./EmptyWishlist";
 function WishlistItem() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -25,13 +25,17 @@ function WishlistItem() {
     const product = products.find((product) => product.id.toString() === id);
     dispatch({ type: 'ADD_TO_CART', payload: product });
     navigate('/cart');
+    dispatch(removeFromWishlist(id));
   };
+
+    // Check if the product already exists in the cart
+
 
 
   return (
     <div>
     {wishlistItems.length === 0 ? (
-      <h1>Wishlist is empty</h1>
+      <EmptyWishlist/>
     ) : (
       <div>
         {wishlistItems.map((item) => (

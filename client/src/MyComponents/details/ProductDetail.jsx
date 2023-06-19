@@ -8,6 +8,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { products } from '../constants/data';
 import { useState } from 'react';
+import { notification2 } from '../notifications/notification';
 
 
 
@@ -16,21 +17,23 @@ const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedSize, setSelectedSize] = useState("");
 
 //to send items into cart
-  const addToCart = () => {
-    dispatch({ type: 'ADD_TO_CART', payload: product, size: selectedSize });
+  const addToCart = (selectedSize) => {
+    dispatch({ type: 'ADD_TO_CART', payload: product, size: selectedSize} );
+    notification2("Added to Cart");
     navigate('/cart');
   };
+  console.log(selectedSize)
 
 //to send item into wishlist
 const addToWishlist = () => {
     dispatch({ type: 'ADD_TO_WISHLIST', payload: product });
+    notification2("Added to Wishlist");
     navigate('/wishlist');
 
 };
-  
 
   //To select size of clothing
   const handleSizeSelection = (size) => {
@@ -73,7 +76,7 @@ const addToWishlist = () => {
                     isActive={selectedSize === 'XL'}>XL</span>
             </Size>
             <ActionButton>
-              <AddToCartButton id="common-button" onClick={addToCart}>
+              <AddToCartButton id="common-button" onClick={()=>addToCart(selectedSize)}>
                 <FaShoppingCart style={{color:"white", fontSize:"1.1rem"}}/><p>ADD TO CART</p>
               </AddToCartButton>
               <WishListButton id="common-button" onClick={addToWishlist}>

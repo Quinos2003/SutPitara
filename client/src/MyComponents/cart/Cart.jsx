@@ -107,9 +107,9 @@
 import React from "react";
 import styled from "styled-components";
 import CartItem from "./CartItem";
-import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { notification1 } from "../notifications/notification";
 
 // const LeftComponent = styled(Grid)(({ theme }) => ({
 //   paddingRight: 15,
@@ -155,13 +155,7 @@ const Cart = () => {
   // };
 
 
-
-  const [totalAmount, setTotalAmount] = useState(0);
-
   // Callback function to update total amount
-  const updateTotalAmount = (amount) => {
-    setTotalAmount(amount);
-  };
 
 
   // const buyNow = (e) => {
@@ -196,17 +190,49 @@ const Cart = () => {
   // };
   //   // }
 
+  const counter = localStorage.getItem("counters");
+
+  const cartItems = useSelector((state) => state.cart) || [];
+  let totalAmount = 0;
+
+  if (cartItems.length > 0) {
+    totalAmount = cartItems.reduce((total, product) => {
+      const itemTotal = (product.price.mrp - product.price.mrp * product.price.discount);
+      return total + itemTotal;
+    }, 0);
+  }
+
+  let discountAmount = 0;
+  if (cartItems.length > 0) {
+    discountAmount = cartItems.reduce((discount, product) => {
+      const itemTotal = (product.price.mrp * product.price.discount);
+      return discount + itemTotal;
+    }, 0);
+  }
+
+  let subtotalAmount = 0;
+  if (cartItems.length > 0) {
+    subtotalAmount = cartItems.reduce((subtotal, product) => {
+      const itemTotal = (product.price.mrp);
+      return subtotal + itemTotal;
+    }, 0);
+  }
+
   /*Added new cart configuration*/
   const navigate = useNavigate();
 
+  // Get the total count of items
+  const totalCount = cartItems.length;
+
   const buyNow = () => {
     // dispatch(addToCart(id, quantity));
+    if(cartItems.length === 0) {
+      notification1("Please add some items to cart");
+      return;
+    }
     navigate('/detail');
   }
 
-    // Get the total count of items
-    const cartItems = useSelector((state) => state.cart); // Get cart items from the Redux store
-    const totalCount = cartItems.length;
 
   return (
     <Container>
@@ -218,7 +244,7 @@ const Cart = () => {
           </Header>
 
           <CartContainer>
-            <CartItem updateTotalAmount={updateTotalAmount}/>
+            <CartItem/>
           </CartContainer>
         </LeftSection>
         <RightSection>
@@ -226,21 +252,25 @@ const Cart = () => {
             <h3>Order Summary</h3>
           </Header>
           <Summary>
+          <Details>
+              <p>MRP. Price</p>
+              <p>₹ {Math.round(subtotalAmount)}</p>
+            </Details>
+            <Details>
+              <p>Discount</p>
+              <p>₹ {Math.round(discountAmount)}</p>
+            </Details>
             <Details>
               <p>Subtotal</p>
-              <p>₹ 1,000</p>
+              <p>₹ {Math.round(subtotalAmount-discountAmount)}</p>
             </Details>
             <Details>
               <p>Shipping</p>
               <p>₹ 40</p>
             </Details>
-            <Details>
-              <p>Discount</p>
-              <p>₹ 0</p>
-            </Details>
             <Details style={{borderTop:"1px solid #e0e0e0", fontWeight:"500"}}>
               <p>Total</p>
-              <p>{totalAmount}</p>
+              <p>₹ {Math.round(totalAmount)+40}</p>
             </Details>
           </Summary>
           <CheckOutButton onClick={() => buyNow()}>
