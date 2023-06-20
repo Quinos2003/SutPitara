@@ -5,6 +5,7 @@ import { useDispatch , useSelector } from 'react-redux';
 import { removeFromWishlist } from "./wishlistReducer";
 import { useNavigate, useParams } from "react-router-dom";
 import { products } from "../constants/data";
+import { notification2 } from "../notifications/notification";
 import EmptyWishlist from "./EmptyWishlist";
 function WishlistItem() {
     const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function WishlistItem() {
   const addToCart = (id) => {
     const product = products.find((product) => product.id.toString() === id);
     dispatch({ type: 'ADD_TO_CART', payload: product });
+    notification2("Transfered to cart");
     navigate('/cart');
     dispatch(removeFromWishlist(id));
   };
