@@ -1,7 +1,7 @@
 from django.contrib import admin
-# from .models import User
-from .models import User, Product
-# from .product import Products
+from .models import User
+# from .models import User, Product
+from .product import Products
 from .category import Category
 # from .customer import Customer
 # from .orders import Order
