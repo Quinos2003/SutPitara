@@ -35,19 +35,31 @@ class Products(models.Model):
         (M, 'Male'),
         (F, 'Female'),
     )
-
-    smallImageURL = models.URLField()
-    largeImageURL = models.URLField()
-    shortTitle = models.CharField(max_length=64)
-    longTitle = models.CharField(max_length=64)
-    mrp = models.IntegerField()
-    discount = models.IntegerField()
-    quantity = models.IntegerField()
-    description = models.CharField(max_length=64)
-    tagline = models.CharField(max_length=64)
-    category = models.CharField(max_length=1, choices=GENDER_CHOICES, default=M)
-    
     image = models.ImageField(upload_to='uploads/products/')
+
+    # smallImageURL = models.URLField()
+    # largeImageURL = models.URLField()
+    # image = models.URLField()
+    # shortTitle = models.CharField(max_length=64)
+    # longTitle = models.CharField(max_length=64)
+    name = models.CharField(max_length=64)
+    description = models.CharField(max_length=64)
+    mrp = models.IntegerField()
+    price = models.IntegerField()
+    # discount = models.IntegerField()
+    category = models.CharField(max_length=1, choices=GENDER_CHOICES, default=M)
+    color = models.CharField(max_length=64)
+    avlSize = models.CharField(max_length=64)
+    # quantity = models.IntegerField()
+    no_items = models.IntegerField()
+    rating = models.IntegerField()
+    ratingCount = models.IntegerField()
+    
+    
+    tagline = models.CharField(max_length=64)
+    
+    
+    
     inStock = models.BooleanField(default=True)
     createdAt = models.DateTimeField(auto_now_add=True)
     updatedAt = models.DateTimeField(auto_now=True)

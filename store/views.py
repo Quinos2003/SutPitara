@@ -3,7 +3,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.http import JsonResponse
 import json
-from .models import User, Product
+# from .models import User, Product
+from .models import User
+from .product import Products
 from django.views.decorators.csrf import csrf_exempt
 
 #npm install react-scripts --save
@@ -54,13 +56,13 @@ def signup(request):
             }
         return JsonResponse(response)
 
-@csrf_exempt
-def get_product(request, id):
-    product = Product.objects.get(id=id)
-    return JsonResponse(product)
+# @csrf_exempt
+# def get_product(request, id):
+#     product = Products.objects.get(id=id)
+#     return JsonResponse(product)
 
-@csrf_exempt
-def get_products(request, offset):
-    queryset = Product.objects.order_by('-id').all()[offset:offset+10]
-    data = [obj.to_dict() for obj in queryset]
-    return JsonResponse(data)
+# @csrf_exempt
+# def get_products(request, offset):
+#     queryset = Products.objects.order_by('-id').all()[offset:offset+10]
+#     data = [obj.to_dict() for obj in queryset]
+#     return JsonResponse(data)

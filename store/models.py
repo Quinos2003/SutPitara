@@ -53,23 +53,23 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
     
-class Product(models.Model):
+# class Product(models.Model):
 
-    M = "M"
-    F = "F"
-    GENDER_CHOICES = (
-        (M, 'Male'),
-        (F, 'Female'),
-    )
-    smallImageURL = models.URLField()
-    largeImageURL = models.URLField()
-    shortTitle = models.CharField(max_length=64)
-    longTitle = models.CharField(max_length=64)
-    mrp = models.IntegerField()
-    discount = models.IntegerField()
-    quantity = models.IntegerField()
-    description = models.CharField(max_length=64)
-    tagline = models.CharField(max_length=64)
-    category = models.CharField(max_length=1,
-                  choices=GENDER_CHOICES,
-                  default=M)
+#     M = "M"
+#     F = "F"
+#     GENDER_CHOICES = (
+#         (M, 'Male'),
+#         (F, 'Female'),
+#     )
+#     smallImageURL = models.URLField()
+#     largeImageURL = models.URLField()
+#     shortTitle = models.CharField(max_length=64)
+#     longTitle = models.CharField(max_length=64)
+#     mrp = models.IntegerField()
+#     discount = models.IntegerField()
+#     quantity = models.IntegerField()
+#     description = models.CharField(max_length=64)
+#     tagline = models.CharField(max_length=64)
+#     category = models.CharField(max_length=1,
+#                   choices=GENDER_CHOICES,
+#                   default=M)
