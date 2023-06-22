@@ -81,47 +81,52 @@ const CartItem = ({counter}) => {
               <Container key={index}>
                 <ImageContainer>
                   <img src={product.url} alt={product.title.shortTitle} />
+                  <RemoveItem id="remove1" onClick={()=> removeFromCart(product.id)}>Remove</RemoveItem>
                 </ImageContainer>
-                <ItemInfoContainer>
-                  <h3 style={{ fontWeight: "500" }}>{product.title.shortTitle}</h3>
-                  <p>Color: Pink</p>
-                  <p>Size : {product.selectedSize}</p>
-                  {console.log(product.selectedSize)}
-                  <span>
-                    <p>Price : Rs. {Math.round(product.price.mrp - product.price.mrp*product.price.discount)}</p>
-                    <p id="mrp">MRP : Rs. {product.price.mrp}</p>
-                  </span>
-                  <p style={{color:"green"}}>Discount: {product.price.discount *100}% off</p>
-                  <RemoveItem onClick={()=> removeFromCart(product.id)}>Remove</RemoveItem>
-                </ItemInfoContainer>
-                <QuantityCounter>
-                  <p style={{ fontWeight: "500", textAlign: "center" }}>Quantity</p>
-                  <Quantity>
-                    <GrSubtract
-                      onClick={() => decrease(index)}
-                      style={{
-                        borderRadius: "8rem",
-                        background: "white",
-                        padding: "0.1rem",
-                        cursor: "pointer",
-                      }}
-                    />
-                    <span style={{ maxWidth: "0.7rem" }}>{counter}</span>
-                    <GrAdd
-                      onClick={() => increase(index)}
-                      style={{
-                        borderRadius: "8rem",
-                        background: "white",
-                        padding: "0.1rem",
-                        cursor: "pointer",
-                      }}
-                    />
-                  </Quantity>
-                </QuantityCounter>
-                <TotalAmountContainer>
-                  <p>Total</p>
-                  <p>Rs.{Math.round(product.price.mrp - product.price.mrp*product.price.discount) * counter}</p>
-                </TotalAmountContainer>
+                <div className="item-container">
+                  <ItemInfoContainer>
+                    <h3 style={{ fontWeight: "500" }}>{product.title.shortTitle}</h3>
+                    <div id="item-container">
+                      <p>Color: Pink</p>
+                      <p>Size : {product.selectedSize}</p>
+                      {console.log(product.selectedSize)}
+                      <span>
+                        <p>Price : Rs. {Math.round(product.price.mrp - product.price.mrp*product.price.discount)}</p>
+                        <p id="mrp">MRP : Rs. {product.price.mrp}</p>
+                      </span>
+                      <p style={{color:"green"}}>Discount: {product.price.discount *100}% off</p>
+                    </div>
+                    <RemoveItem id="remove2" onClick={()=> removeFromCart(product.id)}>Remove</RemoveItem>
+                  </ItemInfoContainer>
+                  <QuantityCounter>
+                    <p style={{ fontWeight: "500"}}>Quantity</p>
+                    <Quantity>
+                      <GrSubtract
+                        onClick={() => decrease(index)}
+                        style={{
+                          borderRadius: "8rem",
+                          background: "white",
+                          padding: "0.1rem",
+                          cursor: "pointer",
+                        }}
+                      />
+                      <span style={{ maxWidth: "0.7rem" }}>{counter}</span>
+                      <GrAdd
+                        onClick={() => increase(index)}
+                        style={{
+                          borderRadius: "8rem",
+                          background: "white",
+                          padding: "0.1rem",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </Quantity>
+                  </QuantityCounter>
+                  <TotalAmountContainer>
+                    <p>Total</p>
+                    <p>Rs.{Math.round(product.price.mrp - product.price.mrp*product.price.discount) * counter}</p>
+                  </TotalAmountContainer>
+                </div>
               </Container>
             );
           })}
@@ -137,17 +142,77 @@ export default CartItem;
 
 
 const Container = styled.div`
-    width:inherit;
+    margin: 0 auto;
     height:inherit;
     display:flex;
-    justify-content:space-between;
     gap:3rem;
     padding:1rem ;
+    align-items:center;
     border-bottom: 1px solid #e0e0e0;
     #mrp{
         text-decoration:line-through;
         font-size:0.8rem;
     }
+    .item-container{
+      display:flex;
+      gap:3rem;
+      justify-content:space-between;
+    }
+    #remove1{
+      display:none;
+    }
+    #remove2{
+      display:block;
+    }
+    #item-container{
+      display:flex;
+      flex-direction:column;
+      flex-wrap:wrap;
+      gap:1rem;
+      span{
+        display:flex;
+        gap:1rem;
+      }
+    }
+
+
+/* //smartphone landscape */
+@media screen and (min-width: 480px) and (max-width: 650px)  {
+  .item-container{
+    flex-direction:column;
+    gap:1.2rem;
+  }
+  #item-container{
+    flex-direction:row;
+    gap:1.5rem;
+    span{
+      flex-direction:column;      
+    }
+  }
+  #remove1{
+    display:block;
+    text-align:center;
+    font-size:0.9rem;
+  }
+  #remove2{
+    display:none;
+  }
+}
+
+/* //smartphone portrait */
+@media screen and (min-width: 300px) and (max-width: 479px) {
+  .item-container{
+    flex-direction:column;
+    gap:1.2rem;
+  }
+  #item-container{
+    flex-direction:row;
+    gap:1.5rem;
+    span{
+      flex-direction:column;      
+    }
+  }
+}
 `
 const ImageContainer = styled.div`
     img{
@@ -156,10 +221,22 @@ const ImageContainer = styled.div`
     }
 `
 const ItemInfoContainer = styled.div`
-    max-width: 15%;
+    min-width: 16%;
+    max-width: 25%;
     font-size: 0.9rem;
     p{
         color:#6B6B6B;
+        padding:0;
+        margin:0;
+    }
+    /* //smartphone landscape */
+    @media screen and (min-width: 480px) and (max-width: 650px)  {
+        min-width:100%;
+    }
+    
+    /* //smartphone portrait */
+    @media screen and (min-width: 300px) and (max-width: 479px) {
+        min-width:100%;
     }
 `
 const TotalAmountContainer = styled.div`
@@ -180,6 +257,22 @@ const Quantity = styled.div`
     padding:0 0.5rem;
 `
 const QuantityCounter = styled.div`
+  p{
+    text-align:center;
+  }
+  /* //smartphone landscape */
+  @media screen and (min-width: 480px) and (max-width: 650px)  {
+    p{
+      text-align:start;
+    }
+  }
+  
+  /* //smartphone portrait */
+  @media screen and (min-width: 300px) and (max-width: 479px) {
+    p{
+      text-align:start;
+    }
+  }
 
 `
 const RemoveItem = styled.span`

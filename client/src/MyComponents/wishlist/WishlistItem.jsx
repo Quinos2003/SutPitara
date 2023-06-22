@@ -75,12 +75,14 @@ function WishlistItem() {
 };
 
 const Container = styled.div`
+  width: 70vw;
   margin: 2px auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border: 1px solid #e0e0e0;
   padding: 0.5rem;
+  gap: 1rem;
   &:hover {
     transform: scale(1.002);
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
@@ -137,6 +139,32 @@ const Image = styled.div`
 const InfoContainer = styled.div`
     width: 80%;
     margin-top:0.5rem;
+    h3{
+      font-size: 1.2rem;
+    }
+    #description{ 
+      font-size: 1rem;
+    }
+
+    /* //smartphone landscape */
+    @media screen and (min-width: 480px) and (max-width: 767px)  {
+      h3{
+        font-size: 1rem;
+      }
+      #description{ 
+        font-size: 0.8rem;
+      }
+    }
+  
+    /* //smartphone portrait */
+    @media screen and (min-width: 300px) and (max-width: 479px) {
+      h3{
+        font-size: 0.8rem;
+      }
+      #description{ 
+        font-size: 0.6rem;
+      }
+    }
 `
 const RemoveButton = styled.div`
     display: flex;
@@ -148,12 +176,29 @@ const Base = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-top:1rem;
+    flex-wrap:wrap;
 
 `
 const Price = styled.div`
     display: flex;
     align-items: center;
     gap:1.8rem;
+    flex-wrap:wrap;
+
+    /* //smartphone landscape */
+    @media screen and (min-width: 480px) and (max-width: 767px)  {
+      p{
+        font-size: 0.9rem;
+      }
+    }
+  
+    /* //smartphone portrait */
+    @media screen and (min-width: 300px) and (max-width: 479px) {
+      p{
+        font-size: 0.8rem;
+      }
+      gap:0.8rem;
+    }
 `
 const AddToCartButton = styled.div`
     display: flex;
@@ -169,6 +214,15 @@ const AddToCartButton = styled.div`
     &:hover{
         background-color:#B84908;
         transition: 0.25s;
+    }
+    /* //smartphone landscape */
+    @media screen and (min-width: 480px) and (max-width: 767px)  {
+      padding: 0.5rem 1rem;
+    }
+  
+    /* //smartphone portrait */
+    @media screen and (min-width: 300px) and (max-width: 479px) {
+      padding: 0.3rem 0.8rem;
     }
 
 `

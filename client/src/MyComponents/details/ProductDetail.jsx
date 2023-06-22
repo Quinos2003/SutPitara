@@ -44,7 +44,6 @@ const addToWishlist = () => {
   const discountedPrice = Math.round(product.price.mrp * product.price.discount);
 
   return (
-    <>
       <Main>
         <LeftSection>
           <Image>
@@ -124,15 +123,14 @@ const addToWishlist = () => {
 
         </RightSection>
       </Main>
-
-    </>
   );
 };
 
 const Main = styled.div`
   display:flex;
-  margin:2rem;
   height:100vh;
+  width:80vw;
+  margin:2rem auto;
   p{
     padding:0rem;
     margin:0rem;
@@ -174,12 +172,23 @@ const Main = styled.div`
     margin-right:0.3rem;
   }
 
+
+  /* //smartphone landscape */
+  @media screen and (min-width: 480px) and (max-width: 767px)  {
+    flex-direction:column;
+  }
+  
+  /* //smartphone portrait */
+  @media screen and (min-width: 300px) and (max-width: 479px) {
+    flex-direction:column;
+  }
+
 `
 const Image = styled.div`
   overflow:hidden; 
   cursor:crosshair; 
   img{
-    width:100%;
+    width:90%;
     height:80vh;
     object-fit:contain;
   }
@@ -191,16 +200,25 @@ const Image = styled.div`
 `
 
 const LeftSection = styled.div`
-  width:50%;
+  width:80rem;
   display:flex;
   flex-direction:column;  
   align-items:center;
-  overflow:hidden;
+  margin:0 auto;
+
+  /* //smartphone landscape */
+  @media screen and (min-width: 480px) and (max-width: 767px)  {
+    width:30rem;
+  }
+  
+  /* //smartphone portrait */
+  @media screen and (min-width: 300px) and (max-width: 479px) {
+    width:20rem;
+  }
 `
 
 const RightSection = styled.div`
   width:fit-content;
-  padding:0rem 1.5rem;
   padding-top:1rem
 
 `
