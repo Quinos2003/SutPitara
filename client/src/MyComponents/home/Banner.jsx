@@ -3,15 +3,13 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import {styled} from '@mui/material'
 import {bannerData} from '../constants/data'
-import { height } from '@mui/system';
+import "./Banner.css";
 
 const Image=styled('img')(({theme})=>({
-    width: '100%',
-    height: '650px',
-    objectFit: 'cover',
     marginTop: '',
     [theme.breakpoints.down('sm')]:{
       objectFit: 'cover',
+
   }
 
   }));
@@ -55,7 +53,7 @@ export default function Banner() {
         
         {
             bannerData.map(data=>(
-                <Image src={data.url} alt="banner" />
+                <Image className="banner-image" src={data.url} alt="banner" />
             ))
         }
 

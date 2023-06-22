@@ -237,7 +237,7 @@ const Cart = () => {
   return (
     <Container>
       <Box>
-        <LeftSection>
+        <LeftSection className="left">
           <Header>
             <h3>Shopping Cart</h3>
             <h3 style={{color:"grey"}}> {totalCount} Items</h3>
@@ -247,7 +247,7 @@ const Cart = () => {
             <CartItem/>
           </CartContainer>
         </LeftSection>
-        <RightSection>
+        <RightSection className="right">
           <Header>
             <h3>Order Summary</h3>
           </Header>
@@ -283,14 +283,46 @@ const Cart = () => {
 };
 
 const Container = styled.div`
+  width: 85vw;
   height: 90vh;
-`
+  margin: 0 auto;
+  `
   const Box = styled.div`
   display: flex;
   justify-content: center;
   gap:1.5rem;
   margin-top:2rem;
+
+  /* MEDIA-QUERIES FURTHER*/
+
+
+/* //tablet portrait */
+@media screen and (min-width: 768px) and (max-width: 1023px)  {
+  flex-direction:column;
+  align-items:center;
+  width:100%
+  gap:0rem;
+
+}
+
+
+/* //smartphone landscape */
+@media screen and (min-width: 480px) and (max-width: 767px)  {
+  flex-direction:column;
+  align-items:center;
+  width:100%
+}
+
+/* //smartphone portrait */
+@media screen and (min-width: 300px) and (max-width: 479px) {
+  flex-direction:column;
+  align-items:center
+  width:100%
+
+}
 `
+
+
 const Header = styled.div`
   display: flex;
   border-bottom: 3px solid #e0e0e0;
@@ -298,11 +330,26 @@ const Header = styled.div`
   padding:0.5rem 1rem;
   font-weight: 700;
   font-size: 1.3rem;
+  flex-wrap:wrap;
 `
 const LeftSection = styled.div`
   border: 2px solid #e0e0e0;
   padding:1rem;
   width:50%;
+
+@media screen and (min-width: 768px) and (max-width: 1023px)  {
+  width:100%;
+}
+
+  /* //smartphone landscape */
+@media screen and (min-width: 480px) and (max-width: 767px)  {
+    width:100%;
+}
+
+/* //smartphone portrait */
+@media screen and (min-width: 300px) and (max-width: 479px) {
+    width:100%;
+}
 `
 const CartContainer = styled.div`
   height:70vh;
