@@ -84,8 +84,14 @@ WSGI_APPLICATION = 'SutPitaara.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'sutpitaara_test',
+        'USER': 'sutpitaara_websitedev1',
+        'PASSWORD': '1uqlgHx?4Yui',
+        'HOST': '97.74.87.73',
+        'PORT': '3306',
     }
 }
 

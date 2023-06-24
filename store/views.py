@@ -24,11 +24,13 @@ def login_view(request):
                 'success': True,
                 'name': user.firstName + ' ' + user.lastName
             }
+            print(email)
             return JsonResponse(response)
         else:
             response = {
                 'success': False
             }
+            print(email)
             return JsonResponse(response)
 
 @csrf_exempt
