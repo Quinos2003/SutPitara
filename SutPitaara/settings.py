@@ -90,17 +90,17 @@ DATABASES = {
         'NAME': 'sutpitaara_test',
         'USER': 'sutpitaara_websitedev1',
         'PASSWORD': '1uqlgHx?4Yui',
-        'HOST': '97.74.87.73',
+        'HOST': 'localhost',   # 97.74.87.73
         'PORT': '3306',
-        'OPTIONS': {
-            'charset': 'utf8mb4',
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-            'read_default_file': '/etc/my.cnf',  # Optional: Specify the MySQL configuration file path
-        },
-        'TEST': {
-            'CHARSET': 'utf8mb4',
-            'COLLATION': 'utf8mb4_unicode_ci',
-        },
+        # 'OPTIONS': {
+        #     'charset': 'utf8mb4',
+        #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        #     'read_default_file': '/etc/my.cnf',  # Optional: Specify the MySQL configuration file path
+        # },
+        # 'TEST': {
+        #     'CHARSET': 'utf8mb4',
+        #     'COLLATION': 'utf8mb4_unicode_ci',
+        # },
     }
 }
 
