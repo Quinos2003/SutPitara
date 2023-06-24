@@ -20,22 +20,22 @@ This is the official repository for the Sut Pitaara e-commerce website. It is bu
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/Quinos2003/SutPitara.git
 
 # Create a virtual environment
-python -m venv env
+python3 -m venv env
 
 # Activate the virtual environment
-source env/bin/activate (Linux/Mac) or .\env\Scripts\activate (Windows)
+source .venv/bin/activate (Linux/Mac) or .\.venv\Scripts\activate (Windows)
 
 # Install Python dependencies
 pip install -r requirements.txt
 
 # Apply database migrations
-python manage.py migrate
+python3 manage.py migrate
 
 # Run the development server
-python manage.py runserver
+python3 manage.py runserver
 ```
 The backend server will start at http://localhost:8000.
 
