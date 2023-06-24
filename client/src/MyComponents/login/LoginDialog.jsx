@@ -135,7 +135,6 @@ export default function LoginDialog({open,setOpen}) {
     const handleClose=()=>{
         setOpen(false);
         toggleAccount(accountInitialValues.login);
-        
     }
 
     const signUp = async () => {
@@ -176,7 +175,7 @@ export default function LoginDialog({open,setOpen}) {
             "email": email,
             "password": password
         };
-        fetch("http://127.0.0.1:8000/store/signup", {
+        fetch("store/signup", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -241,7 +240,7 @@ export default function LoginDialog({open,setOpen}) {
     }
 
   return (
-    <Dialog open={open} onClose={handleClose} PaperProps={ {sx : {maxWidth: 'unset'}}}>
+    <Dialog open={open} onClose={() => { setOpen(false)}} PaperProps={ {sx : {maxWidth: 'unset'}}}>
         <Component>
             <Box style={{
                 display: "flex",

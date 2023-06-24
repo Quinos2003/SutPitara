@@ -47,13 +47,12 @@ function WishlistItem() {
             </Image>
             <InfoContainer>
               <RemoveButton>
-                <p style={{ color: "#65BA00" }}>{item.title.shortTitle}</p>
+                <p style={{ color: "black", fontWeight:'600' }}>{item.title.shortTitle}</p>
                 <MdDelete
                   className="remove"
                   onClick={() => handleDelete(item.id)}
                 />
               </RemoveButton>
-              <h3>{item.title.shortTitle}</h3>
               <p id="description">
                 {item.title.longTitle}
               </p>
@@ -75,14 +74,14 @@ function WishlistItem() {
 };
 
 const Container = styled.div`
-  width: 70vw;
-  margin: 2px auto;
+  width: 80vw;
+  margin: 1rem auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border: 1px solid #e0e0e0;
   padding: 0.5rem;
-  gap: 1rem;
+  gap: 1.2rem;
   &:hover {
     transform: scale(1.002);
     box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
@@ -97,6 +96,7 @@ const Container = styled.div`
     font-size: 1.3rem;
     font-weight: 500;
     margin: 0.5rem 0rem;
+    color:black;
   }
   .remove {
     font-size: 1.5rem;
@@ -154,6 +154,12 @@ const InfoContainer = styled.div`
       #description{ 
         font-size: 0.8rem;
       }
+      #price{
+        font-size: 0.9rem;
+      }
+      #off{
+        font-size: 0.7rem;
+      }
     }
   
     /* //smartphone portrait */
@@ -163,6 +169,12 @@ const InfoContainer = styled.div`
       }
       #description{ 
         font-size: 0.6rem;
+      }
+      #price{
+        font-size: 0.8rem;
+      }
+      #off{
+        font-size: 0.7rem;
       }
     }
 `
@@ -218,11 +230,15 @@ const AddToCartButton = styled.div`
     /* //smartphone landscape */
     @media screen and (min-width: 480px) and (max-width: 767px)  {
       padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      margin-top:0.5rem;
     }
   
     /* //smartphone portrait */
     @media screen and (min-width: 300px) and (max-width: 479px) {
       padding: 0.3rem 0.8rem;
+      font-size: 0.8rem;
+      margin-top:0.5rem;
     }
 
 `

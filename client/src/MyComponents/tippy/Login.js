@@ -1,28 +1,30 @@
-import React from 'react'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Link } from 'react-router-dom';
-import './Login.css'
-export default function Login() {
-   
-  return (
-    <div className='logintab' >
-        <div className="log_in">
-            <p className='nc'>New Customer?</p>
-            <p className='su'>Sign Up</p>
-            
-        </div>
-        <Link to="/account" style={{
-            textDecoration: "none",
-          }}>
-        <div className="log_in">
-            <AccountCircleIcon/>
-            <p style={{color:'#830304'}}>My Profile</p>
-        </div>
-        </Link>
-        
-        
+// import React,{useState} from 'react'
+// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+// import { Link } from 'react-router-dom';
+// import './Login.css';
+// import LoginDialog from '../login/LoginDialog';
 
-      
-    </div>
-  )
-}
+// export default function Login() {
+
+//   const [openSignupDialog, setOpenSignupDialog] = useState(false);
+
+
+//   return (
+//     <div className='logintab' >
+//         <div className="log_in">
+//             <p className='nc'>New Customer?</p>
+//             <button style={{border:"none",background:"none"}} className='su' onClick={() => setOpenSignupDialog(true)}>Sign Up</button>
+            
+//         </div>
+//         <Link to="/account" style={{
+//             textDecoration: "none",
+//           }}>
+//         <div className="log_in">
+//             <AccountCircleIcon/>
+//             <p style={{color:'#830304'}}>My Profile</p>
+//         </div>
+//         </Link>
+
+//         {openSignupDialog && <LoginDialog open={openSignupDialog} setOpen={setOpenSignupDialog} />}    </div>
+//   )
+// }

@@ -176,11 +176,19 @@ const Main = styled.div`
   /* //smartphone landscape */
   @media screen and (min-width: 480px) and (max-width: 767px)  {
     flex-direction:column;
+    #common-button{
+      font-size:0.8rem;
+      padding:0.9rem 1.2rem;
+    }
   }
   
   /* //smartphone portrait */
   @media screen and (min-width: 300px) and (max-width: 479px) {
     flex-direction:column;
+    #common-button{
+      font-size:0.6rem;
+      padding:0.6rem 1rem;
+    }
   }
 
 `
