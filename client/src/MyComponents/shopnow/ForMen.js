@@ -4,7 +4,6 @@ import React from 'react'
 // import { useEffect } from "react";
 // import Banner from "./Banner";
 // import Slide from "./Slide";
-import Slide from '../home/Slide';
 import { Box, Grid, styled } from "@mui/material";
 // import {useDispatch, useSelector} from'react-redux'
 // import MidSlide from "./MidSlide";
@@ -26,25 +25,35 @@ import ProductList from './ProductList';
 const Wrapper = styled(Box)`
   display: flex;
   flex-direction: column;
-  height: 100vh;
   background: #f7ede1;
+  min-height: 100vh;
 }`
 
 const PanelList=styled(Box)`
 display: flex;
-flex: 1;
-overflow-y: auto;
+justify-content: space-evenly;
+position: relative;
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  /* Styles for tablet */
+  flex-direction: column;
+}
+
+@media screen and (min-width: 480px) and (max-width: 767px) {
+  /* Styles for smartphone landscape */
+  flex-direction: column;
+}
+
+@media screen and (min-width: 300px) and (max-width: 479px) {
+  /* Styles for smartphone portrait */
+  flex-direction: column;
+}
 `
 const Panel=styled(Box)`
-flex-basis: 280px;
 padding: 1rem;
-overflow-y: auto;
-
 `
 const List=styled(Box)`
-flex: 1;
 padding: 1rem;
-// overflow-y: auto;
 
 `
 
@@ -64,36 +73,19 @@ export default function ForMen() {
   
 
   return (
-
     <>
      
      <Wrapper className='home'>
-
-
        <PanelList className='home_panelList-wrap'>
-
-
         <Panel className="home_panel-wrap">
-          <FilterSection/>
+            <FilterSection/>
         </Panel>
-        
-        
-        <List className="home_list-wrap">
-          
-             <ProductList/>
-            <ProductList/>
-            <ProductList/>
-            <ProductList/>
-            <ProductList/>
 
+        <List className="home_list-wrap">
+            <ProductList/>
         </List>
-          
-          
-          
-        
 
        </PanelList>
-
      </Wrapper>
     </>
   );

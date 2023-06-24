@@ -1,4 +1,4 @@
-
+/* 
 .logintab{
     width: 200px;
 }
@@ -24,7 +24,7 @@
     font-weight: 550;
 
 }
-.log_in:hover{
+/* .log_in:hover{
     background-color: rgb(245,243,243);
     cursor: pointer;
 }
@@ -32,4 +32,4 @@
     
     cursor: pointer;
     text-decoration: underline;
-}
+} */

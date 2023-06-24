@@ -2,11 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Typography, Button } from '@mui/material';
 import { styled } from '@mui/system';
-
-import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Countdown from 'react-countdown';
-
 import { products } from '../constants/data';
 
 const responsive = {

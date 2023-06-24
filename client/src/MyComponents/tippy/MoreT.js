@@ -1,9 +1,5 @@
 import React from 'react'
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import LiveHelpIcon from '@mui/icons-material/LiveHelp';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import GetAppIcon from '@mui/icons-material/GetApp';
 import StoreIcon from '@mui/icons-material/Store';
 import './MoreT.css'
 import { Link } from 'react-router-dom';

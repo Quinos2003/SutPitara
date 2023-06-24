@@ -2,14 +2,12 @@ import React, { useEffect } from "react";
 import "./Header.css";
 import SearchIcon from "@mui/icons-material/Search";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css"; // optional
 
 import MoreT from "../tippy/MoreT";
 import Login from "../tippy/Login";
 import Logo from '../../image/Logo.png'
-import FavoriteIcon from '@mui/icons-material/Favorite';
 // import { useEffect} from "react";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
@@ -22,7 +20,6 @@ import Shopnow from "../tippy/Shopnow";
 import { Link } from "react-router-dom";
 import MuiDrawer from "./MuiDrawer";
 import { Box,styled } from "@mui/material";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 
@@ -56,12 +53,11 @@ const Space = styled('div')(({ theme }) => ({
     }));
 
 export default function Header() {
+
   const [open, setOpen] = useState(false);
   const openDialog = () => {
     setOpen(true);
   };
-
-  
 
 
   return (
@@ -90,7 +86,7 @@ export default function Header() {
         <Space className="space">
         <div className="header__third">
           <Tippy
-            content={<Login></Login>}
+            content={<LoginDialog open={open} setOpen={setOpen}></LoginDialog>}
             //  visible={false}
             theme="light"
             interactive={true}
@@ -151,7 +147,6 @@ export default function Header() {
       
       
       
-      <LoginDialog open={open} setOpen={setOpen} />
     </>
   );
 }

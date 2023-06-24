@@ -1,175 +1,134 @@
-import { useState } from "react";
-import { Rating } from "react-simple-star-rating";
-import SearchIcon from "@mui/icons-material/Search";
-import { Box } from "@mui/system";
-import styled from "@emotion/styled";
-import * as React from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import React from "react";
+import styled from "styled-components";
 
-let tokenParse = [];
-
-const SearchBar = styled(Box)`
+const FilterSectionContainer = styled.div`
+  padding: 20px;
   display: flex;
-  text-align: center;
-  background-color: white;
-  border-radius: 3px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    /* Styles for tablet */
+    flex-direction: row;
+
+    gap:2rem;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  @media screen and (min-width: 480px) and (max-width: 767px) {
+    /* Styles for smartphone landscape */
+    flex-direction: row;
+    border-bottom: 1px solid #ccc;
+    gap:2rem;
+  }
+  
+  @media screen and (min-width: 300px) and (max-width: 479px) {
+    /* Styles for smartphone portrait */
+    flex-direction: row;
+    border-bottom: 1px solid #ccc;
+    gap:1rem;
+  }
 `;
 
-const Input = styled('input')`
-  border: none;
-  outline: none;
-  width: 36vw;
-  padding: 10px 15px;
-  border-radius: 3px;
+const FilterLabel = styled.h2`
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    /* Styles for tablet */
+    font-size: 1rem;
+  }
+  
+  @media screen and (min-width: 480px) and (max-width: 767px) {
+    /* Styles for smartphone landscape */
+    font-size: 0.9rem;
+  }
+  
+  @media screen and (min-width: 300px) and (max-width: 479px) {
+    /* Styles for smartphone portrait */
+    font-size: 0.8rem;
+  }
 `;
 
-const FilterSection = ({ applyFilter }) => {
-  const [price, setPrice] = useState({
-    minprice: "",
-    maxprice: "",
-  });
+const Dropdown = styled.select`
+  width: 18rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 0.9rem;
 
-  const { minprice, maxprice } = price;
-  const [rating, setRating] = useState("");
-  const [condition, setCondition] = useState("");
-  const [age, setAge] = useState(''); // <-- Add age and setAge state
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    /* Styles for tablet */
+    width: 10rem;
+  }
+  
+  @media screen and (min-width: 480px) and (max-width: 767px) {
+    /* Styles for smartphone landscape */
+    width: 5.5rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+  }
+  
+  @media screen and (min-width: 300px) and (max-width: 479px) {
+    /* Styles for smartphone portrait */
+    width: 4.5rem;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.7rem;
+  }
+`;
 
-  const handlePrice = (e) =>
-    setPrice({ ...price, [e.target.name]: e.target.value });
+const Option = styled.option`
+  font-size: 14px;
+`;
 
-  const handleRating = (rate) => {
-    setRating(rate);
-  };
-
-  const handleCondition = (cond) => setCondition(cond);
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
-  const resetFilter = () => {
-    setPrice({
-      minprice: "",
-      maxprice: "",
-    });
-    setRating("");
-    setCondition("");
-    setAge(''); // <-- Reset age state
-    applyFilter("", "", "", "");
-  };
-
+const FilterSection = () => {
   return (
-    <Box className="container">
-      <h3
-        style={{
-          fontFamily: 'PT Serif',
-          fontSize: '25px',
-          color: '#830304',
-          fontWeight: 'bolder',
-        }}
-      >
-        Filter
-      </h3>
-      <Box>
-        <SearchBar className="search-bar">
-          <SearchIcon
-            style={{
-              color: '#830304',
-              padding: '5px',
-              fontSize: '25px',
-            }}
-          />
-          <Input type="text" name="" id="" placeholder="Search for products" />
-        </SearchBar>
-      </Box>
-      <Box>
-        <h3 style={{ fontFamily: 'PT Serif' }}>Categories</h3>
-        <Box sx={{ minWidth: 120 }} style={{ background: 'white' }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label" style={{ fontFamily: 'PT Serif' }}>
-              Banarasi Silk Saree
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={age}
-              label="Age"
-              onChange={handleChange}
-            >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
-      </Box>
-      <Box>
-        <h3 style={{ fontFamily: 'PT Serif' }}>Types</h3>
-        <Box sx={{ minWidth: 120 }} style={{ background: 'white' }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label" style={{ fontFamily: 'PT Serif' }}>
-              Saree
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={age}
-              label="Age"
-              onChange={handleChange}
-            >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
-      </Box>
-      <Box>
-        <h3 style={{ fontFamily: 'PT Serif' }}>Prices</h3>
-        <Box sx={{ minWidth: 120 }} style={{ background: 'white' }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label" style={{ fontFamily: 'PT Serif' }}>
-              20k-40k
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={age}
-              label="Age"
-              onChange={handleChange}
-            >
-              <MenuItem value={10}>40k-60k</MenuItem>
-              <MenuItem value={20}>60k-80k</MenuItem>
-              <MenuItem value={30}>80k-90k</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
-      </Box>
-      <Box>
-        <h3 style={{ fontFamily: 'PT Serif' }}>Color</h3>
-        <Box sx={{ minWidth: 120 }} style={{ background: 'white' }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label" style={{ fontFamily: 'PT Serif' }}>
-              Blue
-            </InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={age}
-              label="Age"
-              onChange={handleChange}
-            >
-              <MenuItem value={10}>Black</MenuItem>
-              <MenuItem value={20}>Red</MenuItem>
-              <MenuItem value={30}>Yellow</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
-      </Box>
-    </Box>
+    <FilterSectionContainer>
+      {/* Price Range Filter */}
+      <div>
+        <FilterLabel>Price Range</FilterLabel>
+        <Dropdown>
+          <Option value="">All</Option>
+          <Option value="0-50">$0 - $50</Option>
+          <Option value="51-100">$51 - $100</Option>
+          <Option value="101-200">$101 - $200</Option>
+        </Dropdown>
+      </div>
+
+      {/* Colors Filter */}
+      <div>
+        <FilterLabel>Colors</FilterLabel>
+        <Dropdown>
+          <Option value="">All</Option>
+          <Option value="red">Red</Option>
+          <Option value="blue">Blue</Option>
+          <Option value="green">Green</Option>
+        </Dropdown>
+      </div>
+
+      {/* Category Filter */}
+      <div>
+        <FilterLabel>Category</FilterLabel>
+        <Dropdown>
+          <Option value="">All</Option>
+          <Option value="clothing">Clothing</Option>
+          <Option value="shoes">Shoes</Option>
+          <Option value="accessories">Accessories</Option>
+        </Dropdown>
+      </div>
+
+      {/* Fabrics Filter */}
+      <div>
+        <FilterLabel>Fabrics</FilterLabel>
+        <Dropdown>
+          <Option value="">All</Option>
+          <Option value="cotton">Cotton</Option>
+          <Option value="silk">Silk</Option>
+          <Option value="wool">Wool</Option>
+        </Dropdown>
+      </div>
+    </FilterSectionContainer>
   );
 };
 

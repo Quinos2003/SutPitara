@@ -160,7 +160,6 @@
 import styled from "styled-components";
 import WishlistItem from "./WishlistItem";
 import ScrollToTop from "./ScrollToTop";
-import { useSelector } from 'react-redux';
 
 const Wishlist = () => {
   // const cartDetails = useSelector(state => state.cart);
@@ -228,7 +227,9 @@ const Container = styled.div`
   width: 70%;
   margin-top: 2rem;
   margin:0 auto;
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   `
   const Header = styled.div`
   display: flex;
