@@ -84,14 +84,14 @@ WSGI_APPLICATION = 'SutPitaara.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sutpitaara_test',
-        'USER': 'sutpitaara_websitedev1',
-        'PASSWORD': '1uqlgHx?4Yui',
-        'HOST': 'localhost',   # 97.74.87.73
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'sutpitaara_test',
+        # 'USER': 'sutpitaara_websitedev1',
+        # 'PASSWORD': '1uqlgHx?4Yui',
+        # 'HOST': 'localhost',   # 97.74.87.73
+        # 'PORT': '3306',
         # 'OPTIONS': {
         #     'charset': 'utf8mb4',
         #     'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
@@ -150,3 +150,15 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ALL_ORIGINS = True
+
+
+
+# settings.py
+
+# ...
+
+# Session settings
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # You can choose a different session backend if needed
+SESSION_COOKIE_NAME = 'sessionid'  # Customize the session cookie name if desired
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Set to True if you want sessions to expire when the browser is closed
+SESSION_COOKIE_AGE = 86400  # Specify the session cookie age in seconds (e.g., 86400 seconds = 1 day)
