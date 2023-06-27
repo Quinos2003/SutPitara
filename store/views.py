@@ -30,7 +30,8 @@ def login_view(request):
 
             response = {
                 'success': True,
-                'name': user.firstName + ' ' + user.lastName
+                'name': user.firstName + ' ' + user.lastName,
+                'sessionid': session
             }
             # print(email)
             return JsonResponse(response)
@@ -68,7 +69,8 @@ def signup(request):
         print(session)
         response = {
                 'success': True,
-                'name': first_name + ' ' + last_name
+                'name': first_name + ' ' + last_name ,
+                'sessionid': session
             }
         return JsonResponse(response)
 
