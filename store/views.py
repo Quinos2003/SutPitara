@@ -5,6 +5,7 @@ from django.contrib.sessions.backends.db import SessionStore
 from django.http import HttpResponseForbidden
 from django.db import IntegrityError
 from django.http import JsonResponse
+# from django.contrib.auth.decorators import login_required
 
 import json
 # from .models import User, Product
@@ -31,7 +32,7 @@ def login_view(request):
             response = {
                 'success': True,
                 'name': user.firstName + ' ' + user.lastName,
-                'sessionid': session
+                # 'sessionid': session
             }
             # print(email)
             return JsonResponse(response)
@@ -63,14 +64,23 @@ def signup(request):
         login(request, user)
 
         # Create a session for the user
+        
         session = SessionStore()
         session["user_id"] = user.id
         session.create()
-        print(session)
+
+        # s = session._get_session_from_db()
+        # print("this is session printinf " , session)
+        # # print("this is user us " , user.id)
+        # print('you are request.session.get: ', request.session.decode(s)) 
+        # # self.decode(s.session_data)
+        # print('you are request.session.get: ', request.session._get_session_from_db())
+
+        # print("this is session_key" ,session.session_key)
         response = {
                 'success': True,
-                'name': first_name + ' ' + last_name ,
-                'sessionid': session
+                'name': first_name + ' ' + last_name 
+                # 'sessionid': session
             }
         return JsonResponse(response)
 
@@ -106,3 +116,16 @@ def get_products(request, offset):
     queryset = Products.objects.order_by('-id').all()[offset:offset+10]
     data = [obj.to_dict() for obj in queryset]
     return JsonResponse(data)
+
+
+# @login_required
+# def check_session(request):
+#     if request.user.is_authenticated:
+#         # User is authenticated, session is valid
+#         return JsonResponse({'isLoggedIn': True})
+#     else:
+#         # User is not authenticated, session is expired or invalid
+#         return JsonResponse({'isLoggedIn': False})
+# @login_required
+# def check_session(request):
+#     return JsonResponse({'isLoggedIn': True})
