@@ -129,3 +129,5 @@ def get_products(request, offset):
 # @login_required
 # def check_session(request):
 #     return JsonResponse({'isLoggedIn': True})
+
+
