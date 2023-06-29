@@ -1,7 +1,8 @@
 import { Dialog ,Box, TextField, Typography, Button, styled} from '@mui/material'
-import {useState, React} from 'react'
+import {useState, React, useEffect} from 'react'
 import { useCookies } from 'react-cookie';
 import { BsFillEyeFill,BsFillEyeSlashFill } from "react-icons/bs";
+import { notification1, notification2 } from "../notifications/notification.js"
 //  import { authenticateSignup } from '../../service/api';
 //  import { authenticateLogin } from '../../service/api';
 const Component=styled(Box)`
@@ -113,7 +114,7 @@ const accountInitialValues={
 
 
 export default function LoginDialog({open,setOpen}) {
-        const [cookies, setCookie] = useCookies(['csrftoken']);
+        const [cookies, setCookies] = useCookies(['csrftoken']);
         const [account, toggleAccount]=useState(accountInitialValues.login);
         const [emailError, setEmailError] = useState('');
         const [passwordError, setPasswordError] = useState('');
@@ -126,6 +127,9 @@ export default function LoginDialog({open,setOpen}) {
         //To toggle password visibility
         const [show, setShow] = useState(false);
 
+        //To check whether user is authenticated
+        const [isAuthenticated, setisAuthenticated] = useState(false);
+
         // ----to show and hide password----
         const showIcon=()=>{
             setShow(!show)
@@ -136,6 +140,16 @@ export default function LoginDialog({open,setOpen}) {
         setOpen(false);
         toggleAccount(accountInitialValues.login);
     }
+
+    // const tokenCheck = (success,failure) => {
+    //     if ( isAuthenticated ) {
+    //         console.log(isAuthenticated)
+    //         notification2(success);
+    //     }else{
+    //         console.log(isAuthenticated)
+    //         notification1(failure);
+    //     }
+    // }
 
     const signUp = async () => {
 
@@ -185,6 +199,7 @@ export default function LoginDialog({open,setOpen}) {
             .then(response => {
               console.log(response);
             })
+            // tokenCheck('Account created successfully','Account creation failed');
          handleClose();
     }
         const toggleSignup=()=>{
@@ -226,7 +241,7 @@ export default function LoginDialog({open,setOpen}) {
             "email": document.getElementById("email").value,
             "password": document.getElementById("password").value
         }
-        fetch("store/login", {
+        await fetch("store/login", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -235,66 +250,72 @@ export default function LoginDialog({open,setOpen}) {
             }}).then(response => response.json())
             .then(response => {
               console.log(response);
+              console.log(response.status);
+              if(response.status ==! 200){
+                notification2("Successfully logged in");
+                setisAuthenticated(true);
+              }
             })
+            // tokenCheck("Successfully logged in","Invalid credentials")
          handleClose();
     }
 
   return (
-    <Dialog open={open} onClose={() => { setOpen(false)}} PaperProps={ {sx : {maxWidth: 'unset'}}}>
-        <Component>
-            <Box style={{
-                display: "flex",
-                height: '100%'
-            }}>
-            <Image>
-                <Typography variant='h5'>{account.heading}</Typography>
-                <Typography style={{
-                    marginTop: 20
-                }}>{account.SubHeading}</Typography>
+        <Dialog open={open} onClose={() => { setOpen(false)}} PaperProps={ {sx : {maxWidth: 'unset'}}}>
+            <Component>
+                <Box style={{
+                    display: "flex",
+                    height: '100%'
+                }}>
+                <Image>
+                    <Typography variant='h5'>{account.heading}</Typography>
+                    <Typography style={{
+                        marginTop: 20
+                    }}>{account.SubHeading}</Typography>
 
-            </Image>
+                </Image>
 
-            {
-                account.view==='login'?
-            <Wrapper style={{position:"relative"}}>
-                <TextField variant="standard"  id='email'  name="username" label="Enter Email/Mobile number" />
-                <div style={{display:"flex"}}>
-                    <TextField style={{width:"100%"}} variant="standard" type={show?"text":"password"} id='password' name="password" label="Enter Password"/>
-                    <span style={{margin:'8px 6px 0px 0px'}} onClick={()=>showIcon()}>
-                        {show ? <BsFillEyeSlashFill style={{color:"black", fontSize:"1.2rem", margin:"0.8rem",cursor:"pointer"}}/> : <BsFillEyeFill style={{color:"black", fontSize:"1.2rem", margin:"0.8rem",cursor:"pointer"}}/>}
-                    </span>
-                </div>
+                {
+                    account.view==='login'?
+                <Wrapper style={{position:"relative"}}>
+                    <TextField variant="standard"  id='email'  name="username" label="Enter Email/Mobile number" />
+                    <div style={{display:"flex"}}>
+                        <TextField style={{width:"100%"}} variant="standard" type={show?"text":"password"} id='password' name="password" label="Enter Password"/>
+                        <span style={{margin:'8px 6px 0px 0px'}} onClick={()=>showIcon()}>
+                            {show ? <BsFillEyeSlashFill style={{color:"black", fontSize:"1.2rem", margin:"0.8rem",cursor:"pointer"}}/> : <BsFillEyeFill style={{color:"black", fontSize:"1.2rem", margin:"0.8rem",cursor:"pointer"}}/>}
+                        </span>
+                    </div>
 
-                <Text>By continuing,you are agree to Sutpitaara's Terms of Use and Privacy Policy.</Text>
-                <LoginButton onClick={()=> loginUser()}>Login</LoginButton>
-                <Typography style={{
-                    textAlign: 'center' 
-                }}>Or</Typography>
-                <OtpButton>Request OTP?</OtpButton>
-                <CreateAccount onClick={()=> toggleSignup()}>New to Sutpitaara? Create an account</CreateAccount>
-                {/* <CreateAccount >New to Flipkart? Create an account</CreateAccount> */}
-            </Wrapper>
-            
-            :
-            <Wrapper>
-                <TextField variant="standard" id='first' name="firstname" label="Enter  Firstname" defaultValue={firstName} onChange={(e)=>setFirstName(e.target.value)}/>
-                <TextField variant="standard" id='last' name="lastname" label="Enter  Lastname" defaultValue={lastName} onChange={(e)=>setLastName(e.target.value)}/>
-                {/* <TextField variant="standard" onChange={(e)=>onInputChange(e)} name="username" label="Enter  Username"/> */}
-                <TextField variant="standard" id='emailsignup' name="email" label="Enter  Email" defaultValue={emailSignUp} onChange={(e)=>setEmailSignUp(e.target.value)}/>
-                <div style={{display:"flex"}}>
-                    <TextField style={{width:"100%"}} variant="standard" type={show?"text":"password"} id='password' name="password" label="Enter Password" defaultValue={passwordSignUp} onChange={(e)=>setPasswordSignUp(e.target.value)}/>
-                    <span style={{margin:'8px 6px 0px 0px'}} onClick={()=>showIcon()}>
-                        {show ? <BsFillEyeSlashFill style={{color:"black", fontSize:"1.2rem", margin:"0.8rem",cursor:"pointer"}}/> : <BsFillEyeFill style={{color:"black", fontSize:"1.2rem", margin:"0.8rem",cursor:"pointer"}}/>}
-                    </span>
-                </div>                {/* <TextField variant="standard" onChange={(e)=>onInputChange(e)} name="phone"label="Enter  Phone"/>   */}
-                {/* here in the name field we have to take the same values that we have taken in the uperside of the object  that is signupInitialValues */}
+                    <Text>By continuing,you are agree to Sutpitaara's Terms of Use and Privacy Policy.</Text>
+                    <LoginButton onClick={()=> loginUser()}>Login</LoginButton>
+                    <Typography style={{
+                        textAlign: 'center' 
+                    }}>Or</Typography>
+                    <OtpButton>Request OTP?</OtpButton>
+                    <CreateAccount onClick={()=> toggleSignup()}>New to Sutpitaara? Create an account</CreateAccount>
+                    {/* <CreateAccount >New to Flipkart? Create an account</CreateAccount> */}
+                </Wrapper>
                 
-                <LoginButton onClick={() => signUp()}>Continue</LoginButton>
-                <LoginAccount onClick={()=> toggleLogin()}>Already have an account? Click to login</LoginAccount>
-            </Wrapper>
-            }
-            </Box>
-        </Component>
-    </Dialog>
+                :
+                <Wrapper>
+                    <TextField variant="standard" id='first' name="firstname" label="Enter  Firstname" defaultValue={firstName} onChange={(e)=>setFirstName(e.target.value)}/>
+                    <TextField variant="standard" id='last' name="lastname" label="Enter  Lastname" defaultValue={lastName} onChange={(e)=>setLastName(e.target.value)}/>
+                    {/* <TextField variant="standard" onChange={(e)=>onInputChange(e)} name="username" label="Enter  Username"/> */}
+                    <TextField variant="standard" id='emailsignup' name="email" label="Enter  Email" defaultValue={emailSignUp} onChange={(e)=>setEmailSignUp(e.target.value)}/>
+                    <div style={{display:"flex"}}>
+                        <TextField style={{width:"100%"}} variant="standard" type={show?"text":"password"} id='password' name="password" label="Enter Password" defaultValue={passwordSignUp} onChange={(e)=>setPasswordSignUp(e.target.value)}/>
+                        <span style={{margin:'8px 6px 0px 0px'}} onClick={()=>showIcon()}>
+                            {show ? <BsFillEyeSlashFill style={{color:"black", fontSize:"1.2rem", margin:"0.8rem",cursor:"pointer"}}/> : <BsFillEyeFill style={{color:"black", fontSize:"1.2rem", margin:"0.8rem",cursor:"pointer"}}/>}
+                        </span>
+                    </div>                {/* <TextField variant="standard" onChange={(e)=>onInputChange(e)} name="phone"label="Enter  Phone"/>   */}
+                    {/* here in the name field we have to take the same values that we have taken in the uperside of the object  that is signupInitialValues */}
+                    
+                    <LoginButton onClick={() => signUp()}>Continue</LoginButton>
+                    <LoginAccount onClick={()=> toggleLogin()}>Already have an account? Click to login</LoginAccount>
+                </Wrapper>
+                }
+                </Box>
+            </Component>
+        </Dialog>
   )
 }

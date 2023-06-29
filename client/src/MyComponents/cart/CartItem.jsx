@@ -5,7 +5,7 @@ import { products } from "../constants/data";
 import { useSelector, useDispatch } from 'react-redux';
 import EmptyCart from "./EmptyCart";
 
-const CartItem = ({counter}) => {
+const CartItem = () => {
 
   const cartItems = useSelector((state) => state.cart);
 
@@ -88,8 +88,7 @@ const CartItem = ({counter}) => {
                     <h3 style={{ fontWeight: "500" }}>{product.title.shortTitle}</h3>
                     <div id="item-container">
                       <p>Color: Pink</p>
-                      <p>Size : {product.selectedSize}</p>
-                      {console.log(product.selectedSize)}
+                      <p>Size : {product.size}</p>
                       <span>
                         <p>Price : Rs. {Math.round(product.price.mrp - product.price.mrp*product.price.discount)}</p>
                         <p id="mrp">MRP : Rs. {product.price.mrp}</p>

@@ -21,7 +21,7 @@ const ProductDetail = () => {
 
 //to send items into cart
   const addToCart = (selectedSize) => {
-    dispatch({ type: 'ADD_TO_CART', payload: product, size: selectedSize} );
+    dispatch({ type: 'ADD_TO_CART', payload: product} );
     notification2("Added to Cart");
     navigate('/cart');
   };
@@ -32,12 +32,12 @@ const addToWishlist = () => {
     dispatch({ type: 'ADD_TO_WISHLIST', payload: product });
     notification2("Added to Wishlist");
     navigate('/wishlist');
-
 };
 
   //To select size of clothing
   const handleSizeSelection = (size) => {
     setSelectedSize(size);
+    product.size = size;
   };
 
   const product = products.find((product) => product.id.toString() === id);
@@ -172,6 +172,12 @@ const Main = styled.div`
     margin-right:0.3rem;
   }
 
+  @media screen and (min-width: 768px) and (max-width: 1200px)  {
+    #common-button{
+      font-size:0.8rem;
+      padding:0.9rem 0.5rem 0.9rem 1.2rem;
+    }
+  }
 
   /* //smartphone landscape */
   @media screen and (min-width: 480px) and (max-width: 767px)  {

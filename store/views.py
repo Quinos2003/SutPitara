@@ -5,6 +5,8 @@ from django.contrib.sessions.backends.db import SessionStore
 from django.http import HttpResponseForbidden
 from django.db import IntegrityError
 from django.http import JsonResponse
+#############################################
+
 
 import json
 # from .models import User, Product
@@ -31,13 +33,14 @@ def login_view(request):
             response = {
                 'success': True,
                 'name': user.firstName + ' ' + user.lastName,
-                'sessionid': session
+                'status': 200 ,
             }
             # print(email)
             return JsonResponse(response)
         else:
             response = {
-                'success': False
+                'success': False,
+                'status' : 401
             }
             # print(email)
             return JsonResponse(response)
@@ -66,11 +69,11 @@ def signup(request):
         session = SessionStore()
         session["user_id"] = user.id
         session.create()
-        print(session)
+        # print(session)
         response = {
                 'success': True,
                 'name': first_name + ' ' + last_name ,
-                'sessionid': session
+                'sessionid': request.COOKIES.get("csrftoken")
             }
         return JsonResponse(response)
 
@@ -106,3 +109,6 @@ def get_products(request, offset):
     queryset = Products.objects.order_by('-id').all()[offset:offset+10]
     data = [obj.to_dict() for obj in queryset]
     return JsonResponse(data)
+
+
+

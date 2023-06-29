@@ -1,5 +1,5 @@
 import './App.css';
-
+import { CookiesProvider } from "react-cookie"
 import Home from './MyComponents/home/Home';
 import ForMen from './MyComponents/shopnow/ForMen';
 import ForWomen from './MyComponents/shopnow/ForWomen'
@@ -18,28 +18,29 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <><Provider store={store}>
-            <BrowserRouter>
-              <Header/>
-                <Routes>
-                    <Route path='/' element={<Home/>}/>
-                    <Route path='/product/:id' element={<ProductDetail/>}/>
-                    <Route path='/men' element={<ForMen/>}/>
-                    <Route path='/women' element={<ForWomen/>}/>
-                    <Route path='/cart' element={<Cart/>}/>
-                    <Route path='/wishlist' element={<Wishlist/>}/>
-                    <Route path='/detail' element={<Checkout/>}/>
-                    <Route path='/account' element={<Profile/>}/>
-                    <Route path='/orders' element={<Order/>}/>
-                  </Routes>
-                  <ToastContainer/>
-          </BrowserRouter>
-    </Provider>
+    <CookiesProvider>
+      <Provider store={store}>
+              <BrowserRouter>
+                <Header/>
+                  <Routes>
+                      <Route path='/' element={<Home/>}/>
+                      <Route path='/product/:id' element={<ProductDetail/>}/>
+                      <Route path='/men' element={<ForMen/>}/>
+                      <Route path='/women' element={<ForWomen/>}/>
+                      <Route path='/cart' element={<Cart/>}/>
+                      <Route path='/wishlist' element={<Wishlist/>}/>
+                      <Route path='/detail' element={<Checkout/>}/>
+                      <Route path='/account' element={<Profile/>}/>
+                      <Route path='/orders' element={<Order/>}/>
+                    </Routes>
+                    <ToastContainer/>
+            </BrowserRouter>
+      </Provider>
+    </CookiesProvider>
 
         
        
       
-        </>
   );
 }
 
