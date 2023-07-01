@@ -3,6 +3,7 @@ import {useState, React, useEffect} from 'react'
 import { useCookies } from 'react-cookie';
 import { BsFillEyeFill,BsFillEyeSlashFill } from "react-icons/bs";
 import { notification1, notification2 } from "../notifications/notification.js"
+import jwt_decode from "jwt-decode";
 //  import { authenticateSignup } from '../../service/api';
 //  import { authenticateLogin } from '../../service/api';
 const Component=styled(Box)`
@@ -152,56 +153,80 @@ export default function LoginDialog({open,setOpen}) {
     // }
 
     const signUp = async () => {
-
-            const first_name = firstName
-            if(first_name === '') {
-                setFirstNameError('First name cannot be blank');
-                console.log(firstNameError);
-            }
-            const last_name = lastName
-            if(last_name === '') {
-                setLastNameError('Last name cannot be blank');
-                console.log(lastNameError);
-            }
-            // Validate email
-            const email = emailSignUp
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email) || email === '') {
-                setEmailError('Invalid email');
-            console.log(emailError);
-            return;
-            }
-            setEmailError('');
-
-            // Validate password (at least 6 characters)
-            const password = passwordSignUp
-            const passwordRegex = /^.{6,}$/;
-            if (!passwordRegex.test(password) || password === '') {
-                setPasswordError('Password must be at least 6 characters');
-            console.log(passwordError);
-            return;
-            }
-            setPasswordError('');
-
+        const first_name = firstName;
+        if (first_name === '') {
+          setFirstNameError('First name cannot be blank');
+          console.log(firstNameError);
+          return;
+        }
+      
+        const last_name = lastName;
+        if (last_name === '') {
+          setLastNameError('Last name cannot be blank');
+          console.log(lastNameError);
+          return;
+        }
+      
+        // Validate email
+        const email = emailSignUp;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email) || email === '') {
+          setEmailError('Invalid email');
+          console.log(emailError);
+          return;
+        }
+        setEmailError('');
+      
+        // Validate password (at least 6 characters)
+        const password = passwordSignUp;
+        const passwordRegex = /^.{6,}$/;
+        if (!passwordRegex.test(password) || password === '') {
+          setPasswordError('Password must be at least 6 characters');
+          console.log(passwordError);
+          return;
+        }
+        setPasswordError('');
+      
         const data = {
-            "first_name": first_name,
-            "last_name": last_name,
-            "email": email,
-            "password": password
+          first_name: first_name,
+          last_name: last_name,
+          email: email,
+          password: password,
         };
-        fetch("store/signup", {
-            method: "POST",
+      
+        fetch('/store/signup', {
+            method: 'POST',
             body: JSON.stringify(data),
             headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": cookies.csrftoken
-            }}).then(response => response.json())
-            .then(response => {
+              'Content-Type': 'application/json',
+              'X-CSRFToken': cookies.csrftoken,
+            },
+          })
+            .then((response) => response.json())
+            .then((response) => {
               console.log(response);
+              // Handle response and show alert message based on success or failure
+              if (response.success && response.token) {
+                // Verify and decode the JWT token
+                try {
+                    const decodedToken = jwt_decode(response.token);                  const { name } = decodedToken;
+                  notification2(`Account created successfully. Welcome, ${name}!`);
+                } catch (error) {
+                  console.log(error);
+                  notification1('Account creation failed');
+                }
+              } else {
+                notification1('Account creation failed');
+              }
             })
-            // tokenCheck('Account created successfully','Account creation failed');
-         handleClose();
-    }
+            .catch((error) => {
+              console.log(error);
+              notification1('Account creation failed');
+            });
+        
+          handleClose();
+        };
+      
         const toggleSignup=()=>{
             
                 toggleAccount(accountInitialValues.signup);
@@ -215,50 +240,69 @@ export default function LoginDialog({open,setOpen}) {
 
   
 
-    const loginUser = async () => {
-
+        const loginUser = async () => {
             // Validate email
-        const email = document.getElementById('email').value;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email) || email === '') {
-        setEmailError('Invalid email');
-        console.log(emailError);
-        return;
-        }
-        setEmailError('');
-
-        // Validate password (at least 6 characters)
-        const password = document.getElementById('password').value;
-        const passwordRegex = /^.{6,}$/;
-        if (!passwordRegex.test(password) || password === '') {
-        setPasswordError('Password must be at least 6 characters');
-        console.log(passwordError);
-        return;
-        }
-        setPasswordError('');
-            
-        const data = {
-            "email": document.getElementById("email").value,
-            "password": document.getElementById("password").value
-        }
-        await fetch("store/login", {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json",                
+            const email = document.getElementById('email').value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email) || email === '') {
+              setEmailError('Invalid email');
+              console.log(emailError);
+              return;
+            }
+            setEmailError('');
+          
+            // Validate password (at least 6 characters)
+            const password = document.getElementById('password').value;
+            const passwordRegex = /^.{6,}$/;
+            if (!passwordRegex.test(password) || password === '') {
+              setPasswordError('Password must be at least 6 characters');
+              console.log(passwordError);
+              return;
+            }
+            setPasswordError('');
+          
+            const data = {
+              "email": email,
+              "password": password
+            };
+          
+            await fetch("store/login", {
+              method: "POST",
+              body: JSON.stringify(data),
+              headers: {
+                "Content-Type": "application/json",
                 "X-CSRFToken": cookies.csrftoken
-            }}).then(response => response.json())
-            .then(response => {
-              console.log(response);
-              console.log(response.status);
-              if(response.status ==! 200){
-                notification2("Successfully logged in");
-                setisAuthenticated(true);
               }
             })
-            // tokenCheck("Successfully logged in","Invalid credentials")
-         handleClose();
-    }
+            .then(response => response.json())
+            .then(response => {
+              console.log(response);
+              if (response.status === 200) {
+                const token = response.token;
+                try {
+                  // Verify and decode the JWT token
+                  const decodedToken = jwt_decode(token);
+                  const { user_id } = decodedToken;
+          
+                  // Save token in localStorage
+                  localStorage.setItem('token', token);
+                  localStorage.setItem('user_id', user_id)
+          
+                  // Show success notification
+                  notification2("Successfully logged in");
+                } catch (error) {
+                  console.error("Invalid token:", error);
+                  // Show error notification
+                  notification1("Invalid credentials");
+                }
+              } else {
+                // Show error notification
+                notification1("Invalid credentials");
+              }
+            });
+          
+            handleClose();
+          }
 
   return (
         <Dialog open={open} onClose={() => { setOpen(false)}} PaperProps={ {sx : {maxWidth: 'unset'}}}>

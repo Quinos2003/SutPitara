@@ -1,39 +1,64 @@
-import React from "react"
-import styled from "styled-components"
-import { useCookies } from 'react-cookie';
+import React, {useState, useEffect} from "react";
+import styled from "styled-components";
 import { notification2 } from "../notifications/notification";
 import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
-function Logout(){
+function Logout() {
+  const navigate = useNavigate();
 
-    const [, , removeCookies] = useCookies(['sessionid']);
-    const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const token = localStorage.getItem("token");
+  let decodedToken = null;
 
-    const handleLogout = (message) => {
-        removeCookies(['sessionid']);
-        notification2(message);
-        navigate("/");
-      };
+  useEffect(() => {
+    if (token) {
+      try {
+        decodedToken = jwt_decode(token);
+        setIsLoggedIn(true);
+      } catch (error) {
+        console.error("Invalid token:", error);
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
+      }
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [token, isLoggedIn]);
+
+  const handleLogout = (message) => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user_id");
+    setIsLoggedIn(false);
+    window.location.reload();
+    notification2(message);
+    navigate("/");
+  };
 
   return (
-    <LogoutContainer onClick={()=>handleLogout("Logged Out")}>
+    <LogoutContainer onClick={() => handleLogout("Logged Out")}>
       <p>Logout</p>
     </LogoutContainer>
-  )
-};
+  );
+}
 
 const LogoutContainer = styled.div`
-p{
-  font-color:#C70D0D;
-  background-color: white;
-  padding:0.25rem 0.4rem;
-  font-weight: 500;
-  &:hover{
+  p {
+    background-color: #f5f5f5;
+    border: none;
+    outline: none;
+    width: 5vw;
+    color: #830304;
+    font-weight: bold;
+    font-size: 15px;
     cursor: pointer;
-    border-radius: 0.6rem;
-    transition: 0.25s;
-}
+    padding: 7px;
+    text-align: center;
+    &:hover {
+      cursor: pointer;
+      border-radius: 0.6rem;
+    }
   }
-`
+`;
 
 export default Logout;

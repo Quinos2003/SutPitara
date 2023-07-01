@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-
+from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -55,6 +55,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Add the JWT settings
+JWT_AUTH = {
+    'JWT_SECRET_KEY': 'your-secret-key',  # Replace with your own secret key
+    'JWT_ALGORITHM': 'HS256',  # Choose an appropriate algorithm
+    'JWT_EXPIRATION_DELTA': timedelta(days=7),  # Token expiration duration
+}
+
 
 ROOT_URLCONF = 'SutPitaara.urls'
 

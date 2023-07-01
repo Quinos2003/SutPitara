@@ -1,5 +1,4 @@
 import './App.css';
-import { CookiesProvider } from "react-cookie"
 import Home from './MyComponents/home/Home';
 import ForMen from './MyComponents/shopnow/ForMen';
 import ForWomen from './MyComponents/shopnow/ForWomen'
@@ -18,7 +17,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <CookiesProvider>
       <Provider store={store}>
               <BrowserRouter>
                 <Header/>
@@ -36,7 +34,6 @@ function App() {
                     <ToastContainer/>
             </BrowserRouter>
       </Provider>
-    </CookiesProvider>
 
         
        

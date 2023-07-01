@@ -1,12 +1,9 @@
 from django.shortcuts import render , redirect
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.sessions.models import Session
-from django.contrib.sessions.backends.db import SessionStore
 from django.http import HttpResponseForbidden
+import jwt
+from django.conf import settings
 from django.db import IntegrityError
 from django.http import JsonResponse
-#############################################
-
 
 import json
 # from .models import User, Product
@@ -22,27 +19,24 @@ def login_view(request):
         data = json.loads(request.body)
         email = data["email"]
         password = data["password"]
-        user = authenticate(request, email=email, password=password)
-        if user:
-            login(request, user)
-            # Create a session for the user
-            session = SessionStore()
-            session["user_id"] = user.id
-            session.create()
+        user = User.objects.filter(email=email).first()
+        if user and user.check_password(password):
+            # Generate JWT token
+            token_payload = {'user_id': user.id}
+            token = jwt.encode(token_payload, settings.JWT_AUTH['JWT_SECRET_KEY'], algorithm=settings.JWT_AUTH['JWT_ALGORITHM'])
 
             response = {
                 'success': True,
                 'name': user.firstName + ' ' + user.lastName,
-                'status': 200 ,
+                'status': 200,
+                'token': token  # Convert bytes to string
             }
-            # print(email)
             return JsonResponse(response)
         else:
             response = {
                 'success': False,
-                'status' : 401
+                'status': 401
             }
-            # print(email)
             return JsonResponse(response)
 
 @csrf_exempt
@@ -62,20 +56,19 @@ def signup(request):
                 'success': False
             }
             return JsonResponse(response)
-        user = authenticate(request, email=email, password=password)
-        login(request, user)
+        user = User.objects.filter(email=email).first()
 
-        # Create a session for the user
-        session = SessionStore()
-        session["user_id"] = user.id
-        session.create()
-        # print(session)
+        # Generate JWT token
+        token_payload = {'user_id': user.id}
+        token = jwt.encode(token_payload, settings.JWT_AUTH['JWT_SECRET_KEY'], algorithm=settings.JWT_AUTH['JWT_ALGORITHM'])
+
         response = {
-                'success': True,
-                'name': first_name + ' ' + last_name ,
-                'sessionid': request.COOKIES.get("csrftoken")
-            }
+            'success': True,
+            'name': first_name + ' ' + last_name,
+            'token': token  # Convert bytes to string
+        }
         return JsonResponse(response)
+    
 
 # adding logout 
 def logout(request):
@@ -105,10 +98,21 @@ def get_product(request, id):
 #     return JsonResponse(product)
 
 @csrf_exempt
-def get_products(request, offset):
-    queryset = Products.objects.order_by('-id').all()[offset:offset+10]
-    data = [obj.to_dict() for obj in queryset]
-    return JsonResponse(data)
+def get_product(request, id):
+    # Check if the user is authenticated
+    token = request.headers.get('Authorization', '').replace('Bearer ', '')
+
+    # Verify and decode the token
+    try:
+        payload = jwt.decode(token, settings.JWT_AUTH['JWT_SECRET_KEY'], algorithms=[settings.JWT_AUTH['JWT_ALGORITHM']])
+        user_id = payload.get('user_id')
+        user = User.objects.get(pk=user_id)
+
+        # Retrieve the product and return the response
+        product = Products.objects.get(id=id)
+        return JsonResponse(product)
+    except (jwt.ExpiredSignatureError, jwt.DecodeError, User.DoesNotExist):
+        return HttpResponseForbidden("Access denied")
 
 
 
