@@ -22,8 +22,29 @@
 
 #     return middleware
 
+# from django.shortcuts import redirect
+# from .jwt_utils import decode_jwt_token
+
+# def auth_middleware(get_response):
+#     def middleware(request):
+#         token = request.COOKIES.get('token')
+
+#         if not token:
+#             return redirect('login')
+
+#         try:
+#             decoded_token = decode_jwt_token(token)
+#             request.user_id = decoded_token['user_id']
+#         except:
+#             return redirect('login')
+
+#         response = get_response(request)
+#         return response
+
+#     return middleware
+
+import jwt
 from django.shortcuts import redirect
-from .jwt import decode_jwt_token
 
 def auth_middleware(get_response):
     def middleware(request):
@@ -33,9 +54,9 @@ def auth_middleware(get_response):
             return redirect('login')
 
         try:
-            decoded_token = decode_jwt_token(token)
+            decoded_token = jwt.decode(token, 'SECRET_KEY', algorithms=['HS256'])
             request.user_id = decoded_token['user_id']
-        except:
+        except jwt.InvalidTokenError:
             return redirect('login')
 
         response = get_response(request)
