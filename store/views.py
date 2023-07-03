@@ -1,8 +1,9 @@
 from django.shortcuts import render , redirect
 from django.http import HttpResponseForbidden
+import jwt
+from django.conf import settings
 from django.db import IntegrityError
 from django.http import JsonResponse
-# from django.contrib.auth.decorators import login_required
 
 import json
 # from .models import User, Product
@@ -61,11 +62,6 @@ def signup(request):
         token_payload = {'user_id': user.id}
         token = jwt.encode(token_payload, settings.JWT_AUTH['JWT_SECRET_KEY'], algorithm=settings.JWT_AUTH['JWT_ALGORITHM'])
 
-        # Create a session for the user
-        session = SessionStore()
-        session["user_id"] = user.id
-        session.create()
-        # print(session)
         response = {
             'success': True,
             'name': first_name + ' ' + last_name,
@@ -118,17 +114,5 @@ def get_product(request, id):
     except (jwt.ExpiredSignatureError, jwt.DecodeError, User.DoesNotExist):
         return HttpResponseForbidden("Access denied")
 
-
-# @login_required
-# def check_session(request):
-#     if request.user.is_authenticated:
-#         # User is authenticated, session is valid
-#         return JsonResponse({'isLoggedIn': True})
-#     else:
-#         # User is not authenticated, session is expired or invalid
-#         return JsonResponse({'isLoggedIn': False})
-# @login_required
-# def check_session(request):
-#     return JsonResponse({'isLoggedIn': True})
 
 
