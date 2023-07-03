@@ -212,7 +212,6 @@ const Wishlist = () => {
     <Container>
       <Header>
         <h2>My Wishlist</h2>
-        <p>({1} item)</p>
       </Header>
       <WishlistItem/>
       <ScrollToTop/>

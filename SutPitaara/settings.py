@@ -84,8 +84,8 @@ WSGI_APPLICATION = 'SutPitaara.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
         # 'ENGINE': 'django.db.backends.mysql',
         # 'NAME': 'sutpitaara_test',
         # 'USER': 'sutpitaara_websitedev1',
@@ -101,12 +101,12 @@ DATABASES = {
         #     'CHARSET': 'utf8mb4',
         #     'COLLATION': 'utf8mb4_unicode_ci',
         # },
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sutpitaara_test',
-        'USER': 'chatwithsam',
-        'PASSWORD': 'onetwothree',
-        'HOST': 'localhost',
-        'PORT': 3306,
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'sutpitaara_test',
+        # 'USER': 'chatwithsam',
+        # 'PASSWORD': 'onetwothree',
+        # 'HOST': 'localhost',
+        # 'PORT': 3306,
         # 'NAME': os.path.join(BASE_DIR, 'localhost1'),
     }
 }

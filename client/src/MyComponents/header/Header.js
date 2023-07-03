@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useState} from "react";
 import "./Header.css";
 import SearchIcon from "@mui/icons-material/Search";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -6,20 +6,18 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css"; // optional
 
 import MoreT from "../tippy/MoreT";
-import Login from "../tippy/Login";
 import Logo from '../../image/Logo.png'
-// import { useEffect} from "react";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-
 
 //  for the light mode use this import and in the tippy write the theme="light"
 import "tippy.js/themes/light.css";
-import { useState } from "react";
 import LoginDialog from "../login/LoginDialog";
 import Shopnow from "../tippy/Shopnow";
 import { Link } from "react-router-dom";
 import MuiDrawer from "./MuiDrawer";
 import { Box,styled } from "@mui/material";
+import { useCookies } from "react-cookie";
+import Logout from "./Logout";
 
 
 
@@ -60,8 +58,97 @@ export default function Header() {
   };
 
 
+  //to check if the user is logged in or not
+  const [cookies, setCookie] = useCookies(["sessionid"]);
+
   return (
     <>
+    {cookies.sessionid ? 
+      <Navbar className="header">
+        <Link
+          to="/"
+          style={{
+            textDecoration: "none",
+          }}
+        >
+          <div className="header__first">
+              {/* <img
+              src="//img1a.flixcart.com/www/linchpin/fk-cp-zion/img/flipkart-plus_8d85f4.png
+"
+              alt="flipkart logo"
+            />  */}
+            <img src={Logo} alt="" />
+            
+          </div>
+        </Link>
+        <div className="header__second">
+          <input type="text" name="" id="" placeholder="Search for products" />
+          <SearchIcon />
+        </div>
+        <Space className="space">
+        <div className="header__third">
+        
+        </div>
+
+        {/* Shop Now */}
+        <div className="header__third1">
+        <Tippy
+            content={<Shopnow></Shopnow>}
+            theme="light"
+            interactive={true}
+            // visible={true}
+            offset={[5, 18]}
+          >
+          <span>Shop Now</span>
+        </Tippy>
+        </div>
+
+        {/* Orders */}
+        <div className="header__fourth">
+          <Tippy
+            content={<MoreT></MoreT>}
+            theme="light"
+            interactive={true}
+            offset={[5, 18]}
+          >
+            <span>More</span>
+          </Tippy>
+          <ExpandMoreIcon />
+        </div>
+
+        {/* Cart */}
+        <Link to='/cart' style={{
+            textDecoration: "none",
+          }}>
+        <div className="header__fifth" >
+          {/* <ShoppingCartIcon /> */}
+
+          <span>Cart</span>
+        </div>
+        </Link>
+
+        <Link to='/wishlist' style={{
+            textDecoration: "none",
+          }}>
+        <div className="header__sixth">
+          {/* <FavoriteIcon /> */}
+
+          <span>Wishlist</span>
+        </div>
+
+        </Link>
+          <div>
+            <Logout/>
+          </div>
+        </Space>
+        <Drawer>
+
+        <ShoppingCartOutlinedIcon style={{color: 'white'}}/>
+
+        <MuiDrawer />
+        </Drawer>
+      </Navbar>
+         : 
       <Navbar className="header">
         <Link
           to="/"
@@ -106,7 +193,7 @@ export default function Header() {
           <span>Shop Now</span>
           </Tippy>
         </div>
-        <div className="header__fourth">
+        {/* <div className="header__fourth">
           <Tippy
             content={<MoreT></MoreT>}
             theme="light"
@@ -116,7 +203,7 @@ export default function Header() {
             <span>More</span>
           </Tippy>
           <ExpandMoreIcon />
-        </div>
+        </div> */}
         <Link to='/cart' style={{
             textDecoration: "none",
           }}>
@@ -126,6 +213,7 @@ export default function Header() {
           <span>Cart</span>
         </div>
         </Link>
+
         <Link to='/wishlist' style={{
             textDecoration: "none",
           }}>
@@ -139,11 +227,11 @@ export default function Header() {
         <Drawer>
 
         <ShoppingCartOutlinedIcon style={{color: 'white'}}/>
-   
 
         <MuiDrawer />
         </Drawer>
       </Navbar>
+    }
       
       
       

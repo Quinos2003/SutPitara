@@ -32,13 +32,14 @@ def login_view(request):
             response = {
                 'success': True,
                 'name': user.firstName + ' ' + user.lastName,
-                # 'sessionid': session
+                'status': 200 ,
             }
             # print(email)
             return JsonResponse(response)
         else:
             response = {
-                'success': False
+                'success': False,
+                'status' : 401
             }
             # print(email)
             return JsonResponse(response)
@@ -79,8 +80,8 @@ def signup(request):
         # print("this is session_key" ,session.session_key)
         response = {
                 'success': True,
-                'name': first_name + ' ' + last_name 
-                # 'sessionid': session
+                'name': first_name + ' ' + last_name ,
+                'sessionid': request.COOKIES.get("csrftoken")
             }
         return JsonResponse(response)
 
