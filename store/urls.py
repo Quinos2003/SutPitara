@@ -10,7 +10,9 @@ urlpatterns = [
     path("signup", views.signup, name="signup"),
     path("logout", views.logout, name="logout"),
     # path("get-product", views.get_product, name="get-product"),
+
     path("cart", cart.Cart.get , name="cart"),
+    
     # path("api/check-session", views.check_session, name="check_session"),
     # path("ProductsPath", views.Products, name="signup"),
 ]
