@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "./Header.css";
 import SearchIcon from "@mui/icons-material/Search";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -16,9 +16,8 @@ import Shopnow from "../tippy/Shopnow";
 import { Link } from "react-router-dom";
 import MuiDrawer from "./MuiDrawer";
 import { Box,styled } from "@mui/material";
-import { useCookies } from "react-cookie";
 import Logout from "./Logout";
-
+import jwt_decode from "jwt-decode";
 
 
 
@@ -58,12 +57,28 @@ export default function Header() {
   };
 
 
-  //to check if the user is logged in or not
-  const [cookies, setCookie] = useCookies(["sessionid"]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const token = localStorage.getItem("token");
+  let decodedToken = null;
+
+  useEffect(() => {
+    if (token) {
+      try {
+        decodedToken = jwt_decode(token);
+        setIsLoggedIn(true);
+      } catch (error) {
+        console.error("Invalid token:", error);
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
+      }
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [token, isLoggedIn]);
 
   return (
     <>
-    {cookies.sessionid ? 
+    {isLoggedIn ? 
       <Navbar className="header">
         <Link
           to="/"
