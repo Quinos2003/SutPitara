@@ -38,7 +38,7 @@
 from django.views import View
 from django.http import JsonResponse
 from .product import Products
-from .middleware.auth import auth_middleware
+from .Middleware.auth import auth_middleware
 
 class Cart(View):
     @auth_middleware

@@ -76,20 +76,20 @@ def logout(request):
     return redirect('login')
 
 
-@csrf_exempt
-def get_product(request, id):
-    # Check if the user is authenticated
-    if not request.user.is_authenticated:
-        return HttpResponseForbidden("Access denied")
+# @csrf_exempt
+# def get_product(request, id):
+#     # Check if the user is authenticated
+#     if not request.user.is_authenticated:
+#         return HttpResponseForbidden("Access denied")
 
-    # Retrieve the user's session
-    session_key = request.COOKIES.get("sessionid")
-    session = Session.objects.filter(session_key=session_key).first()
-    print(session)
+#     # Retrieve the user's session
+#     session_key = request.COOKIES.get("sessionid")
+#     session = Session.objects.filter(session_key=session_key).first()
+#     print(session)
 
-    # Retrieve the product and return the response
-    product = Products.objects.get(id=id)
-    return JsonResponse(product)
+#     # Retrieve the product and return the response
+#     product = Products.objects.get(id=id)
+#     return JsonResponse(product)
 
 
 # @csrf_exempt

@@ -73,3 +73,4 @@ class User(AbstractBaseUser):
 #     category = models.CharField(max_length=1,
 #                   choices=GENDER_CHOICES,
 #                   default=M)
+
