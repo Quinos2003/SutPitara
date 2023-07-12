@@ -1,6 +1,6 @@
 ﻿# Sut Pitaara E-commerce Website
 
-This is the official repository for the Sut Pitaara e-commerce website. It is built using the Django framework on the backend and the React library on the frontend.
+This is the official repository for the Sut Pitaara e-commerce website. It is built using the Django framework on the backend and the React library on the frontend with MySQL as the database.
 
 ## Tech Stack
 
