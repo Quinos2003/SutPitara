@@ -29,6 +29,7 @@ const MuiDrawer = () => {
             <Link to='/account' style={{textDecoration:"none", color:"black"}}><Typography variant='h6' component='div'>My Profile</Typography></Link>
             <Link to='/login' style={{textDecoration:"none", color:"black"}}><Typography variant='h6' component='div'>Login</Typography></Link>
             <Link to='/wishlist' style={{textDecoration:"none", color:"black"}}><Typography variant='h6' component='div'>Wishlist</Typography></Link>
+            <Link to='/contact' style={{textDecoration:"none", color:"black"}}><Typography variant='h6' component='div'>Contact-Us</Typography></Link>
             
         </Box>
     </Drawer>

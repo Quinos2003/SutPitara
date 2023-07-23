@@ -14,6 +14,7 @@ import { Provider } from 'react-redux';
 import store from './MyComponents/cart/Store';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ContactUs from './MyComponents/contact/ContactUs';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
                       <Route path='/detail' element={<Checkout/>}/>
                       <Route path='/account' element={<Profile/>}/>
                       <Route path='/orders' element={<Order/>}/>
+                      <Route path ='/contact' element={<ContactUs/>}/>
                     </Routes>
                     <ToastContainer/>
             </BrowserRouter>

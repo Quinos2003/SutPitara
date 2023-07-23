@@ -237,6 +237,17 @@ export default function Header() {
 
           <span>Wishlist</span>
         </div>
+
+        </Link>
+
+        <Link to='/contact' style={{
+            textDecoration: "none",
+            color:"white",
+            fontWeight:"bold"
+          }}>
+          <div className="contact">
+            <span>Contact</span>
+          </div>
         </Link>
         </Space>
         <Drawer>

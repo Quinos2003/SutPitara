@@ -113,6 +113,17 @@ color: white;
 
 }
 
+.contact{
+    padding:0.5rem 0.6rem;
+    border-radius: 1.5rem;
+    background-color: rgb(211, 87, 5);
+}
+.contact:hover{
+    background-color: rgb(192, 78, 2);
+    color: white;
+    transition: 0.3s;
+}
+
 /* 
 .header__fifth,.header__second,.header__third,.header__third1,.header__fourth,.header__fifth,.header__sixth{
     margin: 0 20px;
